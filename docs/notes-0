@@ -1,0 +1,28 @@
+## 2022-08-01
+# Copying plugins into www/js folder
+
+deps=$(find plugins -name "*.js" -type f)
+for dep in $deps; do
+  filepath=$(echo $dep | cut -d'/' -f2,3)
+  dirpath=$(echo $dep | cut -d'/' -f2)
+  mkdir -p www/js/$dirpath
+  cp -rf $dep www/js/$filepath
+done
+
+## 2022-08-02
+# Experimenting with webpack ... unfortunately
+
+# install webpack generally
+sudo npm install webpack webpack-cli --global
+
+# build webpack dist
+webpack build ./index.js
+# - Need to install modules: fs path stream zlib
+# npm install fs path stream zlib --save-dev
+
+# serve webpack
+npx webpack serve
+
+## Forget all that.. Just do this for the voxelmetaverse project:
+npm install beefy
+npm run start

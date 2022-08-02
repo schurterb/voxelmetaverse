@@ -1,0 +1,120 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+# include /etc/nginx/modules-enabled/*.conf;
+
+events {
+	worker_connections 768;
+}
+
+http {
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+
+	default_type application/octet-stream;
+
+	#ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+	#ssl_prefer_server_ciphers on;
+
+	access_log /var/log/nginx/access.log;
+	error_log /var/log/nginx/error.log;
+
+	gzip on;
+
+	#include /etc/nginx/conf.d/*.conf;
+	#include /etc/nginx/sites-enabled/*;
+		
+	server {
+		listen 80;
+				
+		add_header 'Access-Control-Allow-Origin' 'localhost' always;
+		add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
+		add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
+		
+		location / {
+			    
+			include /etc/nginx/mime.types;
+			root /home/schurterb/workspace;
+			index index.html;
+			
+			location ~ ^/(.+?)(/.*)?$ {
+			  alias /home/schurterb/workspace/$1/www$2;
+			}
+		}
+		
+		# Aetherview Dev
+		#location / {
+		#	    
+		#	include /etc/nginx/mime.types;
+		#	root /home/schurterb/workspace/aetherview/www;
+		#	index index.html;
+		#	
+		#	location ~ ^/(.*)$ {
+		#	  alias /home/schurterb/workspace/aetherview/www/$1;
+		#	}
+		#}
+		
+		# voxelverse Dev
+		#location / {
+		#	    
+		#	include /etc/nginx/mime.types;
+		#	root /home/schurterb/workspace/voxelmetaverse/www;
+		#	index index.html;
+		#			
+		#	location ~ ^/(.*)$ {
+		#	  alias /home/schurterb/workspace/voxelmetaverse/www/$1;
+		#	}
+		#}
+		
+		# reactjs tutorial
+		#location / {
+		#	include /etc/nginx/mime.types;
+		#	root /home/schurterb/workspace/reactjs-tutorial/www;
+		#	index index.html;
+		#	
+		#
+		#	location /css/ {
+		#		root /home/schurterb/workspace/reactjs-tutorial/www;
+		#	}
+		#	
+		#	location /js/ {
+		#		root /home/schurterb/workspace/reactjs-tutorial/www;
+		#	}
+		#	
+		#	location /img/ {
+		#		root /home/schurterb/workspace/reactjs-tutorial/www;
+		#	}
+		#	
+		#	location /resources/ {
+		#		root /home/schurterb/workspace/reactjs-tutorial/www;
+		#	}
+		#}
+		
+		## react-three-fiber tutorial
+		#location / {
+		#	include /etc/nginx/mime.types;
+		#	root /home/schurterb/workspace/react-three-tutorial/www;
+		#	index index.html;
+		#	
+		#
+		#	location /css/ {
+		#		root /home/schurterb/workspace/react-three-tutorial/www;
+		#	}
+		#	
+		#	location /js/ {
+		#		root /home/schurterb/workspace/react-three-tutorial/www;
+		#	}
+		#	
+		#	location /img/ {
+		#		root /home/schurterb/workspace/react-three-tutorial/www;
+		#	}
+		#	
+		#	location /resources/ {
+		#		root /home/schurterb/workspace/react-three-tutorial/www;
+		#	}
+		#}
+	}
+}
