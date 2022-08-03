@@ -1,51 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>voxelmetaverse</title>
-<style>
-body {
-  background-color: gray;
-  margin: 0px;
-  overflow: hidden;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
+  <meta charset="utf-8">
+  <title>voxelmetaverse</title>
 
-#crosshair {
-  /* centered on screen */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin: -32px 0 0 -32px;
-  width: 64px;
-  height: 64px;
-}
-
-#stats {
-  bottom: 0px;
-  right: 0px;
-}
-
-.logo {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-}
-
-.errorMessage {
-  text-align: center;
-  width: 200px;
-  margin: 20px auto;
-}
-</style>
+  <!-- Style Sheets -->
+  <link rel="stylesheet" href="./css/voxelverse.css">
 </head>
 <body>
-<img id="logo" class="logo" src="logo-white.png">
-<div id="container"></div>
-<script src="bundle.js"></script>
+  <div id="container"></div>
+  <script src="bundle.js"></script>
 
-<div id="crosshair"><img src="crosshair4.png"></div>
+  <div id="crosshair"><img src="./img/crosshair4.png"></div>
 </body>
 </html>

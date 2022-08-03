@@ -1,0 +1,35 @@
+body {
+  background-color: gray;
+  margin: 0px;
+  overflow: hidden;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#crosshair {
+  /* centered on screen */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -32px 0 0 -32px;
+  width: 64px;
+  height: 64px;
+}
+
+#stats {
+  bottom: 0px;
+  right: 0px;
+}
+
+.logo {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.errorMessage {
+  text-align: center;
+  width: 200px;
+  margin: 20px auto;
+}
