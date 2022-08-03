@@ -1,5 +1,5 @@
 
-const createEngine = require('voxel-engine-stackgl');
+const createEngine = require('voxel-engine');
 
 function main() {
   console.log('voxelmetaverse starting'); // TODO: show git version (browserify-commit-sha)
@@ -60,7 +60,7 @@ function main() {
       'voxel-keys': require('voxel-keys'),
       'kb-bindings-ui': require('kb-bindings-ui')
     }, pluginOpts: {
-    'voxel-engine-stackgl': {
+    'voxel-engine': {
       appendDocument: true,
       exposeGlobal: true,  // for debugging
 

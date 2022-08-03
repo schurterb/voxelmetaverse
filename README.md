@@ -14,7 +14,7 @@ voxelmetaverse: playing with [voxel.js](https://github.com/voxel)
 ---
 
 Core plugins:
-* [voxel-engine-stackgl](https://github.com/voxel/voxel-engine-stackgl): An experimental port of [voxel-engine](https://github.com/maxogden/voxel-engine) replacing [three.js](http://threejs.org) with [stackgl](http://stack.gl)
+* [voxel-engine](https://github.com/voxel/voxel-engine): An experimental port of [voxel-engine](https://github.com/maxogden/voxel-engine) replacing [three.js](http://threejs.org) with [stackgl](http://stack.gl)
 * [voxel-registry](https://github.com/voxel/voxel-registry): A shared registry for managing item and block IDs
 * [voxel-stitch](https://github.com/voxel/voxel-stitch): Stitches a set of block textures together into a texture atlas
 * [voxel-shader](https://github.com/voxel/voxel-shader): Shader for use with [voxel-mesher](https://github.com/deathcap/voxel-mesher)

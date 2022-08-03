@@ -26,3 +26,17 @@ npx webpack serve
 ## Forget all that.. Just do this for the voxelmetaverse project:
 npm install beefy
 npm run start
+
+## 2022-08-03
+# Replace voxel-engine-stackgl with voxel-engine
+
+files=$(grep -raw "voxel-engine-stackgl" | cut -d':' -f1)
+for file in $files; do
+  sed -i 's/voxel-engine-stackgl/voxel-engine/g' $file
+done
+
+rm -rf node_modules/voxel-engine-stackgl
+
+npm install
+
+npm run start
