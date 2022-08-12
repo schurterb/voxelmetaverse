@@ -1,5 +1,5 @@
 
-const createEngine = require('voxel-engine');
+const createEngine = require('aether-engine');
 
 function main() {
   console.log('voxelmetaverse starting'); // TODO: show git version (browserify-commit-sha)
@@ -60,7 +60,7 @@ function main() {
       'voxel-keys': require('voxel-keys'),
       'kb-bindings-ui': require('kb-bindings-ui')
     }, pluginOpts: {
-    'voxel-engine': {
+    'aether-engine': {
       appendDocument: true,
       exposeGlobal: true,  // for debugging
 
@@ -76,7 +76,7 @@ function main() {
         jumpTimer: 25
       },
       keybindings: {
-        // voxel-engine defaults
+        // aether-engine defaults
         'W': 'forward',
         'A': 'left',
         'S': 'backward',
