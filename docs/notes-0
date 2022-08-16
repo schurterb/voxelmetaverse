@@ -46,3 +46,7 @@ npm run start
 # The issue with the item collisions was because the collideTerrain
 #  method from voxel-engine-stackgl used the wrong vec format for
 #  the collisions function
+
+####
+# voxel-view initializes renderer
+# accepts scene to link to scene (not sure how THREE.view works...)
