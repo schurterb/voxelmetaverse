@@ -1,7 +1,7 @@
 function voxel_control(require, module, exports) {
     module.exports = control
 
-    var Stream = require('stream').Stream
+    var Stream = require('stream') //.Stream
 
     function control(control_state, opts) {
         return new Control(control_state, opts)
@@ -57,7 +57,7 @@ function voxel_control(require, module, exports) {
         this.buffer = []
         this.paused = false
     }
-
+    
     var cons = Control,
         proto = cons.prototype = new Stream
 

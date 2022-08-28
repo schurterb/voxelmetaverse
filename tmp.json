@@ -1,5 +1,4 @@
-
-const initFunctions = {
+{
   "./end-of-stream": end_of_stream,
   "_process": _process,
   "./writable": writable,
@@ -12,8 +11,8 @@ const initFunctions = {
   "three": three,
   "minecraft-skin": minecraft_skin,
   "events": events,
-  "./init.json.js": init_json,
-  "./types.json.js": types_json,
+  "./init.json": initjson,
+  "./types.json": typesjson,
   "../../../errors": errors,
   "voxel-hello-world": voxel_hello_world,
   "./internal/streams/stream": stream,
@@ -24,7 +23,7 @@ const initFunctions = {
   "./internal/streams/state": state,
   "../errors": errors,
   "./_stream_duplex": _stream_duplex,
-  "string_decoder/": string_decoder,
+  "string_decoder/": string_decoder/,
   "./internal/streams/async_iterator": async_iterator,
   "./internal/streams/from": from,
   "ever": ever,
@@ -33,12 +32,13 @@ const initFunctions = {
   "voxel-highlight": voxel_highlight,
   "voxel-player": voxel_player,
   "voxel": voxel,
-  "extend": extend, //TODO: fix this
+  "extend": extend,
   "voxel-fly": voxel_fly,
   "voxel-walk": voxel_walk,
   "tic": tic,
   "atlaspack": atlaspack,
   "safe-buffer": safe_buffer,
+  "require()": require(),
   "inherits-alt": inherits_alt,
   "./lib/index": index,
   "process/browser.js": browser,
@@ -75,23 +75,5 @@ const initFunctions = {
   "pin-it": pin_it,
   "./_stream_transform": _stream_transform,
   "base64-js": base64_js,
-  "ieee754": ieee754
-};
-function require (name) {
-  if(initFunctions[name]) {
-    console.log("Loading "+name);
-    module={}; exports={}; initFunctions[name](require, module, exports);
-    console.log(" - COMPLETE");
-    if(module.exports) {
-      return module.exports;
-    } else {
-      return exports;
-    }
-  } else {
-    console.log("Error :: "+name+" does not exist");
-    return null;
-  }
+  "ieee754": ieee754"
 }
-
-var createGame = require('voxel-hello-world');
-var game = createGame();

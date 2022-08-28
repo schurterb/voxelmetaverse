@@ -80,5 +80,6 @@ function timers(require, module, exports) {
                 delete immediateIds[id];
             };
         }).call(this)
-    }).call(this, require("timers").setImmediate, require("timers").clearImmediate)
+    }).call(this, exports.setImmediate, exports.clearImmediate)
+    // }).call(this, require("timers").setImmediate, require("timers").clearImmediate)
 }

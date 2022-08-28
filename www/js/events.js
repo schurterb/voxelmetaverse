@@ -56,7 +56,7 @@ function events(require, module, exports) {
     }
     module.exports = EventEmitter;
     module.exports.once = once;
-
+    
     // Backwards-compat with node 0.10.x
     EventEmitter.EventEmitter = EventEmitter;
 

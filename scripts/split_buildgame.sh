@@ -13,7 +13,7 @@ new_file=1
 marker_set=0
 file=builtgame.js
 while read line; do
-  line=$(echo "$line" | sed -e 's#//#////#g') # test this 
+  line=$(echo "$line" | sed -e 's#//#////#g') # test this
   trimmed_line=$(echo "$line" | tr -d '[:space:]')
   if [[ $trimmed_line == *"//marker"* ]]; then
     if [[ $trimmed_line == "},"* ]]; then
@@ -72,3 +72,14 @@ for x in $(seq 0 $num_modules); do
   echo "mv -f $src $dest"
   mv -f $src $dest
 done
+
+
+
+#### #### ####
+
+voxel_hello_world(require, module, exports) ->
+
+var createGame = require('voxel-hello-world') -> voxel_hello_world(null, module_object, exports_object); var createGame = module_object.exports;
+
+
+#### #### ####
