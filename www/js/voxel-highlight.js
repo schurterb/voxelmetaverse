@@ -57,7 +57,7 @@ function voxel_highlight(require, module, exports) {
             position = self.animateFunction(position, self.targetPosition, dt)
             if (position) self.mesh.position.set(position[0], position[1], position[2])
         })
-
+        
         game.on('tick', _.throttle(this.highlight.bind(this), opts.frequency || 100))
 
         // anchors for multi-voxel selection

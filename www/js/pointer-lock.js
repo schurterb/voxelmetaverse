@@ -4,7 +4,7 @@ function pointer_lock(require, module, exports) {
     pointer.available = available
 
     var EE = require('events').EventEmitter,
-        Stream = require('stream').Stream
+        Stream = require('stream') //.Stream
 
     function available() {
         return !!shim(document.body)
