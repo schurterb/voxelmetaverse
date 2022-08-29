@@ -13,8 +13,15 @@ new_file=1
 marker_set=0
 file=builtgame.js
 while read line; do
-  line=$(echo "$line" | sed -e 's#//#////#g') # test this
+  line=$(echo "$line" | sed -e 's#//#////#g')
   trimmed_line=$(echo "$line" | tr -d '[:space:]')
+
+  if [[ $trimmed_line == *":[function("* ]]; then
+
+  else
+
+  fi
+
   if [[ $trimmed_line == *"//marker"* ]]; then
     if [[ $trimmed_line == "},"* ]]; then
       marker_set=1

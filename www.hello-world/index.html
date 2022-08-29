@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AetherView</title>
+
+    <!-- Style Sheets -->
+    <!-- <link rel="stylesheet" href="./css/voxeltest.css"> -->
+
+    <!-- External Libraries -->
+    <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r56/three.min.js"></script>
+    <!-- <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script> -->
+    <!-- <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script crossorigin type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js"></script>
+    <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script> -->
+
+    <!-- Code Modules -->
+    <script type="text/javascript" src="./js/async_iterator.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/extend.js"></script>
+    <script type="text/javascript" src="./js/voxel-walk.js"></script>
+    <script type="text/javascript" src="./js/readable.js"></script>
+    <script type="text/javascript" src="./js/_stream_duplex.js"></script>
+    <script type="text/javascript" src="./js/detector.js"></script>
+    <script type="text/javascript" src="./js/types.json.js"></script>
+    <script type="text/javascript" src="./js/voxel-physical.js"></script>
+    <script type="text/javascript" src="./js/voxel-player.js"></script>
+    <script type="text/javascript" src="./js/monotone.js"></script>
+    <script type="text/javascript" src="./js/ever.js"></script>
+    <script type="text/javascript" src="./js/fullscreen.js"></script>
+    <script type="text/javascript" src="./js/pipeline.js"></script>
+    <script type="text/javascript" src="./js/init.json.js"></script>
+    <script type="text/javascript" src="./js/atlaspack.js"></script>
+    <script type="text/javascript" src="./js/_process.js"></script>
+    <script type="text/javascript" src="./js/stupid.js"></script>
+    <script type="text/javascript" src="./js/1.js"></script>
+    <script type="text/javascript" src="./js/gl-matrix.js"></script>
+    <script type="text/javascript" src="./js/_stream_readable.js"></script>
+    <script type="text/javascript" src="./js/voxel-fly.js"></script>
+    <script type="text/javascript" src="./js/voxel-hello-world.js"></script>
+    <script type="text/javascript" src="./js/buffer_list.js"></script>
+    <script type="text/javascript" src="./js/end-of-stream.js"></script>
+    <script type="text/javascript" src="./js/util.js"></script>
+    <script type="text/javascript" src="./js/voxel-texture.js"></script>
+    <script type="text/javascript" src="./js/culled.js"></script>
+    <script type="text/javascript" src="./js/string_decoder.js"></script>
+    <script type="text/javascript" src="./js/tree.js"></script>
+    <script type="text/javascript" src="./js/three.js"></script>
+    <script type="text/javascript" src="./js/chunker.js"></script>
+    <script type="text/javascript" src="./js/stream.js"></script>
+    <script type="text/javascript" src="./js/from.js"></script>
+    <script type="text/javascript" src="./js/pointer-lock.js"></script>
+    <script type="text/javascript" src="./js/voxel-raycast.js"></script>
+    <script type="text/javascript" src="./js/voxel-mesh.js"></script>
+    <script type="text/javascript" src="./js/domnode-dom.js"></script>
+    <script type="text/javascript" src="./js/timers.js"></script>
+    <script type="text/javascript" src="./js/tic.js"></script>
+    <script type="text/javascript" src="./js/voxel-view.js"></script>
+    <script type="text/javascript" src="./js/safe-buffer.js"></script>
+    <script type="text/javascript" src="./js/_stream_transform.js"></script>
+    <script type="text/javascript" src="./js/errors.js"></script>
+    <script type="text/javascript" src="./js/voxel-control.js"></script>
+    <script type="text/javascript" src="./js/inherits.js"></script>
+    <script type="text/javascript" src="./js/collide-3d-tilemap.js"></script>
+    <script type="text/javascript" src="./js/destroy.js"></script>
+    <script type="text/javascript" src="./js/ieee754.js"></script>
+    <script type="text/javascript" src="./js/raf.js"></script>
+    <script type="text/javascript" src="./js/minecraft-skin.js"></script>
+    <script type="text/javascript" src="./js/path.js"></script>
+    <script type="text/javascript" src="./js/writable.js"></script>
+    <script type="text/javascript" src="./js/_stream_writable.js"></script>
+    <script type="text/javascript" src="./js/base64-js.js"></script>
+    <script type="text/javascript" src="./js/voxel-highlight.js"></script>
+    <script type="text/javascript" src="./js/pin-it.js"></script>
+    <script type="text/javascript" src="./js/voxel.js"></script>
+    <script type="text/javascript" src="./js/inherits-alt.js"></script>
+    <script type="text/javascript" src="./js/aabb-3d.js"></script>
+    <script type="text/javascript" src="./js/voxel-region-change.js"></script>
+    <script type="text/javascript" src="./js/util-deprecate.js"></script>
+    <script type="text/javascript" src="./js/underscore.js"></script>
+    <script type="text/javascript" src="./js/stats.js"></script>
+    <script type="text/javascript" src="./js/interact.js"></script>
+    <script type="text/javascript" src="./js/drag-stream.js"></script>
+    <script type="text/javascript" src="./js/state.js"></script>
+    <script type="text/javascript" src="./js/spatial-events.js"></script>
+    <script type="text/javascript" src="./js/kb-controls.js"></script>
+    <script type="text/javascript" src="./js/through.js"></script>
+    <script type="text/javascript" src="./js/greedy.js"></script>
+    <script type="text/javascript" src="./js/voxel-engine.js"></script>
+    <script type="text/javascript" src="./js/events.js"></script>
+    <script type="text/javascript" src="./js/_stream_passthrough.js"></script>
+    <script type="text/javascript" src="./js/vkey.js"></script>
+    <script type="text/javascript" src="./js/buffer.js"></script>
+    <script type="text/javascript" src="./js/browser.js"></script>
+
+    <!-- probably not needed, since this is the substitute for 'require' -->
+    <!-- <script type="text/javascript" src="./js/0.js"></script> -->
+
+    <!-- probably not needed, since it doesn't have a name -->
+    <!-- <script type="text/javascript" src="./js/56.js"></script> -->
+  </head>
+  <body>
+        <!-- <script type="text/javascript" src="./builtgame.js"></script> -->
+        <script type="text/javascript" src="./main.js"></script>
+  </body>
+</html>
