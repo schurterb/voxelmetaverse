@@ -1,7 +1,7 @@
 function writable(require, module, exports) {
     module.exports = DOMStream
 
-    var Stream = require('stream') //.Stream
+    var Stream = require('stream').Stream
 
     function DOMStream(el, mode, mimetype) {
         this.el = el

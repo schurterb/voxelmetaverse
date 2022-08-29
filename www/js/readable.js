@@ -1,7 +1,7 @@
 function readable(require, module, exports) {
     module.exports = DOMStream
 
-    var Stream = require('stream') //.Stream
+    var Stream = require('stream').Stream
 
     var listener = function(el, type, onmsg) {
         return el.addEventListener(type, onmsg, false)

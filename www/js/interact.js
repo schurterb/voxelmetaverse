@@ -4,7 +4,7 @@ function interact(require, module, exports) {
         full = require('fullscreen')
 
     var EE = require('events').EventEmitter,
-        Stream = require('stream') //.Stream
+        Stream = require('stream').Stream
 
     module.exports = interact
 
