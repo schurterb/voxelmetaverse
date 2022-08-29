@@ -7,7 +7,7 @@ function voxel_hello_world(require, module, exports) {
     var fly = require('voxel-fly')
     var walk = require('voxel-walk')
 
-    module.exports = function(opts, setup) {
+    function createGame(opts, setup) {
         setup = setup || defaultSetup
         var defaults = {
             generate: voxel.generator['Valley'],
@@ -40,6 +40,7 @@ function voxel_hello_world(require, module, exports) {
 
         return game
     }
+    module.exports = createGame;
 
     function defaultSetup(game, avatar) {
 

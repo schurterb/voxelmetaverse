@@ -1,8 +1,8 @@
 function voxel_physical(require, module, exports) {
     module.exports = physical
 
-    var aabb = require('aabb-3d'),
-        THREE = require('three')
+    var aabb = require('aabb-3d')
+    // THREE = require('three')
 
     function physical(avatar, collidables, dimensions, terminal) {
         return new Physical(avatar, collidables, dimensions, terminal)

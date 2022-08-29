@@ -15,10 +15,6 @@ function three(require, module, exports) {
             if (window.performance.now === undefined) {
 
                 window.performance.now = function() {
-
-
-
-
                     var time = process.hrtime();
                     return (time[0] + time[1] / 1e9) * 1000;
 

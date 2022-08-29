@@ -1,5 +1,9 @@
 function voxel(require, module, exports) {
     var chunker = require('./chunker')
+    var culledMesher = require('./meshers/culled')
+    var greedyMesher = require('./meshers/greedy')
+    var monotoneMesher = require('./meshers/monotone')
+    var stupidMesher = require('./meshers/stupid')
 
     module.exports = function(opts) {
         if (!opts.generateVoxelChunk) opts.generateVoxelChunk = function(low, high) {
@@ -8,10 +12,10 @@ function voxel(require, module, exports) {
         return chunker(opts)
     }
     module.exports.meshers = {
-        culled: require('./meshers/culled').mesher,
-        greedy: require('./meshers/greedy').mesher,
-        monotone: require('./meshers/monotone').mesher,
-        stupid: require('./meshers/stupid').mesher
+        culled: culledMesher.mesher,
+        greedy: greedyMesher.mesher,
+        monotone: monotoneMesher.mesher,
+        stupid: stupidMesher.mesher
     }
     module.exports.Chunker = chunker.Chunker
     module.exports.geometry = {}

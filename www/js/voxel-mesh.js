@@ -1,5 +1,5 @@
 function voxel_mesh(require, module, exports) {
-    var THREE = require('three')
+    // var THREE = require('three')
 
     module.exports = function(data, mesher, scaleFactor, three) {
         return new Mesh(data, mesher, scaleFactor, three)

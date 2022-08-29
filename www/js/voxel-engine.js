@@ -7,7 +7,7 @@ function voxel_engine(require, module, exports) {
             var texture = require('voxel-texture')
             var control = require('voxel-control')
             var voxelView = require('voxel-view')
-            var THREE = require('three')
+            // var THREE = require('three')
             var Stats = require('./lib/stats')
             var Detector = require('./lib/detector')
             var inheritsAlt = require('inherits-alt')

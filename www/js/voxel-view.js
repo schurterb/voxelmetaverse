@@ -34,7 +34,8 @@ function voxel_view(require, module, exports) {
                     antialias: true
                 })
                 this.renderer.setSize(this.width, this.height)
-                this.renderer.setClearColorHex(this.skyColor, 1.0)
+                // this.renderer.setClearColorHex(this.skyColor, 1.0) //When did this work?
+                this.renderer.setClearColor(this.skyColor, 1.0)
                 this.renderer.clear()
             }
 
