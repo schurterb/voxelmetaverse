@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>voxelmetaverse</title>
+
+  <!-- External Libs -->
+  <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r56/three.min.js"></script>
+
+  <!-- Code -->
