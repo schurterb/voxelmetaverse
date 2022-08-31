@@ -1,4 +1,4 @@
-function ndarray_ops (require, module, exports) {
+function ndarray_ops(require, module, exports) {
     "use strict"
 
     var compile = require("cwise-compiler")
@@ -284,7 +284,8 @@ function ndarray_ops (require, module, exports) {
                     thisVars: ["this_f"]
                 },
                 funcName: f + "s"
-            }) exports[f + "eq"] = makeOp({
+            })
+            exports[f + "eq"] = makeOp({
                 args: ["array", "array"],
                 pre: {
                     args: [],
@@ -299,7 +300,8 @@ function ndarray_ops (require, module, exports) {
                 rvalue: true,
                 count: 2,
                 funcName: f + "eq"
-            }) exports[f + "seq"] = makeOp({
+            })
+            exports[f + "seq"] = makeOp({
                 args: ["array", "scalar"],
                 pre: {
                     args: [],
@@ -352,7 +354,8 @@ function ndarray_ops (require, module, exports) {
                     thisVars: ["this_f"]
                 },
                 funcName: f + "ops"
-            }) exports[f + "opeq"] = makeOp({
+            })
+            exports[f + "opeq"] = makeOp({
                 args: ["array", "array"],
                 pre: {
                     args: [],
@@ -367,7 +370,8 @@ function ndarray_ops (require, module, exports) {
                 rvalue: true,
                 count: 2,
                 funcName: f + "opeq"
-            }) exports[f + "opseq"] = makeOp({
+            })
+            exports[f + "opseq"] = makeOp({
                 args: ["array", "scalar"],
                 pre: {
                     args: [],
@@ -387,12 +391,442 @@ function ndarray_ops (require, module, exports) {
     })();
 
     exports.any = compile({
-                args: ["array"],
-                pre: EmptyProc,
-                body: {
-                    args: [{
-                                name: "a",
-                                lvalue: false,
-                                rvalue: true,
-                                count: 1
-                            }
+        args: ["array"],
+        pre: EmptyProc,
+        body: {
+            args: [{
+                name: "a",
+                lvalue: false,
+                rvalue: true,
+                count: 1
+            }],
+            body: "if(a){return true}",
+            localVars: [],
+            thisVars: []
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: [],
+            body: "return false"
+        },
+        funcName: "any"
+    })
+
+    exports.all = compile({
+        args: ["array"],
+        pre: EmptyProc,
+        body: {
+            args: [{
+                name: "x",
+                lvalue: false,
+                rvalue: true,
+                count: 1
+            }],
+            body: "if(!x){return false}",
+            localVars: [],
+            thisVars: []
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: [],
+            body: "return true"
+        },
+        funcName: "all"
+    })
+
+    exports.sum = compile({
+        args: ["array"],
+        pre: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "this_s=0"
+        },
+        body: {
+            args: [{
+                name: "a",
+                lvalue: false,
+                rvalue: true,
+                count: 1
+            }],
+            body: "this_s+=a",
+            localVars: [],
+            thisVars: ["this_s"]
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "return this_s"
+        },
+        funcName: "sum"
+    })
+
+    exports.prod = compile({
+        args: ["array"],
+        pre: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "this_s=1"
+        },
+        body: {
+            args: [{
+                name: "a",
+                lvalue: false,
+                rvalue: true,
+                count: 1
+            }],
+            body: "this_s*=a",
+            localVars: [],
+            thisVars: ["this_s"]
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "return this_s"
+        },
+        funcName: "prod"
+    })
+
+    exports.norm2squared = compile({
+        args: ["array"],
+        pre: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "this_s=0"
+        },
+        body: {
+            args: [{
+                name: "a",
+                lvalue: false,
+                rvalue: true,
+                count: 2
+            }],
+            body: "this_s+=a*a",
+            localVars: [],
+            thisVars: ["this_s"]
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "return this_s"
+        },
+        funcName: "norm2squared"
+    })
+
+    exports.norm2 = compile({
+        args: ["array"],
+        pre: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "this_s=0"
+        },
+        body: {
+            args: [{
+                name: "a",
+                lvalue: false,
+                rvalue: true,
+                count: 2
+            }],
+            body: "this_s+=a*a",
+            localVars: [],
+            thisVars: ["this_s"]
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "return Math.sqrt(this_s)"
+        },
+        funcName: "norm2"
+    })
+
+
+    exports.norminf = compile({
+        args: ["array"],
+        pre: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "this_s=0"
+        },
+        body: {
+            args: [{
+                name: "a",
+                lvalue: false,
+                rvalue: true,
+                count: 4
+            }],
+            body: "if(-a>this_s){this_s=-a}else if(a>this_s){this_s=a}",
+            localVars: [],
+            thisVars: ["this_s"]
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "return this_s"
+        },
+        funcName: "norminf"
+    })
+
+    exports.norm1 = compile({
+        args: ["array"],
+        pre: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "this_s=0"
+        },
+        body: {
+            args: [{
+                name: "a",
+                lvalue: false,
+                rvalue: true,
+                count: 3
+            }],
+            body: "this_s+=a<0?-a:a",
+            localVars: [],
+            thisVars: ["this_s"]
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: ["this_s"],
+            body: "return this_s"
+        },
+        funcName: "norm1"
+    })
+
+    exports.sup = compile({
+        args: ["array"],
+        pre: {
+            body: "this_h=-Infinity",
+            args: [],
+            thisVars: ["this_h"],
+            localVars: []
+        },
+        body: {
+            body: "if(_inline_1_arg0_>this_h)this_h=_inline_1_arg0_",
+            args: [{
+                "name": "_inline_1_arg0_",
+                "lvalue": false,
+                "rvalue": true,
+                "count": 2
+            }],
+            thisVars: ["this_h"],
+            localVars: []
+        },
+        post: {
+            body: "return this_h",
+            args: [],
+            thisVars: ["this_h"],
+            localVars: []
+        }
+    })
+
+    exports.inf = compile({
+        args: ["array"],
+        pre: {
+            body: "this_h=Infinity",
+            args: [],
+            thisVars: ["this_h"],
+            localVars: []
+        },
+        body: {
+            body: "if(_inline_1_arg0_<this_h)this_h=_inline_1_arg0_",
+            args: [{
+                "name": "_inline_1_arg0_",
+                "lvalue": false,
+                "rvalue": true,
+                "count": 2
+            }],
+            thisVars: ["this_h"],
+            localVars: []
+        },
+        post: {
+            body: "return this_h",
+            args: [],
+            thisVars: ["this_h"],
+            localVars: []
+        }
+    })
+
+    exports.argmin = compile({
+        args: ["index", "array", "shape"],
+        pre: {
+            body: "{this_v=Infinity;this_i=_inline_0_arg2_.slice(0)}",
+            args: [{
+                    name: "_inline_0_arg0_",
+                    lvalue: false,
+                    rvalue: false,
+                    count: 0
+                },
+                {
+                    name: "_inline_0_arg1_",
+                    lvalue: false,
+                    rvalue: false,
+                    count: 0
+                },
+                {
+                    name: "_inline_0_arg2_",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 1
+                }
+            ],
+            thisVars: ["this_i", "this_v"],
+            localVars: []
+        },
+        body: {
+            body: "{if(_inline_1_arg1_<this_v){this_v=_inline_1_arg1_;for(var _inline_1_k=0;_inline_1_k<_inline_1_arg0_.length;++_inline_1_k){this_i[_inline_1_k]=_inline_1_arg0_[_inline_1_k]}}}",
+            args: [{
+                    name: "_inline_1_arg0_",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 2
+                },
+                {
+                    name: "_inline_1_arg1_",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 2
+                }
+            ],
+            thisVars: ["this_i", "this_v"],
+            localVars: ["_inline_1_k"]
+        },
+        post: {
+            body: "{return this_i}",
+            args: [],
+            thisVars: ["this_i"],
+            localVars: []
+        }
+    })
+
+    exports.argmax = compile({
+        args: ["index", "array", "shape"],
+        pre: {
+            body: "{this_v=-Infinity;this_i=_inline_0_arg2_.slice(0)}",
+            args: [{
+                    name: "_inline_0_arg0_",
+                    lvalue: false,
+                    rvalue: false,
+                    count: 0
+                },
+                {
+                    name: "_inline_0_arg1_",
+                    lvalue: false,
+                    rvalue: false,
+                    count: 0
+                },
+                {
+                    name: "_inline_0_arg2_",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 1
+                }
+            ],
+            thisVars: ["this_i", "this_v"],
+            localVars: []
+        },
+        body: {
+            body: "{if(_inline_1_arg1_>this_v){this_v=_inline_1_arg1_;for(var _inline_1_k=0;_inline_1_k<_inline_1_arg0_.length;++_inline_1_k){this_i[_inline_1_k]=_inline_1_arg0_[_inline_1_k]}}}",
+            args: [{
+                    name: "_inline_1_arg0_",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 2
+                },
+                {
+                    name: "_inline_1_arg1_",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 2
+                }
+            ],
+            thisVars: ["this_i", "this_v"],
+            localVars: ["_inline_1_k"]
+        },
+        post: {
+            body: "{return this_i}",
+            args: [],
+            thisVars: ["this_i"],
+            localVars: []
+        }
+    })
+
+    exports.random = makeOp({
+        args: ["array"],
+        pre: {
+            args: [],
+            body: "this_f=Math.random",
+            thisVars: ["this_f"]
+        },
+        body: {
+            args: ["a"],
+            body: "a=this_f()",
+            thisVars: ["this_f"]
+        },
+        funcName: "random"
+    })
+
+    exports.assign = makeOp({
+        args: ["array", "array"],
+        body: {
+            args: ["a", "b"],
+            body: "a=b"
+        },
+        funcName: "assign"
+    })
+
+    exports.assigns = makeOp({
+        args: ["array", "scalar"],
+        body: {
+            args: ["a", "b"],
+            body: "a=b"
+        },
+        funcName: "assigns"
+    })
+
+
+    exports.equals = compile({
+        args: ["array", "array"],
+        pre: EmptyProc,
+        body: {
+            args: [{
+                    name: "x",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 1
+                },
+                {
+                    name: "y",
+                    lvalue: false,
+                    rvalue: true,
+                    count: 1
+                }
+            ],
+            body: "if(x!==y){return false}",
+            localVars: [],
+            thisVars: []
+        },
+        post: {
+            args: [],
+            localVars: [],
+            thisVars: [],
+            body: "return true"
+        },
+        funcName: "equals"
+    })
+
+
+
+}

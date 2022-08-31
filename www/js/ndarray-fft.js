@@ -1,4 +1,4 @@
-function 236(require, module, exports) {
+function ndarray_fft (require, module, exports) {
     'use strict'
 
     var ops = require('ndarray-ops')

@@ -106,8 +106,7 @@ function onecolor (require, module, exports) {
                 return propertyName !== 'alpha';
             }).map(function(propertyName) {
                 return "isNaN(" + propertyName + ")";
-            }).join("||") + "){" + "throw new Error(" [" + colorSpaceName + "]: Invalid color: ("+" + propertyNames.join("+", "+") + "+")
-            ");}" +
+            }).join("||") + "){" + "throw new Error(\"[" + colorSpaceName + "]: Invalid color: (\"+" + propertyNames.join("+\",\"+") + "+\")\");}" +
             propertyNames.map(function(propertyName) {
                 if (propertyName === 'hue') {
                     return "this._hue=hue<0?hue-Math.floor(hue):hue%1"; // Wrap
@@ -167,13 +166,9 @@ function onecolor (require, module, exports) {
         prototype[colorSpaceName.toLowerCase()] = function() {
             return this;
         };
-        prototype.toString = new Function("return " [one.color.
-                " + colorSpaceName + ": "+" + propertyNames.map(function(propertyName, i) {
-                    return ""
-                    " + propertyNames[i] + " = "+this._" + propertyName;
-                }).join("+") + "+"
-            ]
-            ";");
+        prototype.toString = new Function("return \"[one.color." + colorSpaceName + ":\"+" + propertyNames.map(function (propertyName, i) {
+            return "\" " + propertyNames[i] + "=\"+this._" + propertyName;
+        }).join("+") + "+\"]\";");
 
         // Generate getters and setters
         propertyNames.forEach(function(propertyName, i) {

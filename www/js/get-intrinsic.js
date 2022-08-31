@@ -208,7 +208,7 @@ function get_intrinsic (require, module, exports) {
     var $exec = bind.call(Function.call, RegExp.prototype.exec);
 
     /* adapted from https://github.com/lodash/lodash/blob/4.17.15/dist/lodash.js<hashtag>L6735-L6744 */
-    var rePropName = /[^%.[]]+|[(?:(-?d+(?:.d+)?)|(["'])((?:(?!2)[^\]|\.)*?)2)]|(?=(?:.|[])(?:.|[]|%$))/g;
+    var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
     var reEscapeChar = /\(\)?/g; /** Used to match backslashes in property paths. */
     var stringToPath = function stringToPath(string) {
         var first = $strSlice(string, 0, 1);

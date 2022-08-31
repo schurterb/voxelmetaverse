@@ -1,4 +1,4 @@
-function BufferList (require, module, exports) {
+function buffer_list (require, module, exports) {
     'use strict';
 
     function _classCallCheck(instance, Constructor) {

@@ -204,8 +204,9 @@ function index (require, module, exports) {
         }
 
         function preprocessor() {
-            if ((c === 'r' || c === 'n') && last !== '\') {
-                token(content.join('')) mode = NORMAL
+            if ((c === 'r' || c === 'n') && last !== '\\') {
+                token(content.join(''))
+                mode = NORMAL
                 return i
             }
             content.push(c)

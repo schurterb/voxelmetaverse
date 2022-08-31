@@ -27,12 +27,12 @@ function shellwords (require, module, exports) {
                 }
                 words = [];
                 field = "";
-                scan(line, /s*(?:([^s\'"]+)|'((?:[^'\]|\.)*)'|"((?:[^"\]|\.)*)"|(\.?)|(S))(s|$)?/,function(match){
+                scan(line, /\s*(?:([^\s\\\'\"]+)|'((?:[^\'\\]|\\.)*)'|"((?:[^\"\\]|\\.)*)"|(\\.?)|(\S))(\s|$)?/, function(match) {
                     var dq, escape, garbage, raw, seperator, sq, word; raw = match[0], word = match[1], sq = match[2], dq = match[3], escape = match[4], garbage = match[5], seperator = match[6];
                     if (garbage != null) {
                         throw new Error("Unmatched quote");
                     }
-                    field += word || (sq || dq || escape).replace(/\(?=.)/, "");
+                    field += word || (sq || dq || escape).replace(/\\(?=.)/, "");
                     if (seperator != null) {
                         words.push(field);
                         return field = "";
@@ -51,7 +51,7 @@ function shellwords (require, module, exports) {
             if (str == null) {
                 return "''";
             }
-            return str.replace(/([^A-Za-z0-9_-.,:/@n])/g, "\$1").replace(/n/g, "'n'");
+            return str.replace(/([^A-Za-z0-9_\-.,:\/@\n])/g, "\\$1").replace(/\n/g, "'\n'");
         };
 
     }).call(this);
