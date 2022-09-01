@@ -63,7 +63,7 @@ const initFunctions = {
   "./invert": invert,
   "./adjoint": adjoint,
   "./determinant": determinant,
-  "./multiply": multiply,
+  "./lib/thunk.js": thunk,
   "./translate": translate,
   "./scale": scale,
   "./rotate": rotate,

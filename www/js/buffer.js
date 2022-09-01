@@ -1786,5 +1786,5 @@ function buffer (require, module, exports) {
             }
 
         }).call(this)
-    }).call(this, require("buffer").Buffer)
+    }).call(this, exports.Buffer)
 }

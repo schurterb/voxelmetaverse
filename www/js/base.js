@@ -32,7 +32,8 @@ function base (require, module, exports) {
      */
     function PositionSensorVRDevice() {}
     PositionSensorVRDevice.prototype = new VRDevice();
-
+    
+    module.exports = {};
     module.exports.VRDevice = VRDevice;
     module.exports.HMDVRDevice = HMDVRDevice;
     module.exports.PositionSensorVRDevice = PositionSensorVRDevice;

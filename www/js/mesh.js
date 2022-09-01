@@ -103,7 +103,7 @@ function mesh (require, module, exports) {
                 count: count
             }
         }
-        varempty_proc = {
+        var empty_proc = {
             args: [],
             thisVars: [],
             localVars: [],

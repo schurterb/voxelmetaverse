@@ -115,7 +115,7 @@ function voxel_engine (require, module, exports) {
                 // setup plugins
                 var pluginLoaders = opts.pluginLoaders || {};
                 extend(pluginLoaders, {
-                    'voxel-engine': require('./'),
+                    'voxel-engine': module.exports,
                     'voxel-registry': require('voxel-registry'),
                     'voxel-stitch': require('voxel-stitch'),
                     'voxel-shader': require('voxel-shader'),

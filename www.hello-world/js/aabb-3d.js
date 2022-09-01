@@ -1,4 +1,4 @@
-function aabb_3d(require, module, exports) {
+function aabb_3d (require, module, exports) {
     module.exports = AABB
     var vec3 = require('gl-matrix').vec3
 
