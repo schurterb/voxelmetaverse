@@ -205,7 +205,7 @@ function voxel_engine (require, module, exports) {
                 return 'voxel-engine'
             }
 
-            // <hashtag> External API
+            // # External API
 
             Game.prototype.voxelPosition = function(gamePosition) {
                 var _ = Math.floor
@@ -386,7 +386,7 @@ function voxel_engine (require, module, exports) {
                 // no-op; game-shell to append itself
             }
 
-            // <hashtag> Defaults/options parsing
+            // # Defaults/options parsing
 
             Game.prototype.gravity = [0, -0.0000036, 0]
             Game.prototype.friction = 0.3
@@ -478,7 +478,7 @@ function voxel_engine (require, module, exports) {
                 return wrapper
             }
 
-            // <hashtag> Physics/collision related methods
+            // # Physics/collision related methods
 
             Game.prototype.control = function(target) {
                 this.controlling = target
@@ -529,7 +529,7 @@ function voxel_engine (require, module, exports) {
                 })
             }
 
-            // <hashtag> Chunk related methods
+            // # Chunk related methods
 
             Game.prototype.configureChunkLoading = function(opts) {
                 var self = this
@@ -679,7 +679,7 @@ function voxel_engine (require, module, exports) {
                 return mesh
             }
 
-            // <hashtag> Debugging methods
+            // # Debugging methods
 
             Game.prototype.addMarker = function(position) {
                 throw new Error('voxel-engine addMarker not yet implemented TODO: figure out how to fit this into the rendering pipeline')
@@ -694,7 +694,7 @@ function voxel_engine (require, module, exports) {
                 return this.addAABBMarker(bbox, color)
             }
 
-            // <hashtag> Misc internal methods
+            // # Misc internal methods
 
             Game.prototype.onFire = function(state) {
                 this.emit('fire', this.controlling, state)

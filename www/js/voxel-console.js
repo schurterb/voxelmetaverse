@@ -37,8 +37,8 @@ function voxel_console (require, module, exports) {
             }
 
             this.widget = widget;
-            //this.widget.on 'input', (text) =>  <hashtag> TODO: handle events, pass up?
-            //  this.widget.log "You said: <hashtag>{text}"
+            //this.widget.on 'input', (text) =>  # TODO: handle events, pass up?
+            //  this.widget.log "You said: #{text}"
 
             this.keys = game.plugins.get('voxel-keys');
             if (!this.keys) throw new Error('voxel-console requires voxel-keys plugin');
@@ -46,8 +46,8 @@ function voxel_console (require, module, exports) {
         }
 
         bindKeys() {
-            //this.game.buttons.bindings.console ?= 'T' <hashtag> TODO: bind these keys ourselves?
-            //this.game.buttons.bindings.console2 ?= '/'  <hashtag> maybe with game-shell, game.shell.bind()
+            //this.game.buttons.bindings.console ?= 'T' # TODO: bind these keys ourselves?
+            //this.game.buttons.bindings.console2 ?= '/'  # maybe with game-shell, game.shell.bind()
             //this.game.buttons.bindings.console3 ?= '.'
 
             ['console', 'console2', 'console3'].forEach((binding) => {

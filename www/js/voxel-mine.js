@@ -39,7 +39,7 @@ function voxel_mine (require, module, exports) {
             if (opts.instaMine === undefined) opts.instaMine = false; // instantly mine? (if true, ignores timeToMine)
             if (opts.timeToMine === undefined) opts.timeToMine = undefined; // callback to get how long it should take to completely mine this block
             if (opts.progressTexturesPrefix === undefined) opts.progressTexturesPrefix = undefined; // prefix for damage overlay texture filenames; can be undefined to disable the overlay
-            if (opts.progressTexturesCount === undefined) opts.progressTexturesCount = 10; // number of damage textures, cycles 0 to N-1, name = progressTexturesPrefix + <hashtag>
+            if (opts.progressTexturesCount === undefined) opts.progressTexturesCount = 10; // number of damage textures, cycles 0 to N-1, name = progressTexturesPrefix + #
 
             if (opts.applyTextureParams === undefined) {
                 opts.applyTextureParams = (texture) => {

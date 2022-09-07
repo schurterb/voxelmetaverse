@@ -132,7 +132,7 @@ function voxel_trees (require, module, exports) {
 
                     //F  - move forward one unit with the pen down
                     //G  - move forward one unit with the pen up
-                    //<hashtag>  - Changes draw medium.
+                    //#  - Changes draw medium.
 
                     // +  - yaw the turtle right by angle parameter
                     // -  - yaw the turtle left by angle parameter

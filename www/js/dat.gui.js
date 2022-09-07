@@ -1040,7 +1040,7 @@ function dat_gui (require, module, exports) {
         dat.dom.dom,
         dat.utils.css,
         dat.utils.common,
-        ".slider {n  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);n  height: 1em;n  border-radius: 1em;n  background-color: <hashtag>eee;n  padding: 0 0.5em;n  overflow: hidden;n}nn.slider-fg {n  padding: 1px 0 2px 0;n  background-color: <hashtag>aaa;n  height: 1em;n  margin-left: -0.5em;n  padding-right: 0.5em;n  border-radius: 1em 0 0 1em;n}nn.slider-fg:after {n  display: inline-block;n  border-radius: 1em;n  background-color: <hashtag>fff;n  border:  1px solid <hashtag>aaa;n  content: '';n  float: right;n  margin-right: -1em;n  margin-top: -1px;n  height: 0.9em;n  width: 0.9em;n}");
+        ".slider {n  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);n  height: 1em;n  border-radius: 1em;n  background-color: #eee;n  padding: 0 0.5em;n  overflow: hidden;n}nn.slider-fg {n  padding: 1px 0 2px 0;n  background-color: #aaa;n  height: 1em;n  margin-left: -0.5em;n  padding-right: 0.5em;n  border-radius: 1em 0 0 1em;n}nn.slider-fg:after {n  display: inline-block;n  border-radius: 1em;n  background-color: #fff;n  border:  1px solid #aaa;n  content: '';n  float: right;n  margin-right: -1em;n  margin-top: -1px;n  height: 0.9em;n  width: 0.9em;n}");
 
 
     dat.controllers.FunctionController = (function(Controller, dom, common) {
@@ -1192,7 +1192,7 @@ function dat_gui (require, module, exports) {
                     s = '0' + s;
                 }
 
-                return '<hashtag>' + s;
+                return '#' + s;
 
             } else {
 
@@ -1256,7 +1256,7 @@ function dat_gui (require, module, exports) {
 
                         read: function(original) {
 
-                            var test = original.match(/^<hashtag>([A-F0-9])([A-F0-9])([A-F0-9])$/i);
+                            var test = original.match(/^#([A-F0-9])([A-F0-9])([A-F0-9])$/i);
                             if (test === null) return false;
 
                             return {
@@ -1278,7 +1278,7 @@ function dat_gui (require, module, exports) {
 
                         read: function(original) {
 
-                            var test = original.match(/^<hashtag>([A-F0-9]{6})$/i);
+                            var test = original.match(/^#([A-F0-9]{6})$/i);
                             if (test === null) return false;
 
                             return {
@@ -1805,7 +1805,7 @@ function dat_gui (require, module, exports) {
                     },
 
                     /**
-                     * Determines whether or not to use <a href="https://developer.mozilla.org/en/DOM/Storage<hashtag>localStorage">localStorage</a> as the means for
+                     * Determines whether or not to use <a href="https://developer.mozilla.org/en/DOM/Storage#localStorage">localStorage</a> as the means for
                      * <code>remember</code>ing
                      * @type Boolean
                      */
@@ -2864,7 +2864,7 @@ function dat_gui (require, module, exports) {
         dg - local - storage \" type=\"\
         checkbox \"/> Automatically saven    values to <code>localStorage</code> on exit.nn    <div id=\"\
         dg - local - explain \">The values saved to <code>localStorage</code> will\n      override those passed to <code>dat.GUI</code>'s constructor. This makes itn      easier to work incrementally, but <code>localStorage</code> is fragile,n      and your friends may not see the same values you do.\n      \n    </div>\n    \n  </div>nn</div>",
-        ".dg ul{list-style:none;margin:0;padding:0;width:100%;clear:both}.dg.ac{position:fixed;top:0;left:0;right:0;height:0;z-index:0}.dg:not(.ac) .main{overflow:hidden}.dg.main{-webkit-transition:opacity 0.1s linear;-o-transition:opacity 0.1s linear;-moz-transition:opacity 0.1s linear;transition:opacity 0.1s linear}.dg.main.taller-than-window{overflow-y:auto}.dg.main.taller-than-window .close-button{opacity:1;margin-top:-1px;border-top:1px solid <hashtag>2c2c2c}.dg.main ul.closed .close-button{opacity:1 !important}.dg.main:hover .close-button,.dg.main .close-button.drag{opacity:1}.dg.main .close-button{-webkit-transition:opacity 0.1s linear;-o-transition:opacity 0.1s linear;-moz-transition:opacity 0.1s linear;transition:opacity 0.1s linear;border:0;position:absolute;line-height:19px;height:20px;cursor:pointer;text-align:center;background-color:<hashtag>000}.dg.main .close-button:hover{background-color:<hashtag>111}.dg.a{float:right;margin-right:15px;overflow-x:hidden}.dg.a.has-save ul{margin-top:27px}.dg.a.has-save ul.closed{margin-top:0}.dg.a .save-row{position:fixed;top:0;z-index:1002}.dg li{-webkit-transition:height 0.1s ease-out;-o-transition:height 0.1s ease-out;-moz-transition:height 0.1s ease-out;transition:height 0.1s ease-out}.dg li:not(.folder){cursor:auto;height:27px;line-height:27px;overflow:hidden;padding:0 4px 0 5px}.dg li.folder{padding:0;border-left:4px solid rgba(0,0,0,0)}.dg li.title{cursor:pointer;margin-left:-4px}.dg .closed li:not(.title),.dg .closed ul li,.dg .closed ul li > *{height:0;overflow:hidden;border:0}.dg .cr{clear:both;padding-left:3px;height:27px}.dg .property-name{cursor:default;float:left;clear:left;width:40%;overflow:hidden;text-overflow:ellipsis}.dg .c{float:left;width:60%}.dg .c input[type=text]{border:0;margin-top:4px;padding:3px;width:100%;float:right}.dg .has-slider input[type=text]{width:30%;margin-left:0}.dg .slider{float:left;width:66%;margin-left:-5px;margin-right:0;height:19px;margin-top:4px}.dg .slider-fg{height:100%}.dg .c input[type=checkbox]{margin-top:9px}.dg .c select{margin-top:5px}.dg .cr.function,.dg .cr.function .property-name,.dg .cr.function *,.dg .cr.boolean,.dg .cr.boolean *{cursor:pointer}.dg .selector{display:none;position:absolute;margin-left:-9px;margin-top:23px;z-index:10}.dg .c:hover .selector,.dg .selector.drag{display:block}.dg li.save-row{padding:0}.dg li.save-row .button{display:inline-block;padding:0px 6px}.dg.dialogue{background-color:<hashtag>222;width:460px;padding:15px;font-size:13px;line-height:15px}<hashtag>dg-new-constructor{padding:10px;color:<hashtag>222;font-family:Monaco, monospace;font-size:10px;border:0;resize:none;box-shadow:inset 1px 1px 1px <hashtag>888;word-wrap:break-word;margin:12px 0;display:block;width:440px;overflow-y:scroll;height:100px;position:relative}<hashtag>dg-local-explain{display:none;font-size:11px;line-height:17px;border-radius:3px;background-color:<hashtag>333;padding:8px;margin-top:10px}<hashtag>dg-local-explain code{font-size:10px}<hashtag>dat-gui-save-locally{display:none}.dg{color:<hashtag>eee;font:11px 'Lucida Grande', sans-serif;text-shadow:0 -1px 0 <hashtag>111}.dg.main::-webkit-scrollbar{width:5px;background:<hashtag>1a1a1a}.dg.main::-webkit-scrollbar-corner{height:0;display:none}.dg.main::-webkit-scrollbar-thumb{border-radius:5px;background:<hashtag>676767}.dg li:not(.folder){background:<hashtag>1a1a1a;border-bottom:1px solid <hashtag>2c2c2c}.dg li.save-row{line-height:25px;background:<hashtag>dad5cb;border:0}.dg li.save-row select{margin-left:5px;width:108px}.dg li.save-row .button{margin-left:5px;margin-top:1px;border-radius:2px;font-size:9px;line-height:7px;padding:4px 4px 5px 4px;background:<hashtag>c5bdad;color:<hashtag>fff;text-shadow:0 1px 0 <hashtag>b0a58f;box-shadow:0 -1px 0 <hashtag>b0a58f;cursor:pointer}.dg li.save-row .button.gears{background:<hashtag>c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;height:7px;width:8px}.dg li.save-row .button:hover{background-color:<hashtag>bab19e;box-shadow:0 -1px 0 <hashtag>b0a58f}.dg li.folder{border-bottom:0}.dg li.title{padding-left:16px;background:<hashtag>000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.2)}.dg .closed li.title{background-image:url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==)}.dg .cr.boolean{border-left:3px solid <hashtag>806787}.dg .cr.function{border-left:3px solid <hashtag>e61d5f}.dg .cr.number{border-left:3px solid <hashtag>2fa1d6}.dg .cr.number input[type=text]{color:<hashtag>2fa1d6}.dg .cr.string{border-left:3px solid <hashtag>1ed36f}.dg .cr.string input[type=text]{color:<hashtag>1ed36f}.dg .cr.function:hover,.dg .cr.boolean:hover{background:<hashtag>111}.dg .c input[type=text]{background:<hashtag>303030;outline:none}.dg .c input[type=text]:hover{background:<hashtag>3c3c3c}.dg .c input[type=text]:focus{background:<hashtag>494949;color:<hashtag>fff}.dg .c .slider{background:<hashtag>303030;cursor:ew-resize}.dg .c .slider-fg{background:<hashtag>2fa1d6}.dg .c .slider:hover{background:<hashtag>3c3c3c}.dg .c .slider:hover .slider-fg{background:<hashtag>44abda}n",
+        ".dg ul{list-style:none;margin:0;padding:0;width:100%;clear:both}.dg.ac{position:fixed;top:0;left:0;right:0;height:0;z-index:0}.dg:not(.ac) .main{overflow:hidden}.dg.main{-webkit-transition:opacity 0.1s linear;-o-transition:opacity 0.1s linear;-moz-transition:opacity 0.1s linear;transition:opacity 0.1s linear}.dg.main.taller-than-window{overflow-y:auto}.dg.main.taller-than-window .close-button{opacity:1;margin-top:-1px;border-top:1px solid #2c2c2c}.dg.main ul.closed .close-button{opacity:1 !important}.dg.main:hover .close-button,.dg.main .close-button.drag{opacity:1}.dg.main .close-button{-webkit-transition:opacity 0.1s linear;-o-transition:opacity 0.1s linear;-moz-transition:opacity 0.1s linear;transition:opacity 0.1s linear;border:0;position:absolute;line-height:19px;height:20px;cursor:pointer;text-align:center;background-color:#000}.dg.main .close-button:hover{background-color:#111}.dg.a{float:right;margin-right:15px;overflow-x:hidden}.dg.a.has-save ul{margin-top:27px}.dg.a.has-save ul.closed{margin-top:0}.dg.a .save-row{position:fixed;top:0;z-index:1002}.dg li{-webkit-transition:height 0.1s ease-out;-o-transition:height 0.1s ease-out;-moz-transition:height 0.1s ease-out;transition:height 0.1s ease-out}.dg li:not(.folder){cursor:auto;height:27px;line-height:27px;overflow:hidden;padding:0 4px 0 5px}.dg li.folder{padding:0;border-left:4px solid rgba(0,0,0,0)}.dg li.title{cursor:pointer;margin-left:-4px}.dg .closed li:not(.title),.dg .closed ul li,.dg .closed ul li > *{height:0;overflow:hidden;border:0}.dg .cr{clear:both;padding-left:3px;height:27px}.dg .property-name{cursor:default;float:left;clear:left;width:40%;overflow:hidden;text-overflow:ellipsis}.dg .c{float:left;width:60%}.dg .c input[type=text]{border:0;margin-top:4px;padding:3px;width:100%;float:right}.dg .has-slider input[type=text]{width:30%;margin-left:0}.dg .slider{float:left;width:66%;margin-left:-5px;margin-right:0;height:19px;margin-top:4px}.dg .slider-fg{height:100%}.dg .c input[type=checkbox]{margin-top:9px}.dg .c select{margin-top:5px}.dg .cr.function,.dg .cr.function .property-name,.dg .cr.function *,.dg .cr.boolean,.dg .cr.boolean *{cursor:pointer}.dg .selector{display:none;position:absolute;margin-left:-9px;margin-top:23px;z-index:10}.dg .c:hover .selector,.dg .selector.drag{display:block}.dg li.save-row{padding:0}.dg li.save-row .button{display:inline-block;padding:0px 6px}.dg.dialogue{background-color:#222;width:460px;padding:15px;font-size:13px;line-height:15px}#dg-new-constructor{padding:10px;color:#222;font-family:Monaco, monospace;font-size:10px;border:0;resize:none;box-shadow:inset 1px 1px 1px #888;word-wrap:break-word;margin:12px 0;display:block;width:440px;overflow-y:scroll;height:100px;position:relative}#dg-local-explain{display:none;font-size:11px;line-height:17px;border-radius:3px;background-color:#333;padding:8px;margin-top:10px}#dg-local-explain code{font-size:10px}#dat-gui-save-locally{display:none}.dg{color:#eee;font:11px 'Lucida Grande', sans-serif;text-shadow:0 -1px 0 #111}.dg.main::-webkit-scrollbar{width:5px;background:#1a1a1a}.dg.main::-webkit-scrollbar-corner{height:0;display:none}.dg.main::-webkit-scrollbar-thumb{border-radius:5px;background:#676767}.dg li:not(.folder){background:#1a1a1a;border-bottom:1px solid #2c2c2c}.dg li.save-row{line-height:25px;background:#dad5cb;border:0}.dg li.save-row select{margin-left:5px;width:108px}.dg li.save-row .button{margin-left:5px;margin-top:1px;border-radius:2px;font-size:9px;line-height:7px;padding:4px 4px 5px 4px;background:#c5bdad;color:#fff;text-shadow:0 1px 0 #b0a58f;box-shadow:0 -1px 0 #b0a58f;cursor:pointer}.dg li.save-row .button.gears{background:#c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;height:7px;width:8px}.dg li.save-row .button:hover{background-color:#bab19e;box-shadow:0 -1px 0 #b0a58f}.dg li.folder{border-bottom:0}.dg li.title{padding-left:16px;background:#000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.2)}.dg .closed li.title{background-image:url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==)}.dg .cr.boolean{border-left:3px solid #806787}.dg .cr.function{border-left:3px solid #e61d5f}.dg .cr.number{border-left:3px solid #2fa1d6}.dg .cr.number input[type=text]{color:#2fa1d6}.dg .cr.string{border-left:3px solid #1ed36f}.dg .cr.string input[type=text]{color:#1ed36f}.dg .cr.function:hover,.dg .cr.boolean:hover{background:#111}.dg .c input[type=text]{background:#303030;outline:none}.dg .c input[type=text]:hover{background:#3c3c3c}.dg .c input[type=text]:focus{background:#494949;color:#fff}.dg .c .slider{background:#303030;cursor:ew-resize}.dg .c .slider-fg{background:#2fa1d6}.dg .c .slider:hover{background:#3c3c3c}.dg .c .slider:hover .slider-fg{background:#44abda}n",
         dat.controllers.factory = (function(OptionController, NumberControllerBox, NumberControllerSlider, StringController, FunctionController, BooleanController, common) {
 
             return function(object, property) {
@@ -3055,7 +3055,7 @@ function dat_gui (require, module, exports) {
                     width: '122px',
                     height: '102px',
                     padding: '3px',
-                    backgroundColor: '<hashtag>222',
+                    backgroundColor: '#222',
                     boxShadow: '0px 1px 3px rgba(0,0,0,0.3)'
                 });
 
@@ -3063,7 +3063,7 @@ function dat_gui (require, module, exports) {
                     position: 'absolute',
                     width: '12px',
                     height: '12px',
-                    border: this.__field_knob_border + (this.__color.v < .5 ? '<hashtag>fff' : '<hashtag>000'),
+                    border: this.__field_knob_border + (this.__color.v < .5 ? '#fff' : '#000'),
                     boxShadow: '0px 1px 3px rgba(0,0,0,0.5)',
                     borderRadius: '12px',
                     zIndex: 1
@@ -3073,14 +3073,14 @@ function dat_gui (require, module, exports) {
                     position: 'absolute',
                     width: '15px',
                     height: '2px',
-                    borderRight: '4px solid <hashtag>fff',
+                    borderRight: '4px solid #fff',
                     zIndex: 1
                 });
 
                 common.extend(this.__saturation_field.style, {
                     width: '100px',
                     height: '100px',
-                    border: '1px solid <hashtag>555',
+                    border: '1px solid #555',
                     marginRight: '3px',
                     display: 'inline-block',
                     cursor: 'pointer'
@@ -3092,13 +3092,13 @@ function dat_gui (require, module, exports) {
                     background: 'none'
                 });
 
-                linearGradient(value_field, 'top', 'rgba(0,0,0,0)', '<hashtag>000');
+                linearGradient(value_field, 'top', 'rgba(0,0,0,0)', '#000');
 
                 common.extend(this.__hue_field.style, {
                     width: '15px',
                     height: '100px',
                     display: 'inline-block',
-                    border: '1px solid <hashtag>555',
+                    border: '1px solid #555',
                     cursor: 'ns-resize'
                 });
 
@@ -3110,7 +3110,7 @@ function dat_gui (require, module, exports) {
                     textAlign: 'center',
                     //      padding: '4px',
                     //      marginBottom: '6px',
-                    color: '<hashtag>fff',
+                    color: '#fff',
                     border: 0,
                     fontWeight: 'bold',
                     textShadow: this.__input_textShadow + 'rgba(0,0,0,0.7)'
@@ -3265,7 +3265,7 @@ function dat_gui (require, module, exports) {
                         this.__temp.s = 1;
                         this.__temp.v = 1;
 
-                        linearGradient(this.__saturation_field, 'left', '<hashtag>fff', this.__temp.toString());
+                        linearGradient(this.__saturation_field, 'left', '#fff', this.__temp.toString());
 
                         common.extend(this.__input.style, {
                             backgroundColor: this.__input.value = this.__color.toString(),
@@ -3290,11 +3290,11 @@ function dat_gui (require, module, exports) {
 
             function hueGradient(elem) {
                 elem.style.background = '';
-                elem.style.cssText += 'background: -moz-linear-gradient(top,  <hashtag>ff0000 0%, <hashtag>ff00ff 17%, <hashtag>0000ff 34%, <hashtag>00ffff 50%, <hashtag>00ff00 67%, <hashtag>ffff00 84%, <hashtag>ff0000 100%);'
-                elem.style.cssText += 'background: -webkit-linear-gradient(top,  <hashtag>ff0000 0%,<hashtag>ff00ff 17%,<hashtag>0000ff 34%,<hashtag>00ffff 50%,<hashtag>00ff00 67%,<hashtag>ffff00 84%,<hashtag>ff0000 100%);'
-                elem.style.cssText += 'background: -o-linear-gradient(top,  <hashtag>ff0000 0%,<hashtag>ff00ff 17%,<hashtag>0000ff 34%,<hashtag>00ffff 50%,<hashtag>00ff00 67%,<hashtag>ffff00 84%,<hashtag>ff0000 100%);'
-                elem.style.cssText += 'background: -ms-linear-gradient(top,  <hashtag>ff0000 0%,<hashtag>ff00ff 17%,<hashtag>0000ff 34%,<hashtag>00ffff 50%,<hashtag>00ff00 67%,<hashtag>ffff00 84%,<hashtag>ff0000 100%);'
-                elem.style.cssText += 'background: linear-gradient(top,  <hashtag>ff0000 0%,<hashtag>ff00ff 17%,<hashtag>0000ff 34%,<hashtag>00ffff 50%,<hashtag>00ff00 67%,<hashtag>ffff00 84%,<hashtag>ff0000 100%);'
+                elem.style.cssText += 'background: -moz-linear-gradient(top,  #ff0000 0%, #ff00ff 17%, #0000ff 34%, #00ffff 50%, #00ff00 67%, #ffff00 84%, #ff0000 100%);'
+                elem.style.cssText += 'background: -webkit-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);'
+                elem.style.cssText += 'background: -o-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);'
+                elem.style.cssText += 'background: -ms-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);'
+                elem.style.cssText += 'background: linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);'
             }
 
 

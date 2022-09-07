@@ -3,7 +3,7 @@ function artpacks (require, module, exports) {
 
     const ZIP = require('zip');
     const path = require('path');
-    const fs = require('fs');
+    // const fs = require('fs');
     const binaryXHR = require('binary-xhr');
     const EventEmitter = (require('events').EventEmitter);
     const getFrames = require('mcmeta');
@@ -63,7 +63,7 @@ function artpacks (require, module, exports) {
                     }
 
                     if (err || !packData) {
-                        console.log(`artpack failed to load <hashtag>${packIndex} - ${url}: ${err}`);
+                        console.log(`artpack failed to load #${packIndex} - ${url}: ${err}`);
                         this.emit('failedURL', url, err);
                         delete this.pending[url];
                         return;
@@ -74,7 +74,7 @@ function artpacks (require, module, exports) {
                         this.packs[packIndex] = new ArtPackArchive(packData, url);
                         this.refresh();
                     } catch (e) {
-                        console.log(`artpack failed to parse <hashtag>${packIndex} - ${url}: ${e}`);
+                        console.log(`artpack failed to parse #${packIndex} - ${url}: ${e}`);
                         this.emit('failedURL', url, e);
                         // fallthrough
                     }
@@ -113,7 +113,7 @@ function artpacks (require, module, exports) {
                     return onerror(err, img);
                 }
 
-                // see https://en.wikipedia.org/wiki/HSL_color_space<hashtag>HSV_.28Hue_Saturation_Value.29
+                // see https://en.wikipedia.org/wiki/HSL_color_space#HSV_.28Hue_Saturation_Value.29
                 if (this.colorMap === undefined) {
                     this.colorMap = graycolorize.generateMap(120 / 360, 0.7);
                 }

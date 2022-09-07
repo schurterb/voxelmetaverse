@@ -38,7 +38,7 @@ function voxel_commands (require, module, exports) {
 
                 help: () => {
                     this.console.log("Available commands:");
-                    //for name of this.handlers <hashtag> TODO: include all commands, but this extraneously includes aliases, too
+                    //for name of this.handlers # TODO: include all commands, but this extraneously includes aliases, too
                     for (let name in this.usages) { // only documented commands
                         const usage = this.usages[name];
                         if (usage === undefined) usage = '';

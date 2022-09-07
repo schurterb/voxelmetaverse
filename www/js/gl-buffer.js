@@ -139,6 +139,9 @@ function gl_buffer (require, module, exports) {
     function createBuffer(gl, data, type, usage) {
         type = type || gl.ARRAY_BUFFER
         usage = usage || gl.DYNAMIC_DRAW
+        // console.log("type :: ",type);
+        // console.log("gl.ARRAY_BUFFER :: ",gl.ARRAY_BUFFER);
+        // console.log("gl.ELEMENT_ARRAY_BUFFER :: ",gl.ELEMENT_ARRAY_BUFFER);
         if (type !== gl.ARRAY_BUFFER && type !== gl.ELEMENT_ARRAY_BUFFER) {
             throw new Error("gl-buffer: Invalid type for webgl buffer, must be either gl.ARRAY_BUFFER or gl.ELEMENT_ARRAY_BUFFER")
         }

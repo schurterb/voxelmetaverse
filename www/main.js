@@ -1,15 +1,19 @@
 
+var loaded_modules = {};
 var require;
 require = function (name) {
   if(initFunctions[name]) {
-    console.log("Loading "+name);
-    var module={}; var exports={}; initFunctions[name](require, module, exports);
-    console.log(" - COMPLETE");
-    if(module.exports) {
-      return module.exports;
-    } else {
-      return exports;
+    if( !loaded_modules[name] ) {
+      console.log("Loading "+name);
+      var module={}; var exports={}; initFunctions[name](require, module, exports);
+      console.log(" - COMPLETE");
+      if(module.exports) {
+        loaded_modules[name] = module.exports
+      } else {
+        loaded_modules[name] = exports;
+      }
     }
+    return loaded_modules[name]
   } else {
     console.log("Error :: "+name+" does not exist");
     return null;

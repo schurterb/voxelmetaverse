@@ -232,7 +232,7 @@ function voxel_stitch (require, module, exports) {
                 img.style.border = '1px dotted black';
                 document.body.appendChild(document.createElement('br'));
                 document.body.appendChild(img);
-                document.body.appendChild(document.createTextNode(' level <hashtag>' + i + ' (' + img.width + 'x' + img.height + ')'));
+                document.body.appendChild(document.createTextNode(' level #' + i + ' (' + img.width + 'x' + img.height + ')'));
             });
         }
 

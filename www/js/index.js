@@ -172,7 +172,7 @@ function index (require, module, exports) {
                 return i + 1
             }
 
-            if (c === '<hashtag>') {
+            if (c === '#') {
                 mode = PREPROCESSOR
                 start = total + i
                 return i

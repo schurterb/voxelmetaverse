@@ -52,7 +52,7 @@ function compile (require, module, exports) {
             }
             code.push("}")
         }
-        return code.join("n")
+        return code.join("\n")
     }
 
     // Generate "outer" loops that loop over blocks of data, applying "inner" loops to the blocks by manipulating the local variables in such a way that the inner loop only "sees" the current block.
@@ -92,7 +92,7 @@ function compile (require, module, exports) {
         for (var i = matched; i < dimension; ++i) {
             code.push("}")
         }
-        return code.join("n")
+        return code.join("\n")
     }
 
     //Count the number of compatible inner orders
@@ -198,7 +198,7 @@ function compile (require, module, exports) {
                     break
             }
         }
-        return [pre.join("n"), code, post.join("n")].join("n").trim()
+        return [pre.join("\n"), code, post.join("\n")].join("\n").trim()
     }
 
     function typeSummary(dtypes) {
@@ -351,11 +351,11 @@ function compile (require, module, exports) {
         }
 
         if (proc.debug) {
-            console.log("-----Generated cwise routine for ", typesig, ":n" + code.join("n") + "n----------")
+            console.log("-----Generated cwise routine for ", typesig, ":n" + code.join("\n") + "n----------")
         }
 
         var loopName = [(proc.funcName || "unnamed"), "_cwise_loop_", orders[0].join("s"), "m", matched, typeSummary(dtypes)].join("")
-        var f = new Function(["function ", loopName, "(", arglist.join(","), "){", code.join("n"), "} return ", loopName].join(""))
+        var f = new Function(["function ", loopName, "(", arglist.join(","), "){", code.join("\n"), "} return ", loopName].join(""))
         return f()
     }
     module.exports = generateCWiseOp

@@ -292,7 +292,7 @@ function zlib (require, module, exports) {
             // true or false if there is anything in the queue when
             // you call the .write() method.
 
-            function Zlib(opts, mode) {
+            var Zlib = function (opts, mode) {
                 var _this = this;
 
                 this._opts = opts = opts || {};

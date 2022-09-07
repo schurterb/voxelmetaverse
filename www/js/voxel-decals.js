@@ -85,11 +85,11 @@ function voxel_decals (require, module, exports) {
     };
 
     DecalsPlugin.prototype.shaderInit = function() {
-        // TODO: refactor with voxel-decals, voxel-chunkborder?
-        this.shader = glShader(this.shell.gl,
-            "<hashtag>define GLSLIFY 1n/* voxel-decals vertex shader */attribute vec3 position;attribute vec2 uv;uniform mat4 projection;uniform mat4 view;uniform mat4 model;varying vec2 vUv;void main() {  gl_Position = projection * view * model * vec4(position, 1.0);  vUv = uv;}",
+      // TODO: refactor with voxel-decals, voxel-chunkborder?
+      this.shader = glShader(this.shell.gl,
+        "#define GLSLIFY 1\n/* voxel-decals vertex shader */attribute vec3 position;attribute vec2 uv;uniform mat4 projection;uniform mat4 view;uniform mat4 model;varying vec2 vUv;void main() {  gl_Position = projection * view * model * vec4(position, 1.0);  vUv = uv;}",
 
-            "/* voxel-decals fragment shader */precision highp float;n<hashtag>define GLSLIFY 1nuniform sampler2D texture;varying vec2 vUv;void main() {  gl_FragColor = texture2D(texture, vUv);}");
+        "/* voxel-decals fragment shader */precision highp float;\n#define GLSLIFY 1\nuniform sampler2D texture;varying vec2 vUv;void main() {  gl_FragColor = texture2D(texture, vUv);}");
     };
 
     DecalsPlugin.prototype.update = function() {

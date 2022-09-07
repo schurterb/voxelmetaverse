@@ -82,11 +82,11 @@ function gl_css3d (require, module, exports) {
         })
 
         this.cutoutShader = glShader(gl,
-            "<hashtag>define GLSLIFY 1n  attribute vec3 position;    uniform mat4 projection;  uniform mat4 view;    void main() {    gl_Position = projection * view * vec4(position, 1.0);  }",
+            "#define GLSLIFY 1\n  attribute vec3 position;    uniform mat4 projection;  uniform mat4 view;    void main() {    gl_Position = projection * view * vec4(position, 1.0);  }",
 
-            // color it all transparent so CSS element is visible through
-            "  precision highp float;n<hashtag>define GLSLIFY 1n  uniform vec4 color;    void main() {    gl_FragColor = color;  }");
-    };
+          // color it all transparent so CSS element is visible through
+          "  precision highp float;\n#define GLSLIFY 1\n  uniform vec4 color;    void main() {    gl_FragColor = color;  }");
+      };
 
     GLCSS3D.prototype.updatePerspective = function(cameraFOVradians, width, height) {
         // CSS world perspective - only needs to change on gl-resize (not each rendering tick)
@@ -122,7 +122,7 @@ function gl_css3d (require, module, exports) {
         cssMatrix[5] = -cssMatrix[5];
         cssMatrix[9] = -cssMatrix[9];
         cssMatrix[13] = -cssMatrix[13];
-
+        
         this.cameraElement.style.transform = this.cameraElement.style.webkitTransform = 'translateZ(' + this.fovPx + 'px) ' + matrixToCSS(cssMatrix);
     };
 

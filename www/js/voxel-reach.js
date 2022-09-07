@@ -7,7 +7,8 @@ function voxel_reach (require, module, exports) {
     var fract = require('fract');
 
     module.exports = function(game, opts) {
-        return new Reach(game, opts);
+        var output = new Reach(game, opts);
+        return output;
     };
 
     module.exports.pluginInfo = {};
@@ -25,6 +26,9 @@ function voxel_reach (require, module, exports) {
         this.enable();
     }
 
+    // (BNS - 2022/09/06) Oddly, it seems that this overwrites any previously defined prototypes on the first argument (i.e. Reach)
+    //                    Therefore, it must be placed before any other prototypes are defined.
+    inherits(Reach, EventEmitter);
 
     Reach.prototype.enable = function() {
         var self = this;
@@ -187,6 +191,4 @@ function voxel_reach (require, module, exports) {
             return undefined;
         }
     };
-
-    inherits(Reach, EventEmitter);
 }

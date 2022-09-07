@@ -1,7 +1,13 @@
 function webworkify (require, module, exports) {
-    var bundleFn = arguments[3];
-    var sources = arguments[4];
-    var cache = arguments[5];
+
+    // (BNS - 2022/09/06) Since the documentation on this is wonderful, I have no idea what these things are supposed to be.
+    // var bundleFn = arguments[3];
+    // var sources = arguments[4];
+    // var cache = arguments[5];
+
+    var bundleFn = "";
+    var sources = {};
+    var cache = {};
 
     var stringify = JSON.stringify;
 
@@ -42,7 +48,7 @@ function webworkify (require, module, exports) {
         var hackStr = '{},';
         var src = '(' + bundleFn + ')({' +
             Object.keys(sources).map(function(key) {
-                returnstringify(key) + ':[' +
+                return stringify(key) + ':[' +
                     sources[key][0] +
                     ',' + stringify(sources[key][1]) + ']';
             }).join(',') +

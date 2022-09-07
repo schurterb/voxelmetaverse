@@ -32,7 +32,7 @@ function voxel_registry (require, module, exports) {
     };
 
     Registry.prototype.registerBlocks = function(name, count, props) {
-        var startIndex = this.registerBlock(props.names && props.names[0] || name + '<hashtag>0', props); // TODO: just 'name' instead? (no suffix)
+        var startIndex = this.registerBlock(props.names && props.names[0] || name + '#0', props); // TODO: just 'name' instead? (no suffix)
         var lastIndex = startIndex;
 
         // register this many blocks
@@ -43,7 +43,7 @@ function voxel_registry (require, module, exports) {
         };
 
         for (var i = 1; i < count; i += 1) {
-            var thisName = props.names && props.names[i] || name + '<hashtag>' + i; // TODO: take in array as name instead of a 'names' property?
+            var thisName = props.names && props.names[i] || name + '#' + i; // TODO: take in array as name instead of a 'names' property?
             var thisIndex = this.registerBlock(thisName, props); // unique name and index, but same props for all
 
             lastIndex = thisIndex;
@@ -114,7 +114,7 @@ function voxel_registry (require, module, exports) {
     Registry.prototype.getBlockName = function(blockIndex) {
         var name = this.blockIndex2Name[blockIndex];
 
-        return name ? name : '<index <hashtag>' + blockIndex + '>';
+        return name ? name : '<index #' + blockIndex + '>';
     };
 
     Registry.prototype.getBlockProps = function(name) {

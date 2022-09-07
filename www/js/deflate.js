@@ -363,7 +363,7 @@ function deflate (require, module, exports) {
             more = s.window_size - s.lookahead - s.strstart;
 
             // JS ints have 32 bit, block below not needed
-            /* Deal with !@<hashtag>$% 64K limit: */
+            /* Deal with !@#$% 64K limit: */
             //if (sizeof(int) <= 2) {
             //    if (more == 0 && s->strstart == 0 && s->lookahead == 0) {
             //        more = wsize;
@@ -440,9 +440,9 @@ function deflate (require, module, exports) {
 
                 /* UPDATE_HASH(s, s->ins_h, s->window[str + 1]); */
                 s.ins_h = ((s.ins_h << s.hash_shift) ^ s.window[str + 1]) & s.hash_mask;
-                //<hashtag>if MIN_MATCH != 3
+                //#if MIN_MATCH != 3
                 //        Call update_hash() MIN_MATCH-3 more times
-                //<hashtag>endif
+                //#endif
                 while (s.insert) {
                     /* UPDATE_HASH(s, s->ins_h, s->window[str + MIN_MATCH-1]); */
                     s.ins_h = ((s.ins_h << s.hash_shift) ^ s.window[str + MIN_MATCH - 1]) & s.hash_mask;
@@ -683,9 +683,9 @@ function deflate (require, module, exports) {
                     /* UPDATE_HASH(s, s.ins_h, s.window[s.strstart+1]); */
                     s.ins_h = ((s.ins_h << s.hash_shift) ^ s.window[s.strstart + 1]) & s.hash_mask;
 
-                    //<hashtag>if MIN_MATCH != 3
+                    //#if MIN_MATCH != 3
                     //                Call UPDATE_HASH() MIN_MATCH-3 more times
-                    //<hashtag>endif
+                    //#endif
                     /* If lookahead < MIN_MATCH, ins_h is garbage, but it does not
                      * matter since it will be recomputed at next deflate call.
                      */
@@ -1522,7 +1522,7 @@ function deflate (require, module, exports) {
             }
         }
 
-        //<hashtag>ifdef GZIP
+        //#ifdef GZIP
         if (s.status === EXTRA_STATE) {
             if (s.gzhead.extra /* != Z_NULL*/ ) {
                 beg = s.pending; /* start of bytes to update crc */
@@ -1640,7 +1640,7 @@ function deflate (require, module, exports) {
                 s.status = BUSY_STATE;
             }
         }
-        //<hashtag>endif
+        //#endif
 
         /* Flush as much pending output as possible */
         if (s.pending !== 0) {

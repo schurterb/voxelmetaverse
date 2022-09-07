@@ -78,7 +78,8 @@ function _stream_writable (require, module, exports) {
             /*</replacement>*/
 
             /*<replacement>*/
-            var Stream = require('./internal/streams/stream');
+            // var Stream = require('./internal/streams/stream');
+            var Stream = require('events').EventEmitter
             /*</replacement>*/
 
             /*<replacement>*/
