@@ -403,7 +403,8 @@ function gl_mesh (require, module, exports) {
                     for (var i = 0; i < element_count; ++i) {
                         point_buf[i] = elements[i]
                     }
-                    element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, point_buf.subarray(0, element_count))
+                    // element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, point_buf.subarray(0, element_count))
+                    element_buffer = createBuffer(gl, point_buf.subarray(0, element_count), gl.ELEMENT_ARRAY_BUFFER)
                     pool.freeUint16(point_buf)
                 } else {
                     //Otherwise we pack data into a uint16 array
@@ -418,7 +419,8 @@ function gl_mesh (require, module, exports) {
                             packed_buf[ptr++] = prim[j]
                         }
                     }
-                    element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, packed_buf.subarray(0, element_count))
+                    // element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, packed_buf.subarray(0, element_count))
+                    element_buffer = createBuffer(gl, packed_buf.subarray(0, element_count), gl.ELEMENT_ARRAY_BUFFER)
                     pool.freeUint16(packed_buf)
                 }
             } else {

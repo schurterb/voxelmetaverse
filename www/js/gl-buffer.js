@@ -135,7 +135,7 @@ function gl_buffer (require, module, exports) {
             throw new Error("gl-buffer: Invalid data type")
         }
     }
-
+    
     function createBuffer(gl, data, type, usage) {
         type = type || gl.ARRAY_BUFFER
         usage = usage || gl.DYNAMIC_DRAW

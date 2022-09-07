@@ -44,7 +44,9 @@ function voxel_webview (require, module, exports) {
                 if (this.game.shell.gl) {
                     // gl is already initialized - we won't receive gl-init, or the first gl-resize
                     // call it here (on-demand plugin loading) TODO: cleaner generic fix for plugins receiving init events too late
+                    console.log("check 0");
                     this.ginit();
+                    console.log("check 2");
                     this.updatePerspective();
                 } else {
                     this.game.shell.on('gl-init', this.onInit = this.ginit.bind(this));
@@ -116,6 +118,7 @@ function voxel_webview (require, module, exports) {
             };
 
             WebviewPlugin.prototype.ginit = function(gl) {
+              console.log("check 1");
                 this.css3d.ginit(this.game.shell.gl);
             };
 
