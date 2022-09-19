@@ -1586,6 +1586,7 @@ function inflate (require, module, exports) {
             (state.mode === TYPE ? 128 : 0) +
             (state.mode === LEN_ || state.mode === COPY_ ? 256 : 0);
         if (((_in === 0 && _out === 0) || flush === Z_FINISH) && ret === Z_OK) {
+            console.log("Z_BUF_ERROR")
             ret = Z_BUF_ERROR;
         }
         return ret;

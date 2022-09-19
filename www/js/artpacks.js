@@ -153,10 +153,10 @@ function artpacks (require, module, exports) {
         // TODO: refactor to operate on ndarray directly
         getTextureImage(name, onload, onerror) {
             const img = new Image();
+            console.log("check -");
 
             const load = () => {
                 const url = this.getTexture(name);
-                console.log(name+" -> "+url);
                 if (!url) {
                     return onerror(`no such texture in artpacks: ${name}`, img);
                 }
@@ -211,6 +211,7 @@ function artpacks (require, module, exports) {
                 }
 
                 img.onerror = (err) => {
+                    console.log("img.onerror :: ",err);
                     onerror(err, img);
                 }
             };
@@ -238,7 +239,7 @@ function artpacks (require, module, exports) {
             // get a blob
             const blob = this.getBlob(name, type);
             if (blob === undefined) return undefined;
-            console.log("blob :: ",blob);
+            console.log("blob :: ",blob); // TODO: Check size on good load
 
             // create URL and return
             url = URL.createObjectURL(blob);
@@ -250,9 +251,12 @@ function artpacks (require, module, exports) {
             const arrayBuffer = this.getArrayBuffer(name, type, false);
             if (arrayBuffer === undefined) return undefined;
 
-            return new Blob([arrayBuffer], {
+            console.log("arrayBuffer :: ",arrayBuffer);
+            const blob = new Blob([arrayBuffer], {
                 type: this.mimeTypes[type]
             });
+            console.log("blob :: ",blob);
+            return blob
         }
 
         getArrayBuffer(name, type, isMeta) {
@@ -334,6 +338,7 @@ function artpacks (require, module, exports) {
 
             this.zipEntries = {};
             this.zip.forEach((entry) => {
+                console.log("[ArtPackArchive] "+entry.getName()+" :: ",entry);
                 this.zipEntries[entry.getName()] = entry;
             });
 
@@ -412,6 +417,7 @@ function artpacks (require, module, exports) {
             }
 
             let pathRP = this.nameToPath(type, name);
+            console.log("pathRP :: ",pathRP);
             if (isMeta) pathRP += '.mcmeta';
 
             let found = false;
@@ -425,10 +431,12 @@ function artpacks (require, module, exports) {
                     tryPaths.push(pathRP.replace('*', namespace));
                 }
             }
+            console.log("tryPaths :: ",tryPaths);
 
             for (let tryPath of tryPaths) {
                 const zipEntry = this.zipEntries[tryPath];
                 if (zipEntry !== undefined) {
+                    console.log("zipEntry :: ",zipEntry);
                     return zipEntry.getData();
                 }
             }

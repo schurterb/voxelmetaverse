@@ -30,17 +30,14 @@ function webworkify (require, module, exports) {
     module.exports = function(fn) {
         var sources = initFunctions;
         var cache = loaded_modules;
-        console.log(loaded_modules);
         var keys = [];
         var wkey;
         var cacheKeys = Object.keys(cache);
 
         for (var i = 0, l = cacheKeys.length; i < l; i++) {
             var key = cacheKeys[i];
-            console.log(" @@@@@@@@@@@@@@ "+key+" :: "+cache[key]+" === "+fn+" :: "+(cache[key] === fn));
             if (cache[key] === fn) {
                 wkey = key;
-                console.log(" @@@@@@@@ wkey == "+wkey);
                 break;
             }
         }
@@ -56,7 +53,6 @@ function webworkify (require, module, exports) {
         sources[skey] = Function(['require'], 'require(' + stringify(wkey) + ');');
         Object.defineProperty(sources[skey], "name", { value: skey });
 
-        console.log("sources :: ",sources);
         var src = "";
         src += Object.keys(sources).map(function (key) {
           if(typeof(sources[key]) === Function || typeof(sources[key]) == "function") {

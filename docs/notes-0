@@ -59,3 +59,7 @@ npm run start
 ## 2022-09-09
 # I suspect the arguments in webworkify.js correspond to the arguments passed to
 # '.call' in the initial function of builtgame.js
+
+## 2022-09-19
+# The issue with loading blob images turned out to be how buffer-io.toBuffer was
+# incorrectly merging the buffer segments
