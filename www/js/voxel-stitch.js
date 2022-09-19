@@ -277,7 +277,7 @@ function voxel_stitch (require, module, exports) {
             img2.src = touchup.repeat(img, self.tilePad, self.tilePad);
 
         }, function(err) {
-            console.error('voxel-stitch _addTextureName error in getTextureImage for ' + name + ': ' + err);
+            console.error('voxel-stitch _addTextureName error in getTextureImage for ' + name + ': ', err);
         });
     };
 

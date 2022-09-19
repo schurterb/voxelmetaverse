@@ -48,13 +48,13 @@ function voxel_webview (require, module, exports) {
                     this.ginit();
                     console.log("check 2");
                     this.updatePerspective();
+                    console.log("check 4");
                 } else {
                     this.game.shell.on('gl-init', this.onInit = this.ginit.bind(this));
                 }
 
                 this.shader.on('updateProjectionMatrix', this.onUpdatePerspective = this.updatePerspective.bind(this));
                 this.game.shell.on('gl-render', this.onRender = this.render.bind(this));
-
 
                 var self = this;
 
@@ -118,13 +118,11 @@ function voxel_webview (require, module, exports) {
             };
 
             WebviewPlugin.prototype.ginit = function(gl) {
-              console.log("check 1");
-                this.css3d.ginit(this.game.shell.gl);
+              this.css3d.ginit(this.game.shell.gl);
             };
 
             WebviewPlugin.prototype.updatePerspective = function() {
                 var cameraFOVradians = this.shader.cameraFOV * Math.PI / 180;
-
                 this.css3d.updatePerspective(cameraFOVradians, this.game.shell.width, this.game.shell.height);
             };
 

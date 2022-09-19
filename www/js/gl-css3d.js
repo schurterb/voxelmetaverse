@@ -71,7 +71,7 @@ function gl_css3d (require, module, exports) {
             indices.push([0, 1, 2]);
             indices.push([2, 1, 3]);
         }
-
+        
         this.cutoutMesh = createMesh(gl, indices, {
             "position": [
                 [-hx, -hy, 0],
@@ -122,7 +122,7 @@ function gl_css3d (require, module, exports) {
         cssMatrix[5] = -cssMatrix[5];
         cssMatrix[9] = -cssMatrix[9];
         cssMatrix[13] = -cssMatrix[13];
-        
+
         this.cameraElement.style.transform = this.cameraElement.style.webkitTransform = 'translateZ(' + this.fovPx + 'px) ' + matrixToCSS(cssMatrix);
     };
 

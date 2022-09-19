@@ -1,4 +1,3 @@
-
 var loaded_modules = {};
 var require;
 require = function (name) {

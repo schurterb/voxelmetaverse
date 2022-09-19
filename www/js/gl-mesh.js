@@ -305,7 +305,7 @@ function gl_mesh (require, module, exports) {
         if (numElements === 0) {
             return new EmptyMesh(gl)
         }
-        var vao = createVAO(gl, elements, attributes.values)
+        var vao = createVAO(gl, attributes, elements, attributes.values) // (BNS - 2022/09/08) the second arg (attributes) was not specified, probably because of different versions of gl-vao
         return new Mesh(gl, mode, numElements, vao, elements, attributes.values, attributes.names)
     }
 

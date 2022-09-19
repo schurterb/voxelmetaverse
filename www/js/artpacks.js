@@ -40,6 +40,7 @@ function artpacks (require, module, exports) {
         }
 
         addPack(x, name) {
+                        console.log(" ### Sanity check 1");
             if (x instanceof ArrayBuffer) {
                 const rawZipArchiveData = x;
                 this.packs.push(new ArtPackArchive(rawZipArchiveData, name ? name : `(${rawZipArchiveData.byteLength} raw bytes)`));
@@ -53,6 +54,7 @@ function artpacks (require, module, exports) {
                     throw new Error(`artpacks unsupported addPack url ${x} without XMLHttpRequest`);
                 }
 
+                console.log(" ### Sanity check 2");
                 this.pending[url] = true;
                 const packIndex = this.packs.length;
                 this.packs[packIndex] = null; // save place while loading
@@ -154,12 +156,14 @@ function artpacks (require, module, exports) {
 
             const load = () => {
                 const url = this.getTexture(name);
+                console.log(name+" -> "+url);
                 if (!url) {
                     return onerror(`no such texture in artpacks: ${name}`, img);
                 }
 
                 img.src = url;
                 img.onload = () => {
+                    console.log(" - name :: sanity check 1");
                     if (this.shouldColorize[name]) {
                         return this.colorize(img, onload, onerror);
                     }
@@ -234,6 +238,7 @@ function artpacks (require, module, exports) {
             // get a blob
             const blob = this.getBlob(name, type);
             if (blob === undefined) return undefined;
+            console.log("blob :: ",blob);
 
             // create URL and return
             url = URL.createObjectURL(blob);

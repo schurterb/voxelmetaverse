@@ -50,3 +50,12 @@ npm run start
 ####
 # voxel-view initializes renderer
 # accepts scene to link to scene (not sure how THREE.view works...)
+
+## 2022-09-08
+# mesh.js for creating voxel meshes
+# current problem with artpacks appears to be because of url loading, not
+# actually getting the artpack data, which has already been loaded.
+
+## 2022-09-09
+# I suspect the arguments in webworkify.js correspond to the arguments passed to
+# '.call' in the initial function of builtgame.js

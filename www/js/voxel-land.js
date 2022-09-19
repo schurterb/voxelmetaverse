@@ -56,6 +56,7 @@ function voxel_land (require, module, exports) {
 
             Land.prototype.enable = function() {
                 this.registerBlocks();
+                // (BNS - 2022/09/09) Skipping the web worker thingy, as I don't know how to get it to work.  Seems quite terrible...
                 if (process.browser) {
                     this.worker = webworkify(require('./worker.js'));
                 } else {
@@ -63,6 +64,7 @@ function voxel_land (require, module, exports) {
                     // TODO: switch to https://github.com/audreyt/node-webworker-threads
                     this.worker = unworkify(require('./worker.js'));
                 }
+                // this.worker = unworkify(require('./worker.js'));
                 this.bindEvents();
             };
 

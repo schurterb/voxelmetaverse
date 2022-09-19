@@ -277,7 +277,11 @@ function game_shell (require, module, exports) {
             var ns = !!state
             if (!ns) {
                 this._wantFullscreen = false
-                cancelFullscreen.call(document)
+                if( window.innerHeight == screen.height ) {
+                  cancelFullscreen.call(document);
+                } else {
+                  console.log("Not in fullscreen mode.");
+                }
             } else {
                 this._wantFullscreen = true
                 tryFullscreen(this)
