@@ -377,6 +377,7 @@ function game_shell (require, module, exports) {
 
             //Tick the game
             s = hrtime()
+            if(enable_per_tick_logging) console.log("[game-shell][tick] emitting tick")
             shell.emit("tick")
             t = hrtime()
             shell.tickTime = t - s
@@ -403,6 +404,8 @@ function game_shell (require, module, exports) {
     //Render stuff
     function render(shell) {
 
+        if(enable_per_tick_logging) console.log("[game-shell][render] start render")
+
         //Request next frame
         shell._rafHandle = requestAnimationFrame(shell._render)
 
@@ -424,6 +427,7 @@ function game_shell (require, module, exports) {
         var t = hrtime()
         shell.frameTime = t - s
 
+        if(enable_per_tick_logging) console.log("[game-shell][render] end render")
     }
 
     function isFocused(shell) {
@@ -619,7 +623,7 @@ function game_shell (require, module, exports) {
         //Wait for dom to intiailize
         setTimeout(function() {
             domready(function initGameShell() {
-
+                console.log("SANITY CHECK");
                 //Retrieve element
                 var element = options.element
                 if (typeof element === "string") {

@@ -1,11 +1,12 @@
 var loaded_modules = {};
 var require;
+console.log("Debuggery");
 require = function (name) {
   if(initFunctions[name]) {
     if( !loaded_modules[name] ) {
-      console.log("Loading "+name);
+      // console.log("Loading "+name);
       var module={}; var exports={}; initFunctions[name](require, module, exports);
-      console.log(" - COMPLETE");
+      // console.log(" - COMPLETE");
       if(module.exports) {
         loaded_modules[name] = module.exports
       } else {
@@ -19,6 +20,7 @@ require = function (name) {
   }
 }
 
+const enable_per_tick_logging = false;
 const createEngine = require('voxel-engine');
 
 function main() {

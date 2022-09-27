@@ -43,9 +43,12 @@ function voxel_engine (require, module, exports) {
 
                 // is this a client or a headless server
                 this.isClient = Boolean((typeof opts.isClient !== 'undefined') ? opts.isClient : process.browser)
+                console.log("Is this a client? "+this.isClient);
 
+                console.log("opts :: ",opts);
                 if (!('generateChunks' in opts)) opts.generateChunks = true
                 this.generateChunks = opts.generateChunks
+                console.log("this.generateChunks :: "+this.generateChunks);
                 this.setConfigurablePositions(opts)
                 this.configureChunkLoading(opts)
                 this.setDimensions(opts)
@@ -90,6 +93,7 @@ function voxel_engine (require, module, exports) {
 
 
                 // the game-shell
+                console.log("this.isClient :: "+this.isClient)
                 if (this.isClient) /*GZ: Do not load on server, as document element is missing*/ {
                     var createShell = require('gl-now')
                     var shellOpts = shellOpts || {}
@@ -102,6 +106,7 @@ function voxel_engine (require, module, exports) {
                     shellOpts.pointerLock = opts.pointerLock !== undefined ? opts.pointerLock : true
                     shellOpts.stickyPointerLock = opts.stickyPointerLock !== undefined ? opts.stickyPointerLock : shellOpts.pointerLock
                     shellOpts.element = this.createContainer(opts)
+                    console.log("### -- creating shell -- ###")
                     var shell = createShell(shellOpts)
 
                     shell.on('gl-error', function(err) {
@@ -184,6 +189,8 @@ function voxel_engine (require, module, exports) {
                 // textures loaded, now can render chunks
                 this.stitcher = plugins.get('voxel-stitch')
                 this.stitcher.on('updatedSides', function() {
+                    self.generateChunks = true;
+                    console.log("[updateSides] self.generateChunks : ",self.generateChunks);
                     if (self.generateChunks) self.handleChunkGeneration()
                     self.showAllChunks()
 
@@ -532,6 +539,7 @@ function voxel_engine (require, module, exports) {
             // # Chunk related methods
 
             Game.prototype.configureChunkLoading = function(opts) {
+                console.log("[voxel-engine][configureChunkLoading] ...")
                 var self = this
                 if (!opts.generateChunks) return
                 if (!opts.generate) {
@@ -654,26 +662,33 @@ function voxel_engine (require, module, exports) {
             }
 
             Game.prototype.showChunk = function(chunk, optionalPosition) {
+                console.log("[voxel-engine][showChunk] :: check 0")
                 if (optionalPosition) chunk.position = optionalPosition
 
+                console.log("[voxel-engine][showChunk] :: check 1")
                 var chunkIndex = chunk.position.join('|')
                 var bounds = this.voxels.getBounds.apply(this.voxels, chunk.position)
                 //console.log('showChunk',chunkIndex,'density=',JSON.stringify(chunkDensity(chunk)))
 
+                console.log("[voxel-engine][showChunk] :: check 2")
                 var voxelArray = isndarray(chunk) ? chunk : ndarray(chunk.voxels, chunk.dims)
                 var mesh = this.mesherPlugin.createVoxelMesh(this.shell.gl, voxelArray, this.stitcher.voxelSideTextureIDs, this.stitcher.voxelSideTextureSizes, chunk.position, this.chunkPad)
 
+                console.log("[voxel-engine][showChunk] :: check 3")
                 if (!mesh) {
                     // no voxels
+                    console.log("[voxel-engine][showChunk] :: No MESH!")
                     return null
                 }
 
+                console.log("[voxel-engine][showChunk] :: check 4")
                 this.voxels.chunks[chunkIndex] = chunk
                 if (this.voxels.meshes[chunkIndex]) {
                     // TODO: remove mesh if exists
                     //if (this.voxels.meshes[chunkIndex].surfaceMesh) this.scene.remove(this.voxels.meshes[chunkIndex].surfaceMesh)
                     //if (this.voxels.meshes[chunkIndex].wireMesh) this.scene.remove(this.voxels.meshes[chunkIndex].wireMesh)
                 }
+                console.log("[voxel-engine][showChunk] :: check 5")
                 this.voxels.meshes[chunkIndex] = mesh
                 this.emit('renderChunk', chunk)
                 return mesh
@@ -704,12 +719,14 @@ function voxel_engine (require, module, exports) {
             Game.prototype.setTimeout = tic.timeout.bind(tic)
 
             Game.prototype.tick = function(delta) {
+                if(enable_per_tick_logging) console.log("start game.tick");
                 for (var i = 0, len = this.items.length; i < len; ++i) {
                     this.items[i].tick(delta)
                 }
 
                 //if (this.materials) this.materials.tick(delta)
 
+                console.log("this.pendingChunks.length",this.pendingChunks.length);
                 if (this.pendingChunks.length) this.loadPendingChunks()
                 if (Object.keys(this.chunksNeedsUpdate).length > 0) this.updateDirtyChunks()
 
@@ -720,6 +737,7 @@ function voxel_engine (require, module, exports) {
                 //if (!this.controls) return // this.controls removed; still load chunks
                 var playerPos = this.playerPosition()
                 this.spatial.emit('position', playerPos, playerPos)
+                if(enable_per_tick_logging) console.log("end game.tick");
             }
 
             Game.prototype.render = function(delta) {
@@ -816,12 +834,14 @@ function voxel_engine (require, module, exports) {
             }
 
             Game.prototype.handleChunkGeneration = function() {
+                console.log("[voxel-engine][handleChunkGeneration] begin")
                 var self = this
                 this.voxels.on('missingChunk', function(chunkPos) {
                     self.pendingChunks.push(chunkPos.join('|'))
                 })
                 this.voxels.requestMissingChunks(this.worldOrigin)
                 this.loadPendingChunks(this.pendingChunks.length)
+                console.log("[voxel-engine][handleChunkGeneration] end")
             }
 
             // teardown methods

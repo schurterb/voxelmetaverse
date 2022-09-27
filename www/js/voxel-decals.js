@@ -239,6 +239,7 @@ function voxel_decals (require, module, exports) {
 
     DecalsPlugin.prototype.render = function() {
         if (this.mesh) {
+            if(enable_per_tick_logging) console.log("[voxel-decals][render] start render")
             var gl = this.shell.gl;
 
             this.shader.bind();
@@ -254,6 +255,7 @@ function voxel_decals (require, module, exports) {
             this.mesh.bind();
             this.mesh.draw(gl.TRIANGLES, this.mesh.length);
             this.mesh.unbind();
+            if(enable_per_tick_logging) console.log("[voxel-decals][render] end render")
         }
     };
 }

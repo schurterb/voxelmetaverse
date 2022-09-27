@@ -91,6 +91,7 @@ function voxel_wireframe (require, module, exports) {
 
     WireframePlugin.prototype.render = function() {
         if (this.showWireframe) {
+            if(enable_per_tick_logging) console.log("[voxel-wireframe][render] start render")
             var gl = this.shell.gl
 
             //Bind the wire shader
@@ -117,6 +118,7 @@ function voxel_wireframe (require, module, exports) {
                 gl.drawArrays(gl.LINES, 0, wireVAO.length)
                 wireVAO.unbind()
             }
+            if(enable_per_tick_logging) console.log("[voxel-wireframe][render] end render")
         }
     };
 

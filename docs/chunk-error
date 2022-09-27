@@ -1,0 +1,41 @@
+Uncaught Error: cwise: Arrays do not all have the same shape!
+    assign_cwise_thunk http://localhost/voxelmetaverse/js/thunk.js line 168 > Function:8
+    assign_ndarrayops http://localhost/voxelmetaverse/js/ndarray-ops.js line 59 > Function:3
+    splitVoxelArray http://localhost/voxelmetaverse/js/voxel-mesher.js:82
+    createVoxelMesh http://localhost/voxelmetaverse/js/voxel-mesher.js:40
+    showChunk http://localhost/voxelmetaverse/js/voxel-engine.js:675
+    loadPendingChunks http://localhost/voxelmetaverse/js/voxel-engine.js:628
+    handleChunkGeneration http://localhost/voxelmetaverse/js/voxel-engine.js:843
+    Game http://localhost/voxelmetaverse/js/voxel-engine.js:194
+    emitNone http://localhost/voxelmetaverse/js/events.js:101
+    emit http://localhost/voxelmetaverse/js/events.js:189
+    updateTextureSideIDs http://localhost/voxelmetaverse/js/voxel-stitch.js:192
+    emitNone http://localhost/voxelmetaverse/js/events.js:101
+    emit http://localhost/voxelmetaverse/js/events.js:189
+    onload http://localhost/voxelmetaverse/js/voxel-stitch.js:277
+    _addTextureName http://localhost/voxelmetaverse/js/voxel-stitch.js:266
+    onload http://localhost/voxelmetaverse/js/artpacks.js:125
+    colorize http://localhost/voxelmetaverse/js/artpacks.js:125
+    onload http://localhost/voxelmetaverse/js/get-pixels.js:20
+    defaultImage http://localhost/voxelmetaverse/js/get-pixels.js:13
+    getPixels http://localhost/voxelmetaverse/js/get-pixels.js:123
+    colorize http://localhost/voxelmetaverse/js/artpacks.js:111
+    onload http://localhost/voxelmetaverse/js/artpacks.js:164
+    load http://localhost/voxelmetaverse/js/artpacks.js:162
+    getTextureImage http://localhost/voxelmetaverse/js/artpacks.js:214
+    _addTextureName http://localhost/voxelmetaverse/js/voxel-stitch.js:259
+    stitch http://localhost/voxelmetaverse/js/voxel-stitch.js:134
+    emitNone http://localhost/voxelmetaverse/js/events.js:106
+    emit http://localhost/voxelmetaverse/js/events.js:189
+    initGLNow http://localhost/voxelmetaverse/js/gl-now.js:90
+    emitNone http://localhost/voxelmetaverse/js/events.js:101
+    emit http://localhost/voxelmetaverse/js/events.js:189
+    initGameShell http://localhost/voxelmetaverse/js/game-shell.js:741
+    setTimeout handler*domready/</< http://localhost/voxelmetaverse/js/domready.js:28
+    createShell http://localhost/voxelmetaverse/js/game-shell.js:625
+    setTimeout handler*createShell http://localhost/voxelmetaverse/js/game-shell.js:624
+    createGLShell http://localhost/voxelmetaverse/js/gl-now.js:14
+    Game http://localhost/voxelmetaverse/js/voxel-engine.js:110
+    Game http://localhost/voxelmetaverse/js/voxel-engine.js:37
+    main http://localhost/voxelmetaverse/main.js:29
+    <anonymous> http://localhost/voxelmetaverse/main.js:223

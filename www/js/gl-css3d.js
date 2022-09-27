@@ -71,7 +71,7 @@ function gl_css3d (require, module, exports) {
             indices.push([0, 1, 2]);
             indices.push([2, 1, 3]);
         }
-        
+
         this.cutoutMesh = createMesh(gl, indices, {
             "position": [
                 [-hx, -hy, 0],
@@ -145,7 +145,9 @@ function gl_css3d (require, module, exports) {
 
 
     GLCSS3D.prototype.render = function(view, proj) {
+        if(enable_per_tick_logging) console.log("[gl-css3d][render] start render")
         this.updateView(view);
         this.renderCutout(view, proj);
+        if(enable_per_tick_logging) console.log("[gl-css3d][render] end render")
     };
 }

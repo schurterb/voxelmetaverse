@@ -14,24 +14,14 @@ function zip(require, module, exports) {
             var MADE_BY_UNIX = 3; // See http://www.pkware.com/documents/casestudies/APPNOTE.TXT
 
             var Reader = exports.Reader = function(data) {
-                console.log(" ### ")
-                console.log(" ### ")
-                console.log(" ### ")
                 if (!(this instanceof Reader)) {
-                    console.log(" ### check 0")
                     return new Reader(data);
                 }
                 if (bops.is(data)) {
-                    console.log(" ### check 1")
                     this._source = new BufferSource(data);
                 } else {
-                    console.log(" ### check 2")
                     this._source = new FdSource(data);
                 }
-                console.log(" ### ")
-                console.log(" ### ")
-                console.log(" ### ")
-                console.log(" ### ")
                 this._offset = 0;
             }
 
@@ -98,15 +88,12 @@ function zip(require, module, exports) {
             Reader.prototype.readUncompressed = function(length, method) {
                 var compressed = this.read(length);
                 var uncompressed = null;
-                console.log(" - method :: ",method);
                 if (method === 0)
                     uncompressed = compressed;
                 else if (method === 8)
                     uncompressed = INFLATE.inflate(compressed);
                 else
                     throw new Error("Unknown compression method: " + structure.compression_method);
-                console.log(" - compressed :: ",compressed);
-                console.log(" - uncompressed :: ",uncompressed);
                 return uncompressed;
             }
 
@@ -427,15 +414,9 @@ function zip(require, module, exports) {
             Entry.prototype.getData = function() {
                 if (this._stream == null) {
                     var bookmark = this._realStream.position();
-                    console.log(" ############################################## ")
-                    console.log(" bookmark :: ",bookmark)
-                    console.log(" this._start :: ",this._start)
-                    console.log(" this._compressedSize :: ",this._compressedSize)
-                    console.log(" this._compressionMethod :: ",this._compressionMethod)
                     this._realStream.seek(this._start);
                     this._stream = this._realStream.readUncompressed(this._compressedSize, this._compressionMethod);
                     this._realStream.seek(bookmark);
-                    console.log(" this._stream :: ",this._stream)
                 }
                 return this._stream;
             };

@@ -40,7 +40,6 @@ function artpacks (require, module, exports) {
         }
 
         addPack(x, name) {
-                        console.log(" ### Sanity check 1");
             if (x instanceof ArrayBuffer) {
                 const rawZipArchiveData = x;
                 this.packs.push(new ArtPackArchive(rawZipArchiveData, name ? name : `(${rawZipArchiveData.byteLength} raw bytes)`));
@@ -54,7 +53,6 @@ function artpacks (require, module, exports) {
                     throw new Error(`artpacks unsupported addPack url ${x} without XMLHttpRequest`);
                 }
 
-                console.log(" ### Sanity check 2");
                 this.pending[url] = true;
                 const packIndex = this.packs.length;
                 this.packs[packIndex] = null; // save place while loading
@@ -153,7 +151,6 @@ function artpacks (require, module, exports) {
         // TODO: refactor to operate on ndarray directly
         getTextureImage(name, onload, onerror) {
             const img = new Image();
-            console.log("check -");
 
             const load = () => {
                 const url = this.getTexture(name);
@@ -163,7 +160,6 @@ function artpacks (require, module, exports) {
 
                 img.src = url;
                 img.onload = () => {
-                    console.log(" - name :: sanity check 1");
                     if (this.shouldColorize[name]) {
                         return this.colorize(img, onload, onerror);
                     }
@@ -174,7 +170,6 @@ function artpacks (require, module, exports) {
                     } else {
                         // possible multi-frame texture strip; read .mcmeta file
                         const json = this.getMeta(name, 'textures');
-                        console.log('.mcmeta=', json);
 
                         getPixels(img.src, (err, pixels) => {
                             if (err) {
@@ -211,7 +206,6 @@ function artpacks (require, module, exports) {
                 }
 
                 img.onerror = (err) => {
-                    console.log("img.onerror :: ",err);
                     onerror(err, img);
                 }
             };
@@ -239,7 +233,6 @@ function artpacks (require, module, exports) {
             // get a blob
             const blob = this.getBlob(name, type);
             if (blob === undefined) return undefined;
-            console.log("blob :: ",blob); // TODO: Check size on good load
 
             // create URL and return
             url = URL.createObjectURL(blob);
@@ -251,11 +244,9 @@ function artpacks (require, module, exports) {
             const arrayBuffer = this.getArrayBuffer(name, type, false);
             if (arrayBuffer === undefined) return undefined;
 
-            console.log("arrayBuffer :: ",arrayBuffer);
             const blob = new Blob([arrayBuffer], {
                 type: this.mimeTypes[type]
             });
-            console.log("blob :: ",blob);
             return blob
         }
 
@@ -338,7 +329,6 @@ function artpacks (require, module, exports) {
 
             this.zipEntries = {};
             this.zip.forEach((entry) => {
-                console.log("[ArtPackArchive] "+entry.getName()+" :: ",entry);
                 this.zipEntries[entry.getName()] = entry;
             });
 
@@ -391,7 +381,7 @@ function artpacks (require, module, exports) {
                 const basename = parts[1];
 
                 const pathRP = `assets/${namespace}/textures/${category}/${basename}.png`;
-                console.log('artpacks texture:', fullname, [category, namespace, basename]);
+                // console.log('artpacks texture:', fullname, [category, namespace, basename]); // Temporary to aid debugging
 
                 return pathRP;
             } else if (type === 'sounds') {
@@ -417,7 +407,6 @@ function artpacks (require, module, exports) {
             }
 
             let pathRP = this.nameToPath(type, name);
-            console.log("pathRP :: ",pathRP);
             if (isMeta) pathRP += '.mcmeta';
 
             let found = false;
@@ -431,12 +420,10 @@ function artpacks (require, module, exports) {
                     tryPaths.push(pathRP.replace('*', namespace));
                 }
             }
-            console.log("tryPaths :: ",tryPaths);
 
             for (let tryPath of tryPaths) {
                 const zipEntry = this.zipEntries[tryPath];
                 if (zipEntry !== undefined) {
-                    console.log("zipEntry :: ",zipEntry);
                     return zipEntry.getData();
                 }
             }

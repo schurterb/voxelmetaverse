@@ -130,7 +130,7 @@ function voxel_plugins (require, module, exports) {
                 this.all[name] = plugin;
 
                 //console.log("Instantiated plugin:",name,plugin);
-                console.log("Instantiated plugin:", name);
+                // console.log("Instantiated plugin:", name); // Temporarily disabled for debuggery
 
 
                 return plugin;
@@ -185,7 +185,6 @@ function voxel_plugins (require, module, exports) {
                 // topological sort by loadAfter dependency order
                 var sortedPluginNames = this.graph.sort();
 
-                console.log('sortedPluginNames:' + JSON.stringify(sortedPluginNames));
                 for (var i = 0; i < sortedPluginNames.length; ++i) {
                     var name = sortedPluginNames[i];
 

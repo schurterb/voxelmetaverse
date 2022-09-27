@@ -127,7 +127,9 @@ function voxel_webview (require, module, exports) {
             };
 
             WebviewPlugin.prototype.render = function() {
+                if(enable_per_tick_logging) console.log("[voxel-webview][render] start render")
                 this.css3d.render(this.shader.viewMatrix, this.shader.projectionMatrix);
+                if(enable_per_tick_logging) console.log("[voxel-webview][render] end render")
             };
 
 

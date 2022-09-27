@@ -10,6 +10,7 @@ function gl_now (require, module, exports) {
         var extensions = options.extensions || []
 
         //First create shell
+        console.log(" ### SANITY CHECK - makeGameShell ###")
         var shell = makeGameShell(options)
         var scale = shell.scale || 1
         var contextOptions = options.glOptions
@@ -60,6 +61,7 @@ function gl_now (require, module, exports) {
             //Hook render event
             shell.on("render", function renderGLNow(t) {
 
+                if(enable_per_tick_logging) console.log("[gl-now][on render]: ",t);
                 //Bind default framebuffer
                 gl.bindFramebuffer(gl.FRAMEBUFFER, null)
 

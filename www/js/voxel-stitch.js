@@ -32,7 +32,8 @@ function voxel_stitch (require, module, exports) {
         opts.artpacks = opts.artpacks || ['https://dl.dropboxusercontent.com/u/258156216/artpacks/ProgrammerArt-v2.2.1-dev-ResourcePack-20140322.zip'];
 
         this.debug = opts.debug !== undefined ? opts.debug : false;
-        this.verbose = opts.verbose !== undefined ? opts.verbose : true;
+        // this.verbose = opts.verbose !== undefined ? opts.verbose : true; // Temporarily disabled verbose logging
+        this.verbose = false;
 
         // texture atlas width and height
         this.atlasSize = opts.atlasSize !== undefined ? opts.atlasSize : 2048;
@@ -187,6 +188,7 @@ function voxel_stitch (require, module, exports) {
 
         var self = this;
         if (this.verbose) console.log('updateTextureSideIDs complete, about to call createGLTexture');
+        console.log("[voxel-stitch][updateTextureSideIDs] emitting updatedSides")
         this.emit('updatedSides'); // now ready: this.voxelSideTextureIDs, this.voxelSideTextureSizes
 
         this.createGLTexture(this.shell.gl, function(err, texture) {
@@ -271,6 +273,7 @@ function voxel_stitch (require, module, exports) {
 
                 self.countLoaded += 1;
                 if (self.countLoaded % self.countLoading === 0) {
+                    console.log("[voxel-stitch][getTextureImage] emitting addedAll")
                     self.emit('addedAll');
                 }
             };

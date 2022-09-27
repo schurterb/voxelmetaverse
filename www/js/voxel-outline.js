@@ -90,6 +90,7 @@ function voxel_outline (require, module, exports) {
 
     OutlinePlugin.prototype.render = function() {
         if (this.showOutline && this.currentTarget) {
+            if(enable_per_tick_logging) console.log("[voxel-outline][render] start render")
             var gl = this.shell.gl;
 
             if (this.showThrough) gl.disable(gl.DEPTH_TEST);
@@ -104,6 +105,7 @@ function voxel_outline (require, module, exports) {
             outlineVAO.bind();
             outlineVAO.draw(gl.LINES, outlineVAO.length);
             outlineVAO.unbind();
+            if(enable_per_tick_logging) console.log("[voxel-outline][render] end render")
         }
     };
 

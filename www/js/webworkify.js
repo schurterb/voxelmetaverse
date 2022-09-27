@@ -1,30 +1,51 @@
 function webworkify (require, module, exports) {
 
-   var bundleFn = "function (initFunctions, loaded_modules, starters) { \
-     var require; \
-     require = function (name) { \
-       if(initFunctions[name]) { \
-         if( !loaded_modules[name] ) { \
-           console.log(\"[webworkify] Loading \"+name); \
-           var module={}; var exports={}; initFunctions[name](require, module, exports); \
-           console.log(\"[webworkify]  - COMPLETE\"); \
-           if(module.exports) { \
-             loaded_modules[name] = module.exports \
-           } else { \
-             loaded_modules[name] = exports; \
-           } \
-         } \
-         return loaded_modules[name] \
-       } else { \
-         console.log(\"Error :: \"+name+\" does not exist\"); \
-         return null; \
-       } \
-     }; \
-     for (let x=0; x<starters.length; x++) { \
-       require(starters[x]); \
-     } \
-   }";
-
+   // var bundleFn = "function (initFunctions, loaded_modules, starters) { \
+   //   var require; \
+   //   require = function (name) { \
+   //     if(initFunctions[name]) { \
+   //       if( !loaded_modules[name] ) { \
+   //         console.log(\"[webworkify] Loading \"+name); \
+   //         var module={}; var exports={}; initFunctions[name](require, module, exports); \
+   //         console.log(\"[webworkify]  - COMPLETE\"); \
+   //         if(module.exports) { \
+   //           loaded_modules[name] = module.exports \
+   //         } else { \
+   //           loaded_modules[name] = exports; \
+   //         } \
+   //       } \
+   //       return loaded_modules[name] \
+   //     } else { \
+   //       console.log(\"Error :: \"+name+\" does not exist\"); \
+   //       return null; \
+   //     } \
+   //   }; \
+   //   for (let x=0; x<starters.length; x++) { \
+   //     require(starters[x]); \
+   //   } \
+   // }";
+    var bundleFn = "function (initFunctions, loaded_modules, starters) { \
+      var require; \
+      require = function (name) { \
+        if(initFunctions[name]) { \
+          if( !loaded_modules[name] ) { \
+            var module={}; var exports={}; initFunctions[name](require, module, exports); \
+            if(module.exports) { \
+              loaded_modules[name] = module.exports \
+            } else { \
+              loaded_modules[name] = exports; \
+            } \
+          } \
+          return loaded_modules[name] \
+        } else { \
+          console.log(\"Error :: \"+name+\" does not exist\"); \
+          return null; \
+        } \
+      }; \
+      for (let x=0; x<starters.length; x++) { \
+        require(starters[x]); \
+      } \
+    }";
     var stringify = JSON.stringify;
 
     module.exports = function(fn) {

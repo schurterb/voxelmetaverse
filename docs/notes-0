@@ -63,3 +63,8 @@ npm run start
 ## 2022-09-19
 # The issue with loading blob images turned out to be how buffer-io.toBuffer was
 # incorrectly merging the buffer segments
+
+## 2022-09-27
+# Now, everything seems to run, but no 3d images ever show up
+# current line of inquiry :: mcmeta.js, voxel-stitch.js, atlaspack.js
+# after digging, found generateChunks flag == false; setting to true openned new errors

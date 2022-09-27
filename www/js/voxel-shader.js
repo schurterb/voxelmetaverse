@@ -78,6 +78,7 @@ function voxel_shader (require, module, exports) {
     };
 
     ShaderPlugin.prototype.render = function() {
+        if(enable_per_tick_logging) console.log("[voxel-shader][render] start render")
         var gl = this.shell.gl
 
         this.camera.view(this.viewMatrix)
@@ -138,6 +139,7 @@ function voxel_shader (require, module, exports) {
                 blockMesh.unbind()
             }
         }
+        if(enable_per_tick_logging) console.log("[voxel-shader][render] end render")
     };
 
     ShaderPlugin.prototype.createAOShader = function() {
