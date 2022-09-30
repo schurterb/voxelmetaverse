@@ -129,7 +129,7 @@ function aomesh (require, module, exports) {
                     }
             cwise_body.push(["_o", d, "=_func(", expr.join(","), ")"].join(""))
         }
-        var cwise_body_str = cwise_body.join("n")
+        var cwise_body_str = cwise_body.join("\n")
         for (var dx = -1; dx <= 1; ++dx)
             for (var dy = -1; dy <= 1; ++dy)
                 for (var dz = -1; dz <= 1; ++dz) {
@@ -508,9 +508,12 @@ function aomesh (require, module, exports) {
     //Compute a mesh
     function computeMesh(array, voxelSideTextureIDs, voxelSideTextureSizes) {
         var shp = array.shape.slice(0)
-        var nx = (shp[0] - 2) | 0
-        var ny = (shp[1] - 2) | 0
-        var nz = (shp[2] - 2) | 0
+        // var nx = (shp[0] - 2) | 0
+        // var ny = (shp[1] - 2) | 0
+        // var nz = (shp[2] - 2) | 0
+        var nx = (shp[0]) | 0
+        var ny = (shp[1]) | 0
+        var nz = (shp[2]) | 0
         var sz = nx * ny * nz
         var scratch0 = pool.mallocInt32(sz)
         var scratch1 = pool.mallocInt32(sz)

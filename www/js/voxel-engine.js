@@ -662,33 +662,27 @@ function voxel_engine (require, module, exports) {
             }
 
             Game.prototype.showChunk = function(chunk, optionalPosition) {
-                console.log("[voxel-engine][showChunk] :: check 0")
                 if (optionalPosition) chunk.position = optionalPosition
 
-                console.log("[voxel-engine][showChunk] :: check 1")
                 var chunkIndex = chunk.position.join('|')
                 var bounds = this.voxels.getBounds.apply(this.voxels, chunk.position)
                 //console.log('showChunk',chunkIndex,'density=',JSON.stringify(chunkDensity(chunk)))
 
-                console.log("[voxel-engine][showChunk] :: check 2")
                 var voxelArray = isndarray(chunk) ? chunk : ndarray(chunk.voxels, chunk.dims)
                 var mesh = this.mesherPlugin.createVoxelMesh(this.shell.gl, voxelArray, this.stitcher.voxelSideTextureIDs, this.stitcher.voxelSideTextureSizes, chunk.position, this.chunkPad)
 
-                console.log("[voxel-engine][showChunk] :: check 3")
                 if (!mesh) {
                     // no voxels
-                    console.log("[voxel-engine][showChunk] :: No MESH!")
+                    if(enable_per_tick_logging) console.log("[voxel-engine][showChunk] :: No MESH!")
                     return null
                 }
 
-                console.log("[voxel-engine][showChunk] :: check 4")
                 this.voxels.chunks[chunkIndex] = chunk
                 if (this.voxels.meshes[chunkIndex]) {
                     // TODO: remove mesh if exists
                     //if (this.voxels.meshes[chunkIndex].surfaceMesh) this.scene.remove(this.voxels.meshes[chunkIndex].surfaceMesh)
                     //if (this.voxels.meshes[chunkIndex].wireMesh) this.scene.remove(this.voxels.meshes[chunkIndex].wireMesh)
                 }
-                console.log("[voxel-engine][showChunk] :: check 5")
                 this.voxels.meshes[chunkIndex] = mesh
                 this.emit('renderChunk', chunk)
                 return mesh
@@ -774,6 +768,9 @@ function voxel_engine (require, module, exports) {
 
                     self.tick(wholeTick)
                     accum -= wholeTick
+
+                    // console.log("Pausing after first tick")
+                    // self.paused = true
 
                     self.frameUpdated = true
                 }

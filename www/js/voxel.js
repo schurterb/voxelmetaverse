@@ -30,6 +30,12 @@ function voxel (require, module, exports) {
         hi[0]++
         hi[1]++
         hi[2]++
+        lo[0]--
+        lo[1]--
+        lo[2]--
+        hi[0]++
+        hi[1]++
+        hi[2]++
         var dims = [hi[2] - lo[2], hi[1] - lo[1], hi[0] - lo[0]]
         var data = ndarray(new Uint16Array(dims[2] * dims[1] * dims[0]), dims)
         for (var k = lo[2]; k < hi[2]; k++)

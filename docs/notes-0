@@ -68,3 +68,16 @@ npm run start
 # Now, everything seems to run, but no 3d images ever show up
 # current line of inquiry :: mcmeta.js, voxel-stitch.js, atlaspack.js
 # after digging, found generateChunks flag == false; setting to true openned new errors
+
+## 2022-09-28
+# in voxel-engine.showChunk, the voxelArray has different dimensions from the
+# "solidVoxels" stored in voxel-mesher.
+#  - voxelArray is 34x34x34
+#  - solidVoxels is 36x36x36
+
+## 2022-09-29
+# the solution to that issue appears to be change in padding between then and now
+# - TODO: find general solution to this such that we don't encounter this issue again... ever
+
+## 2022-09-30
+# the latest issue with the rendering logic was a join("n") needed to be join("\n")

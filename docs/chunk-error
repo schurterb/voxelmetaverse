@@ -1,41 +1,35 @@
+solidVoxels ::
+Object { data: Uint16Array(46656), shape: (3) […], stride: (3) […], offset: 0 }​
+data: Uint16Array(46656) [ 0, 0, 0, … ]​
+offset: 0​
+shape: Array(3) [ 36, 36, 36 ]​
+stride: Array(3) [ 1296, 36, 1 ]​
+<prototype>: Object { dtype: "uint16", dimension: 3, set: View3duint16_set(i0, i1, i2, v)
+, … }
+voxel-mesher.js:85:17
+--------------------------------------------------------------------------------
+voxels ::
+Object { data: Uint16Array(39304), shape: (3) […], stride: (3) […], offset: 0, position: (3) […] }​
+data: Uint16Array(39304) [ 32769, 32769, 32769, … ]​
+offset: 0​
+position: Array(3) [ -2, -2, -2 ]​
+shape: Array(3) [ 34, 34, 34 ]​
+stride: Array(3) [ 1156, 34, 1 ]​
+<prototype>: Object { dtype: "uint16", dimension: 3, set: View3duint16_set(i0, i1, i2, v)
+, … }
+voxel-mesher.js:86:17
+--------------------------------------------------------------------------------
 Uncaught Error: cwise: Arrays do not all have the same shape!
     assign_cwise_thunk http://localhost/voxelmetaverse/js/thunk.js line 168 > Function:8
     assign_ndarrayops http://localhost/voxelmetaverse/js/ndarray-ops.js line 59 > Function:3
-    splitVoxelArray http://localhost/voxelmetaverse/js/voxel-mesher.js:82
-    createVoxelMesh http://localhost/voxelmetaverse/js/voxel-mesher.js:40
+    splitVoxelArray http://localhost/voxelmetaverse/js/voxel-mesher.js:87
+    createVoxelMesh http://localhost/voxelmetaverse/js/voxel-mesher.js:42
     showChunk http://localhost/voxelmetaverse/js/voxel-engine.js:675
     loadPendingChunks http://localhost/voxelmetaverse/js/voxel-engine.js:628
-    handleChunkGeneration http://localhost/voxelmetaverse/js/voxel-engine.js:843
-    Game http://localhost/voxelmetaverse/js/voxel-engine.js:194
-    emitNone http://localhost/voxelmetaverse/js/events.js:101
-    emit http://localhost/voxelmetaverse/js/events.js:189
-    updateTextureSideIDs http://localhost/voxelmetaverse/js/voxel-stitch.js:192
-    emitNone http://localhost/voxelmetaverse/js/events.js:101
-    emit http://localhost/voxelmetaverse/js/events.js:189
-    onload http://localhost/voxelmetaverse/js/voxel-stitch.js:277
-    _addTextureName http://localhost/voxelmetaverse/js/voxel-stitch.js:266
-    onload http://localhost/voxelmetaverse/js/artpacks.js:125
-    colorize http://localhost/voxelmetaverse/js/artpacks.js:125
-    onload http://localhost/voxelmetaverse/js/get-pixels.js:20
-    defaultImage http://localhost/voxelmetaverse/js/get-pixels.js:13
-    getPixels http://localhost/voxelmetaverse/js/get-pixels.js:123
-    colorize http://localhost/voxelmetaverse/js/artpacks.js:111
-    onload http://localhost/voxelmetaverse/js/artpacks.js:164
-    load http://localhost/voxelmetaverse/js/artpacks.js:162
-    getTextureImage http://localhost/voxelmetaverse/js/artpacks.js:214
-    _addTextureName http://localhost/voxelmetaverse/js/voxel-stitch.js:259
-    stitch http://localhost/voxelmetaverse/js/voxel-stitch.js:134
-    emitNone http://localhost/voxelmetaverse/js/events.js:106
-    emit http://localhost/voxelmetaverse/js/events.js:189
-    initGLNow http://localhost/voxelmetaverse/js/gl-now.js:90
-    emitNone http://localhost/voxelmetaverse/js/events.js:101
-    emit http://localhost/voxelmetaverse/js/events.js:189
-    initGameShell http://localhost/voxelmetaverse/js/game-shell.js:741
-    setTimeout handler*domready/</< http://localhost/voxelmetaverse/js/domready.js:28
-    createShell http://localhost/voxelmetaverse/js/game-shell.js:625
-    setTimeout handler*createShell http://localhost/voxelmetaverse/js/game-shell.js:624
-    createGLShell http://localhost/voxelmetaverse/js/gl-now.js:14
-    Game http://localhost/voxelmetaverse/js/voxel-engine.js:110
+    tick http://localhost/voxelmetaverse/js/voxel-engine.js:730
+    timer http://localhost/voxelmetaverse/js/voxel-engine.js:775
+    setInterval handler*voxel_engine/</</Game.prototype.initializeTimer http://localhost/voxelmetaverse/js/voxel-engine.js:757
+    Game http://localhost/voxelmetaverse/js/voxel-engine.js:143
     Game http://localhost/voxelmetaverse/js/voxel-engine.js:37
     main http://localhost/voxelmetaverse/main.js:29
     <anonymous> http://localhost/voxelmetaverse/main.js:223
