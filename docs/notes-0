@@ -81,3 +81,6 @@ npm run start
 
 ## 2022-09-30
 # the latest issue with the rendering logic was a join("n") needed to be join("\n")
+
+## 2022-10-02
+# voxel-outline plugin has error in shader-cache with WebGLRenderingContext.linkProgram
