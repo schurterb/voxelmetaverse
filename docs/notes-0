@@ -84,3 +84,15 @@ npm run start
 
 ## 2022-10-02
 # voxel-outline plugin has error in shader-cache with WebGLRenderingContext.linkProgram
+
+## 2022-10-10
+# voxel.js -> generateVoxelChunk input params do not match the call to it in chunker.js
+#  - given that generateVoxelChunk is also set to "valley", perhaps this is why
+#    the default generation is so whacked.
+
+## 2022-10-11
+# actually, that is apparently how generateVoxelChunk is supposed to work in chunker.js (on previous note)
+# actually, voxel-land is where the terrain is generated in a separate worker thread
+#  the worker thread appears to be being sent generateChunk events whenever a missingChunk is requested
+#  however, no chunks are coming back from that thread
+# Note :: this is the same worker thread which I had to do a lot of tinkering with webworkify

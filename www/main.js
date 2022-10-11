@@ -1,6 +1,5 @@
 var loaded_modules = {};
 var require;
-console.log("Debuggery");
 require = function (name) {
   if(initFunctions[name]) {
     if( !loaded_modules[name] ) {
