@@ -621,12 +621,12 @@ function voxel_engine (require, module, exports) {
                     count = Math.max(1, Math.min(count, pendingChunks.length))
                 }
 
-                for (var i = 0; i < count; i += 1) {
-                    var chunkPos = pendingChunks[i].split('|')
-                    var chunk = this.voxels.generateChunk(chunkPos[0] | 0, chunkPos[1] | 0, chunkPos[2] | 0)
-
-                    if (this.isClient) this.showChunk(chunk)
-                }
+                // for (var i = 0; i < count; i += 1) {
+                //     var chunkPos = pendingChunks[i].split('|')
+                //     var chunk = this.voxels.generateChunk(chunkPos[0] | 0, chunkPos[1] | 0, chunkPos[2] | 0)
+                //
+                //     if (this.isClient) this.showChunk(chunk)
+                // }
 
                 if (count) pendingChunks.splice(0, count)
             }
@@ -720,8 +720,8 @@ function voxel_engine (require, module, exports) {
 
                 //if (this.materials) this.materials.tick(delta)
 
-                console.log("this.pendingChunks.length",this.pendingChunks.length);
-                if (this.pendingChunks.length) this.loadPendingChunks()
+                // console.log("this.pendingChunks.length",this.pendingChunks.length);
+                // if (this.pendingChunks.length) this.loadPendingChunks()
                 if (Object.keys(this.chunksNeedsUpdate).length > 0) this.updateDirtyChunks()
 
                 tic.tick(delta)
