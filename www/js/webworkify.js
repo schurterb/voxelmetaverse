@@ -71,7 +71,8 @@ function webworkify (require, module, exports) {
         var skey = "anon"+Math.floor(Math.pow(16, 8) * Math.random()).toString(16);
 
         var scache = {};
-        sources[skey] = Function(['require'], 'require(' + stringify(wkey) + ');');
+        // sources[skey] = Function(['require'], 'require(' + stringify(wkey) + ');');
+        sources[skey] = Function(['require'], 'const main_const_var = require(' + stringify(wkey) + ')();');
         Object.defineProperty(sources[skey], "name", { value: skey });
 
         var src = "";

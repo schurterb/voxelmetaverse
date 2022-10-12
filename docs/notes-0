@@ -96,3 +96,6 @@ npm run start
 #  the worker thread appears to be being sent generateChunk events whenever a missingChunk is requested
 #  however, no chunks are coming back from that thread
 # Note :: this is the same worker thread which I had to do a lot of tinkering with webworkify
+
+## 2022-10-12
+# fixed the issue from yesterday by modifying the webworkify.js file.
