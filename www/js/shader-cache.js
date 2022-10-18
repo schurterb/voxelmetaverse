@@ -58,9 +58,6 @@ function shader_cache(require, module, exports) {
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
             var errLog = gl.getShaderInfoLog(shader)
             try {
-                console.log("errLog : ",errLog);
-                    console.log("src : ",src);
-                        console.log("type : ",type);
                 var fmt = formatCompilerError(errLog, src, type);
             } catch (e) {
                 console.warn('Failed to format compiler error: ' + e);

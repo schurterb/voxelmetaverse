@@ -1,6 +1,3 @@
-// function gl_shader (require, module, exports) {
-//     arguments[4][86][0].apply(exports, arguments)
-// }
 function gl_shader(require, module, exports) {
     'use strict'
 
@@ -92,7 +89,8 @@ function gl_shader(require, module, exports) {
     //Update export hook for glslify-live
     proto.update = function(
         vertSource, fragSource, uniforms, attributes) {
-
+        console.log("vertSource :: "+JSON.stringify(vertSource));
+        console.log("fragSource :: "+JSON.stringify(fragSource));
         //If only one object passed, assume glslify style output
         if (!fragSource || arguments.length === 1) {
             var obj = vertSource
@@ -203,6 +201,13 @@ function gl_shader(require, module, exports) {
         var uniformLocations = new Array(uniforms.length)
 
         function relink() {
+
+            // (BNS - 2022/10/18) For some reason, attribute locations here is [0, 0] for the voxel-outline plugin
+            //  - not sure why this is, but it needs to be [0, 1], so we are making it that...
+            if( (attributeLocations.length == 2) && (attributeLocations[0] == 0) && (attributeLocations[1] == 0) ) {
+              attributeLocations = [0, 1];
+            }
+                      
             wrapper.program = shaderCache.program(
                 gl, wrapper._vref, wrapper._fref, attributeNames, attributeLocations)
 
