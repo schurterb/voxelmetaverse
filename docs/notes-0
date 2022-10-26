@@ -106,3 +106,11 @@ npm run start
 # but it wasn't, so the code crashed in that particular part.
 # - attributeLocations was expected to be [0, 1], but was [0, 0] for unknown reasons
 # - temporary solution was to add some logic to check for this case and correct it
+
+## 2022-10-26
+# voxel-controls contains loop that monitors for mouse-hold
+# game-shell is supposed to keep track of which buttons are pressed on keyboard
+#  and on mouse.  Not sure it does this right, though.  A failure somewhere in
+#  there appears to be causing the break-block feature to fail.
+# The issue was that binary-search-bounds.js was malformed during the initial transfer
+#  and was missing escapes in certain places.

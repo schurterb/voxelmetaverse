@@ -93,7 +93,6 @@ function voxel_engine (require, module, exports) {
 
 
                 // the game-shell
-                console.log("this.isClient :: "+this.isClient)
                 if (this.isClient) /*GZ: Do not load on server, as document element is missing*/ {
                     var createShell = require('gl-now')
                     var shellOpts = shellOpts || {}
@@ -106,7 +105,6 @@ function voxel_engine (require, module, exports) {
                     shellOpts.pointerLock = opts.pointerLock !== undefined ? opts.pointerLock : true
                     shellOpts.stickyPointerLock = opts.stickyPointerLock !== undefined ? opts.stickyPointerLock : shellOpts.pointerLock
                     shellOpts.element = this.createContainer(opts)
-                    console.log("### -- creating shell -- ###")
                     var shell = createShell(shellOpts)
 
                     shell.on('gl-error', function(err) {
@@ -788,7 +786,7 @@ function voxel_engine (require, module, exports) {
                             return self.shell.pointerLock && self.shell.wasDown(name)
                         }
                     })
-                })
+                });
             }
 
             // cleanup key name - based on https://github.com/mikolalysenko/game-shell/blob/master/shell.js
@@ -814,6 +812,7 @@ function voxel_engine (require, module, exports) {
 
                     this.shell.bind(name, key)
                 }
+                console.log("keybindings :: ",keybindings);
 
                 obsolete(this, 'interact')
 

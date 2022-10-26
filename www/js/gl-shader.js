@@ -89,8 +89,6 @@ function gl_shader(require, module, exports) {
     //Update export hook for glslify-live
     proto.update = function(
         vertSource, fragSource, uniforms, attributes) {
-        console.log("vertSource :: "+JSON.stringify(vertSource));
-        console.log("fragSource :: "+JSON.stringify(fragSource));
         //If only one object passed, assume glslify style output
         if (!fragSource || arguments.length === 1) {
             var obj = vertSource
@@ -207,7 +205,7 @@ function gl_shader(require, module, exports) {
             if( (attributeLocations.length == 2) && (attributeLocations[0] == 0) && (attributeLocations[1] == 0) ) {
               attributeLocations = [0, 1];
             }
-                      
+
             wrapper.program = shaderCache.program(
                 gl, wrapper._vref, wrapper._fref, attributeNames, attributeLocations)
 

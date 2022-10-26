@@ -473,7 +473,7 @@ function game_shell (require, module, exports) {
     //Mouse events are really annoying
     var mouseCodes = iota(32).map(function(n) {
         return virtualKeyCode("mouse-" + (n + 1))
-    })
+    });
 
     function setMouseButtons(shell, buttons) {
         for (var i = 0; i < 32; ++i) {
@@ -623,7 +623,6 @@ function game_shell (require, module, exports) {
         //Wait for dom to intiailize
         setTimeout(function() {
             domready(function initGameShell() {
-                console.log("SANITY CHECK");
                 //Retrieve element
                 var element = options.element
                 if (typeof element === "string") {

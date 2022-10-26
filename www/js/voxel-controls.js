@@ -102,9 +102,7 @@ function voxel_controls (require, module, exports) {
                 target.velocity[2] = min(max(-max_speed, -move_speed * dt * this.acceleration(this.z_accel_timer, this.accel_max_timer)), target.velocity[2])
         } else {
             this.z_accel_timer = this.accel_max_timer
-
         }
-
 
         if (state.left || state.right) {
             this.x_accel_timer = max(0, this.x_accel_timer - dt)
