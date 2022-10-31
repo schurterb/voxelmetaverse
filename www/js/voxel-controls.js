@@ -30,6 +30,8 @@ function voxel_controls (require, module, exports) {
         this.acceleration = opts.accelerationCurve || this.acceleration
 
         this.fire_rate = opts.fireRate || 0
+        this.fire_rate = 200
+        console.log("[voxel-controls] ##### this.fire_rate = ",this.fire_rate)
         this.needs_discrete_fire = opts.discreteFire || false
         this.onfire = opts.onfire || this.onfire
         this.firing = 0
@@ -140,9 +142,12 @@ function voxel_controls (require, module, exports) {
 
         if (state.fire || state.firealt) {
             if (this.firing && this.needs_discrete_fire) {
+                console.log("[?]  this.firing = "+this.firing);
                 this.firing += dt
             } else {
+                console.log("this.firing = "+this.firing);
                 if (!this.fire_rate || floor(this.firing / this.fire_rate) !== floor((this.firing + dt) / this.fire_rate)) {
+                    console.log("Fire emitted from controls!")
                     this.onfire(state)
                 }
                 this.firing += dt

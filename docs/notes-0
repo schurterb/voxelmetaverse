@@ -114,3 +114,10 @@ npm run start
 #  there appears to be causing the break-block feature to fail.
 # The issue was that binary-search-bounds.js was malformed during the initial transfer
 #  and was missing escapes in certain places.
+
+## 2022-10-30
+# fireRate option has been found to not correctly correlate to rate of fire Events
+# Rather, a higher fireRate means shorter time to block breaking and a slower
+#  fireRate means longer time to block breaking.
+# Related - voxel-controls:onfire does not appear to be being called within voxel-controls
+#  however; fire events are being sent out.
