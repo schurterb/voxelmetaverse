@@ -31,7 +31,6 @@ function voxel_controls (require, module, exports) {
 
         this.fire_rate = opts.fireRate || 0
         this.fire_rate = 200
-        console.log("[voxel-controls] ##### this.fire_rate = ",this.fire_rate)
         this.needs_discrete_fire = opts.discreteFire || false
         this.onfire = opts.onfire || this.onfire
         this.firing = 0

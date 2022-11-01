@@ -57,8 +57,6 @@ function voxel_reach (require, module, exports) {
 
         // Continuously fired events while button is held down (from voxel-engine)
         function fire(fireTarget, state) {
-          console.log("--------------------------------");
-          console.log("Received fire event");
             /*jshint unused:false*/
             var action, target;
             action = self.action(state);
@@ -74,7 +72,6 @@ function voxel_reach (require, module, exports) {
                     self.emit('start mining', target);
                 }
             }
-            console.log("Emitting "+action+" ...");
             self.emit(action, target);
         }
 

@@ -11,6 +11,7 @@ function itempile (require, module, exports) {
         }
 
         clone() {
+            console.log("cloneObject : ",cloneObject);
             return new ItemPile(this.item, this.count, cloneObject(this.tags, false));
         }
 

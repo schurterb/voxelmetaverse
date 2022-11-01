@@ -121,3 +121,6 @@ npm run start
 #  fireRate means longer time to block breaking.
 # Related - voxel-controls:onfire does not appear to be being called within voxel-controls
 #  however; fire events are being sent out.
+# clone.js appears to be unecessarily complicated.  Simplified code a bit, which
+#  fixed issue with broken blocks not appearing in inventory.
+# Now to fix issue with placing blocks from inventory....

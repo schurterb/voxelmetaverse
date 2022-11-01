@@ -112,7 +112,6 @@ function voxel_mine (require, module, exports) {
 
         enable() {
             this.reach.on('mining', this.onMining = (target) => {
-                console.log("Received Mining Event");
                 if (!target) {
                     console.log('no block mined');
                     return;
