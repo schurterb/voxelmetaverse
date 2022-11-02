@@ -94,7 +94,7 @@ function main() {
       controls: {
         discreteFire: false,
         // (BNS - 2022-10-30) The fireRate value is not actually ms between firing atm.  Higher values = faster block break time; lower = slower block break time
-        fireRate: 350, //100, // ms between firing
+        fireRate: 500, //100, // ms between firing
         jumpTimer: 25
       },
       keybindings: {
@@ -143,7 +143,7 @@ function main() {
 
     'voxel-mesher': {},
     'game-shell-fps-camera': {
-      position: [0, -20, 0]
+      position: [0, -40, 0]
     },
 
     'voxel-artpacks': {},

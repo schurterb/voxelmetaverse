@@ -124,3 +124,15 @@ npm run start
 # clone.js appears to be unecessarily complicated.  Simplified code a bit, which
 #  fixed issue with broken blocks not appearing in inventory.
 # Now to fix issue with placing blocks from inventory....
+# There is also a problem with the game-shell and binary-search-bounds in virtualKeyCode
+#  Not sure what is supposed to happen here, but it doesn't work.  Mapping for the
+#  Mouse-down event doesn't work, so mouse click doesn't work via voxel-controls path.
+#  The thing that has been working is a simple solution I threw together in voxel-reach.
+
+## 2022-11-01
+# gl-css3d appears to be the key to displaying dom elements within the 3d world
+# converting this to work with THREE.js is ESSENTIAL (else we may have to stick with webgl...)
+# typing .web allows interaction with the iframe
+#  - exiting interaction with iframe breaks controls : MUST FIX THIS
+# Appears that the iframe or its div is too transparent.
+# '.web' makes it visible and interactable, but otherwise, it is invisible.

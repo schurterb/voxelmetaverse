@@ -120,6 +120,7 @@ function voxel_controls (require, module, exports) {
         }
 
         if (state.jump) {
+                console.log("[voxel-controls] state = ",state);
             if (!this.jumping && !at_rest) {
                 // we're falling, we can't jump
             } else if (at_rest > 0) {

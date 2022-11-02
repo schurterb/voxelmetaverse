@@ -103,27 +103,28 @@ function voxel_reach (require, module, exports) {
         this.mousedown = mousedown;
         this.mouseup = mouseup;
 
+        // (BNS - 2022/10/30) this does work as anlternative to the voxel-controls proc.
         // (BNS - 2022/10/25) emit a fire event when the mouse is held for more than 500 ms
         //  for response time, the loop runs every 10 ms.
-        this.mouseState = null;
-        this.prevMouseState = null;
-        this.fireIntervalCheck = 10; //ms
-        this.stateDuration = 0;
-        this.fireThreshold = 500; //ms
-        setInterval(function() {
-          if(this.mouseState == 'down') {
-            if(this.mouseState == this.prevMouseState) {
-              this.stateDuration += this.fireIntervalCheck;
-              if(this.stateDuration >= this.fireThreshold) {
-                this.game.onFire('mining');
-                this.stateDuration = 0;
-              }
-            }
-          } else {
-            this.stateDuration = 0;
-          }
-          this.prevMouseState = this.mouseState;
-        }.bind(this), this.fireIntervalCheck);
+        // this.mouseState = null;
+        // this.prevMouseState = null;
+        // this.fireIntervalCheck = 10; //ms
+        // this.stateDuration = 0;
+        // this.fireThreshold = 500; //ms
+        // setInterval(function() {
+        //   if(this.mouseState == 'down') {
+        //     if(this.mouseState == this.prevMouseState) {
+        //       this.stateDuration += this.fireIntervalCheck;
+        //       if(this.stateDuration >= this.fireThreshold) {
+        //         this.game.onFire('mining');
+        //         this.stateDuration = 0;
+        //       }
+        //     }
+        //   } else {
+        //     this.stateDuration = 0;
+        //   }
+        //   this.prevMouseState = this.mouseState;
+        // }.bind(this), this.fireIntervalCheck);
     };
 
     Reach.prototype.disable = function() {

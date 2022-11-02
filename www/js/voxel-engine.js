@@ -43,12 +43,10 @@ function voxel_engine (require, module, exports) {
 
                 // is this a client or a headless server
                 this.isClient = Boolean((typeof opts.isClient !== 'undefined') ? opts.isClient : process.browser)
-                console.log("Is this a client? "+this.isClient);
 
-                console.log("opts :: ",opts);
+                // console.log("opts :: ",opts);
                 if (!('generateChunks' in opts)) opts.generateChunks = true
                 this.generateChunks = opts.generateChunks
-                console.log("this.generateChunks :: "+this.generateChunks);
                 this.setConfigurablePositions(opts)
                 this.configureChunkLoading(opts)
                 this.setDimensions(opts)
@@ -188,7 +186,6 @@ function voxel_engine (require, module, exports) {
                 this.stitcher = plugins.get('voxel-stitch')
                 this.stitcher.on('updatedSides', function() {
                     self.generateChunks = true;
-                    console.log("[updateSides] self.generateChunks : ",self.generateChunks);
                     if (self.generateChunks) self.handleChunkGeneration()
                     self.showAllChunks()
 
@@ -537,7 +534,6 @@ function voxel_engine (require, module, exports) {
             // # Chunk related methods
 
             Game.prototype.configureChunkLoading = function(opts) {
-                console.log("[voxel-engine][configureChunkLoading] ...")
                 var self = this
                 if (!opts.generateChunks) return
                 if (!opts.generate) {
@@ -704,6 +700,8 @@ function voxel_engine (require, module, exports) {
             // # Misc internal methods
 
             Game.prototype.onFire = function(state) {
+                console.log(" [voxel-engine][onFire] -------------- ")
+                console.trace();
                 this.emit('fire', this.controlling, state)
             }
 
@@ -812,7 +810,7 @@ function voxel_engine (require, module, exports) {
 
                     this.shell.bind(name, key)
                 }
-                console.log("keybindings :: ",keybindings);
+                // console.log("keybindings :: ",keybindings);
 
                 obsolete(this, 'interact')
 
@@ -830,14 +828,12 @@ function voxel_engine (require, module, exports) {
             }
 
             Game.prototype.handleChunkGeneration = function() {
-                console.log("[voxel-engine][handleChunkGeneration] begin")
                 var self = this
                 this.voxels.on('missingChunk', function(chunkPos) {
                     self.pendingChunks.push(chunkPos.join('|'))
                 })
                 this.voxels.requestMissingChunks(this.worldOrigin)
                 this.loadPendingChunks(this.pendingChunks.length)
-                console.log("[voxel-engine][handleChunkGeneration] end")
             }
 
             // teardown methods
