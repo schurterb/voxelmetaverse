@@ -84,3 +84,64 @@ npm run start
 
 ## 2022-10-02
 # voxel-outline plugin has error in shader-cache with WebGLRenderingContext.linkProgram
+
+## 2022-10-10
+# voxel.js -> generateVoxelChunk input params do not match the call to it in chunker.js
+#  - given that generateVoxelChunk is also set to "valley", perhaps this is why
+#    the default generation is so whacked.
+
+## 2022-10-11
+# actually, that is apparently how generateVoxelChunk is supposed to work in chunker.js (on previous note)
+# actually, voxel-land is where the terrain is generated in a separate worker thread
+#  the worker thread appears to be being sent generateChunk events whenever a missingChunk is requested
+#  however, no chunks are coming back from that thread
+# Note :: this is the same worker thread which I had to do a lot of tinkering with webworkify
+
+## 2022-10-12
+# fixed the issue from yesterday by modifying the webworkify.js file.
+
+## 2022-10-18
+# apparently, the issue with the voxel-outline plugin was because a specific part
+# initializing the gpu code expected a certain variable to be a certain value,
+# but it wasn't, so the code crashed in that particular part.
+# - attributeLocations was expected to be [0, 1], but was [0, 0] for unknown reasons
+# - temporary solution was to add some logic to check for this case and correct it
+
+## 2022-10-26
+# voxel-controls contains loop that monitors for mouse-hold
+# game-shell is supposed to keep track of which buttons are pressed on keyboard
+#  and on mouse.  Not sure it does this right, though.  A failure somewhere in
+#  there appears to be causing the break-block feature to fail.
+# The issue was that binary-search-bounds.js was malformed during the initial transfer
+#  and was missing escapes in certain places.
+
+## 2022-10-30
+# fireRate option has been found to not correctly correlate to rate of fire Events
+# Rather, a higher fireRate means shorter time to block breaking and a slower
+#  fireRate means longer time to block breaking.
+# Related - voxel-controls:onfire does not appear to be being called within voxel-controls
+#  however; fire events are being sent out.
+# clone.js appears to be unecessarily complicated.  Simplified code a bit, which
+#  fixed issue with broken blocks not appearing in inventory.
+# Now to fix issue with placing blocks from inventory....
+# There is also a problem with the game-shell and binary-search-bounds in virtualKeyCode
+#  Not sure what is supposed to happen here, but it doesn't work.  Mapping for the
+#  Mouse-down event doesn't work, so mouse click doesn't work via voxel-controls path.
+#  The thing that has been working is a simple solution I threw together in voxel-reach.
+
+## 2022-11-01
+# gl-css3d appears to be the key to displaying dom elements within the 3d world
+# converting this to work with THREE.js is ESSENTIAL (else we may have to stick with webgl...)
+# typing .web allows interaction with the iframe
+#  - exiting interaction with iframe breaks controls : MUST FIX THIS
+# Appears that the iframe or its div is too transparent.
+# '.web' makes it visible and interactable, but otherwise, it is invisible.
+
+## 2022-11-02
+# issue with seeing webview inside world doesn't appear to have to do with the position matrix/mesh
+
+## 2022-11-04
+# there appears to be a way to 'cut' a hole through the 3d image that allows html elements
+#  on the back to be visible.
+# Much trouble figuring this one out.  There seem to be plenty of files that were
+#  not properly converted.

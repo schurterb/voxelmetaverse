@@ -43,12 +43,10 @@ function voxel_engine (require, module, exports) {
 
                 // is this a client or a headless server
                 this.isClient = Boolean((typeof opts.isClient !== 'undefined') ? opts.isClient : process.browser)
-                console.log("Is this a client? "+this.isClient);
 
-                console.log("opts :: ",opts);
+                // console.log("opts :: ",opts);
                 if (!('generateChunks' in opts)) opts.generateChunks = true
                 this.generateChunks = opts.generateChunks
-                console.log("this.generateChunks :: "+this.generateChunks);
                 this.setConfigurablePositions(opts)
                 this.configureChunkLoading(opts)
                 this.setDimensions(opts)
@@ -93,7 +91,6 @@ function voxel_engine (require, module, exports) {
 
 
                 // the game-shell
-                console.log("this.isClient :: "+this.isClient)
                 if (this.isClient) /*GZ: Do not load on server, as document element is missing*/ {
                     var createShell = require('gl-now')
                     var shellOpts = shellOpts || {}
@@ -106,7 +103,6 @@ function voxel_engine (require, module, exports) {
                     shellOpts.pointerLock = opts.pointerLock !== undefined ? opts.pointerLock : true
                     shellOpts.stickyPointerLock = opts.stickyPointerLock !== undefined ? opts.stickyPointerLock : shellOpts.pointerLock
                     shellOpts.element = this.createContainer(opts)
-                    console.log("### -- creating shell -- ###")
                     var shell = createShell(shellOpts)
 
                     shell.on('gl-error', function(err) {
@@ -190,7 +186,6 @@ function voxel_engine (require, module, exports) {
                 this.stitcher = plugins.get('voxel-stitch')
                 this.stitcher.on('updatedSides', function() {
                     self.generateChunks = true;
-                    console.log("[updateSides] self.generateChunks : ",self.generateChunks);
                     if (self.generateChunks) self.handleChunkGeneration()
                     self.showAllChunks()
 
@@ -539,7 +534,6 @@ function voxel_engine (require, module, exports) {
             // # Chunk related methods
 
             Game.prototype.configureChunkLoading = function(opts) {
-                console.log("[voxel-engine][configureChunkLoading] ...")
                 var self = this
                 if (!opts.generateChunks) return
                 if (!opts.generate) {
@@ -621,12 +615,12 @@ function voxel_engine (require, module, exports) {
                     count = Math.max(1, Math.min(count, pendingChunks.length))
                 }
 
-                for (var i = 0; i < count; i += 1) {
-                    var chunkPos = pendingChunks[i].split('|')
-                    var chunk = this.voxels.generateChunk(chunkPos[0] | 0, chunkPos[1] | 0, chunkPos[2] | 0)
-
-                    if (this.isClient) this.showChunk(chunk)
-                }
+                // for (var i = 0; i < count; i += 1) {
+                //     var chunkPos = pendingChunks[i].split('|')
+                //     var chunk = this.voxels.generateChunk(chunkPos[0] | 0, chunkPos[1] | 0, chunkPos[2] | 0)
+                //
+                //     if (this.isClient) this.showChunk(chunk)
+                // }
 
                 if (count) pendingChunks.splice(0, count)
             }
@@ -706,6 +700,8 @@ function voxel_engine (require, module, exports) {
             // # Misc internal methods
 
             Game.prototype.onFire = function(state) {
+                console.log(" [voxel-engine][onFire] -------------- ")
+                console.trace();
                 this.emit('fire', this.controlling, state)
             }
 
@@ -720,8 +716,8 @@ function voxel_engine (require, module, exports) {
 
                 //if (this.materials) this.materials.tick(delta)
 
-                console.log("this.pendingChunks.length",this.pendingChunks.length);
-                if (this.pendingChunks.length) this.loadPendingChunks()
+                // console.log("this.pendingChunks.length",this.pendingChunks.length);
+                // if (this.pendingChunks.length) this.loadPendingChunks()
                 if (Object.keys(this.chunksNeedsUpdate).length > 0) this.updateDirtyChunks()
 
                 tic.tick(delta)
@@ -788,7 +784,7 @@ function voxel_engine (require, module, exports) {
                             return self.shell.pointerLock && self.shell.wasDown(name)
                         }
                     })
-                })
+                });
             }
 
             // cleanup key name - based on https://github.com/mikolalysenko/game-shell/blob/master/shell.js
@@ -814,6 +810,7 @@ function voxel_engine (require, module, exports) {
 
                     this.shell.bind(name, key)
                 }
+                // console.log("keybindings :: ",keybindings);
 
                 obsolete(this, 'interact')
 
@@ -831,14 +828,12 @@ function voxel_engine (require, module, exports) {
             }
 
             Game.prototype.handleChunkGeneration = function() {
-                console.log("[voxel-engine][handleChunkGeneration] begin")
                 var self = this
                 this.voxels.on('missingChunk', function(chunkPos) {
                     self.pendingChunks.push(chunkPos.join('|'))
                 })
                 this.voxels.requestMissingChunks(this.worldOrigin)
                 this.loadPendingChunks(this.pendingChunks.length)
-                console.log("[voxel-engine][handleChunkGeneration] end")
             }
 
             // teardown methods

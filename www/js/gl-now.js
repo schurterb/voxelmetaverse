@@ -10,7 +10,6 @@ function gl_now (require, module, exports) {
         var extensions = options.extensions || []
 
         //First create shell
-        console.log(" ### SANITY CHECK - makeGameShell ###")
         var shell = makeGameShell(options)
         var scale = shell.scale || 1
         var contextOptions = options.glOptions
