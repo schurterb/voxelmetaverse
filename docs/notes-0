@@ -136,3 +136,12 @@ npm run start
 #  - exiting interaction with iframe breaks controls : MUST FIX THIS
 # Appears that the iframe or its div is too transparent.
 # '.web' makes it visible and interactable, but otherwise, it is invisible.
+
+## 2022-11-02
+# issue with seeing webview inside world doesn't appear to have to do with the position matrix/mesh
+
+## 2022-11-04
+# there appears to be a way to 'cut' a hole through the 3d image that allows html elements
+#  on the back to be visible.
+# Much trouble figuring this one out.  There seem to be plenty of files that were
+#  not properly converted.

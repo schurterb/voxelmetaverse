@@ -51,12 +51,17 @@ function gl_css3d (require, module, exports) {
 
         this.planeWidth = opts.planeWidth || 2; // assume -1 to +1
         this.planeHeight = opts.planeHeight || 2;
-        //this.tint = opts.tint || [0.5,0,0,0]; // reddish tint, etc.. useful? (note gl blending mode)
+        // this.tint = opts.tint || [0.5,0,0,0]; // reddish tint, etc.. useful? (note gl blending mode)
         this.tint = opts.tint || [0, 0, 0, 0]; // fully transparent
+        // this.tint = [1,1,1,1];
         this.blend = (opts.blend !== undefined) ? opts.blend : false; // overwrite transparent color
         this.flipX = (opts.flipX !== undefined) ? opts.flipX : true;
         this.flipY = (opts.flipY !== undefined) ? opts.flipY : true;
         this.backface = (opts.backface !== undefined) ? opts.backface : true;
+
+        console.log("[gl-css3d] this.tint = ",this.tint);
+        console.log("[gl-css3d] this.blend = ",this.blend);
+        console.log("[gl-css3d] this :: ",this);
 
         this.cutoutMesh = null;
         this.cutoutShader = null;
@@ -94,6 +99,23 @@ function gl_css3d (require, module, exports) {
 
           // color it all transparent so CSS element is visible through
           "  precision highp float;\n#define GLSLIFY 1\n  uniform vec4 color;    void main() {    gl_FragColor = color;  }");
+
+        // this.cutoutShader = glShader(gl,
+        //   "#define GLSLIFY 1\n\
+        //   attribute vec3 position;\n\
+        //   uniform mat4 projection;\n\
+        //   uniform mat4 view;\n\
+        //   void main() {\n\
+        //     gl_Position = projection * view * vec4(position, 1.0);\n\
+        //   }",
+        //   // color it all transparent so CSS element is visible through
+        //   "precision highp float;\n\
+        //   #define GLSLIFY 1\n\
+        //   uniform vec4 color;\n\
+        //   void main() {\n\
+        //     gl_FragColor = color;\n\
+        //   }"
+        // );
       };
 
     GLCSS3D.prototype.updatePerspective = function(cameraFOVradians, width, height) {
@@ -140,6 +162,7 @@ function gl_css3d (require, module, exports) {
 
         this.cutoutShader.uniforms.projection = proj
         this.cutoutShader.uniforms.view = view
+        // console.log("[gl-css3d] this.tint = ",this.tint);
         this.cutoutShader.uniforms.color = this.tint
 
         this.cutoutMesh.bind(this.cutoutShader)
