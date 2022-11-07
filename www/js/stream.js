@@ -162,7 +162,8 @@ function stream(require, module, exports) {
   Stream.Writable = require('readable-stream/writable.js');
   Stream.Duplex = require('readable-stream/duplex.js');
   Stream.Transform = require('readable-stream/transform.js');
-  Stream.PassThrough = require('readable-stream/passthrough.js');
+  // Stream.PassThrough = require('readable-stream/passthrough.js');
+  Stream.PassThrough = Stream.Readable.PassThrough;
 
   // Backwards-compat with node 0.4.x
   Stream.Stream = Stream;

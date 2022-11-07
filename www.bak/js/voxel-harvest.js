@@ -38,7 +38,7 @@ function voxel_harvest (require, module, exports) {
             //this.playerInventory.give new ItemPile('chest', 1)
 
             this.mine.on('break', this.onBreak = (target) => {
-                //if plugins.isEnabled('debris') <hashtag> TODO: refactor into module itself (event listener)
+                //if plugins.isEnabled('debris') # TODO: refactor into module itself (event listener)
                 //  debris(target.voxel, target.value)
                 //else
                 game.setBlock(target.voxel, 0);
@@ -102,7 +102,7 @@ function voxel_harvest (require, module, exports) {
             tool.tags.damage += 1;
 
             if (tool.tags.damage >= maxDamage) {
-                // break tool <hashtag> TODO: fanfare
+                // break tool # TODO: fanfare
                 tool = undefined;
             }
 

@@ -663,6 +663,8 @@ function voxel_engine (require, module, exports) {
                 //console.log('showChunk',chunkIndex,'density=',JSON.stringify(chunkDensity(chunk)))
 
                 var voxelArray = isndarray(chunk) ? chunk : ndarray(chunk.voxels, chunk.dims)
+
+                // TODO: This needs to create a THREE.Geometry
                 var mesh = this.mesherPlugin.createVoxelMesh(this.shell.gl, voxelArray, this.stitcher.voxelSideTextureIDs, this.stitcher.voxelSideTextureSizes, chunk.position, this.chunkPad)
 
                 if (!mesh) {
@@ -678,6 +680,10 @@ function voxel_engine (require, module, exports) {
                     //if (this.voxels.meshes[chunkIndex].wireMesh) this.scene.remove(this.voxels.meshes[chunkIndex].wireMesh)
                 }
                 this.voxels.meshes[chunkIndex] = mesh
+
+                // TODO: The THREE.Geometry needs to be added to the scene
+
+
                 this.emit('renderChunk', chunk)
                 return mesh
             }

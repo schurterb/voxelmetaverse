@@ -60,6 +60,7 @@ function gl_now (require, module, exports) {
             //Hook render event
             shell.on("render", function renderGLNow(t) {
 
+                if(enable_per_tick_logging) console.log("[gl-now][on render]: ",t);
                 //Bind default framebuffer
                 gl.bindFramebuffer(gl.FRAMEBUFFER, null)
 

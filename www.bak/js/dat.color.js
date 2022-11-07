@@ -159,7 +159,7 @@ function dat_color (require, module, exports) {
                     s = '0' + s;
                 }
 
-                return '<hashtag>' + s;
+                return '#' + s;
 
             } else {
 
@@ -391,7 +391,7 @@ function dat_color (require, module, exports) {
 
                             read: function(original) {
 
-                                var test = original.match(/^<hashtag>([A-F0-9])([A-F0-9])([A-F0-9])$/i);
+                                var test = original.match(/^#([A-F0-9])([A-F0-9])([A-F0-9])$/i);
                                 if (test === null) return false;
 
                                 return {
@@ -413,7 +413,7 @@ function dat_color (require, module, exports) {
 
                             read: function(original) {
 
-                                var test = original.match(/^<hashtag>([A-F0-9]{6})$/i);
+                                var test = original.match(/^#([A-F0-9]{6})$/i);
                                 if (test === null) return false;
 
                                 return {

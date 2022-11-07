@@ -1330,6 +1330,7 @@ const initFunctions = {
   "pako/lib/zlib/constants": constants,
   "_process": _process,
   "./inflate": inflate_alt,
+  "readable-stream/passthrough.js": transform,
   "readable-stream/transform.js": transform,
   "readable-stream/readable.js": readable,
   "readable-stream/writable.js": writable,
@@ -1341,5 +1342,6 @@ const initFunctions = {
   "./lib/reflect": reflect,
   "./lib/create-attributes": create_attributes,
   "./lib/create-uniforms": create_uniforms,
-  "./reflect": reflect
+  "./reflect": reflect,
+  "./doConvert.js": doConvert
 }

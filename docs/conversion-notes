@@ -1,0 +1,12 @@
+## 2022-11-04
+
+## 2022-11-07
+# goal is to have back-end chunk generator -> chunk -> Geometry -> scene.add (or scene.update?)
+#  - voxel-land generates terrain via webworker
+#  - webworkify removed as unnecessary
+#  - voxel-engine.showChunk does meshing and chunk rendering
+#  - - TODO: This needs to create a THREE.Geometry (use the latest?) and add it to a THREE.Scene
+#  - -       Create a separate canvas so we can test the StackGL against the THREE during this phase
+#
+# TODO: modify chunk-generator-worker.js to load scripts instead of having them ALL embedded
+#

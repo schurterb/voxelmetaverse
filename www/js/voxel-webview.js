@@ -5,7 +5,6 @@ function voxel_webview(require, module, exports) {
   var createCSS3D = require('gl-css3d');
 
   module.exports = function(game, opts) {
-    console.log("WebView Plugin Check");
     return new WebviewPlugin(game, opts);
   };
 
@@ -34,7 +33,6 @@ function voxel_webview(require, module, exports) {
       opts.tint = opts.tint || [1,0,0,0];
       opts.flipX = false; // for some reason
       this.css3d = createCSS3D(iframe, opts);
-      console.log("[voxel-webview] this.css3d :: ",this.css3d)
 
       this.enable();
   }
@@ -69,7 +67,6 @@ function voxel_webview(require, module, exports) {
 
       // commands for interacting TODO: replace with something in-game (survival), https://github.com/deathcap/voxel-webview/issues/3
       var commands = this.game.plugins.get('voxel-commands');
-      console.log("[voxel-webview] commands :: ",commands)
       if (commands) {
           commands.registerCommand('url',
               this.onURL = function(address) {
@@ -119,12 +116,10 @@ function voxel_webview(require, module, exports) {
   };
 
   WebviewPlugin.prototype.ginit = function(gl) {
-      console.log("[voxel-webview] ginit")
       this.css3d.ginit(this.game.shell.gl);
   };
 
   WebviewPlugin.prototype.updatePerspective = function() {
-      console.log("[voxel-webview] updatePerspective")
       var cameraFOVradians = this.shader.cameraFOV * Math.PI / 180;
       this.css3d.updatePerspective(cameraFOVradians, this.game.shell.width, this.game.shell.height);
   };

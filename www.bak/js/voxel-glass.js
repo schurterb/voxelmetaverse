@@ -65,41 +65,72 @@ function voxel_glass (require, module, exports) {
 
     // Register an item and two blocks for a glass pane of the given color
     GlassPlugin.prototype.registerPane = function(color) {
-            var colorName = ucfirst(color);
+        var colorName = ucfirst(color);
 
-            var texture = color !== '' ? ('glass_' + color) : 'glass';
+        var texture = color !== '' ? ('glass_' + color) : 'glass';
 
-            // item
-            var self = this;
-            this.registry.registerItem('glassPane' + colorName, {
-                displayName: colorName + ' Glass Pane',
-                itemTexture: texture,
-                creativeTab: 'glass',
-                onUse: function(held, target) {
-                    // place X or Z pane depending on facing
-                    return self.use.useBlock(target, new ItemPile('glassPane' + self.playerOrientation() + colorName)) === undefined;
+        // item
+        var self = this;
+        this.registry.registerItem('glassPane' + colorName, {
+            displayName: colorName + ' Glass Pane',
+            itemTexture: texture,
+            creativeTab: 'glass',
+            onUse: function(held, target) {
+                // place X or Z pane depending on facing
+                return self.use.useBlock(target, new ItemPile('glassPane' + self.playerOrientation() + colorName)) === undefined;
+            },
+        });
+
+        // oriented blocks
+
+        this.registry.registerBlock('glassPaneZ' + colorName, {
+            harvestSound: 'random/glass1',
+            creativeTab: false,
+            itemDrop: 'glassPane' + colorName,
+            displayName: colorName + ' Glass Pane Z',
+            itemTexture: texture, // flat, not 3D cube
+            texture: texture, // preload for model below
+            blockModel: [{
+                from: [0, 0, 7],
+                to: [16, 16, 2],
+                faceData: {
+                    down: {},
+                    up: {},
+                    north: {},
+                    south: {},
+                    west: {},
+                    east: {}
                 },
-            });
+                texture: texture, // for all faces. TODO: use glass_pane_top for narrow faces?
+            }]
+        });
 
-            // oriented blocks
+        // same as above but oriented along X axis
+        this.registry.registerBlock('glassPaneX' + colorName, {
+            harvestSound: 'random/glass1',
+            creativeTab: false,
+            itemDrop: 'glassPane' + colorName,
+            displayName: colorName + ' Glass Pane X',
+            itemTexture: texture,
+            texture: texture,
+            blockModel: [{
+                from: [7, 0, 0],
+                to: [2, 16, 16],
+                faceData: {
+                    down: {},
+                    up: {},
+                    north: {},
+                    south: {},
+                    west: {},
+                    east: {}
+                },
+                texture: texture,
+            }]
+        });
+    };
 
-            this.registry.registerBlock('glassPaneZ' + colorName, {
-                        harvestSound: 'random/glass1',
-                        creativeTab: false,
-                        itemDrop: 'glassPane' + colorName,
-                        displayName: colorName + ' Glass Pane Z',
-                        itemTexture: texture, // flat, not 3D cube
-                        texture: texture, // preload for model below
-                        blockModel: [{
-                                    from: [0, 0, 7],
-                                    to: [16, 16, 2],
-                                    faceData: {
-                                        down: {},
-                                        up: {},
-                                        north: {},
-                                        south: {},
-                                        west: {},
-                                        east: {}
-                                    },
-                                    texture: texture, // for all faces. TODO: use glass_pane_top for narrow faces?
-                                }
+    GlassPlugin.prototype.disable = function() {
+        // TODO: unregister blocks
+    };
+
+}

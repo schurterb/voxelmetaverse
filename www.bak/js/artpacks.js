@@ -3,7 +3,7 @@ function artpacks (require, module, exports) {
 
     const ZIP = require('zip');
     const path = require('path');
-    const fs = require('fs');
+    // const fs = require('fs');
     const binaryXHR = require('binary-xhr');
     const EventEmitter = (require('events').EventEmitter);
     const getFrames = require('mcmeta');
@@ -63,7 +63,7 @@ function artpacks (require, module, exports) {
                     }
 
                     if (err || !packData) {
-                        console.log(`artpack failed to load <hashtag>${packIndex} - ${url}: ${err}`);
+                        console.log(`artpack failed to load #${packIndex} - ${url}: ${err}`);
                         this.emit('failedURL', url, err);
                         delete this.pending[url];
                         return;
@@ -74,7 +74,7 @@ function artpacks (require, module, exports) {
                         this.packs[packIndex] = new ArtPackArchive(packData, url);
                         this.refresh();
                     } catch (e) {
-                        console.log(`artpack failed to parse <hashtag>${packIndex} - ${url}: ${e}`);
+                        console.log(`artpack failed to parse #${packIndex} - ${url}: ${e}`);
                         this.emit('failedURL', url, e);
                         // fallthrough
                     }
@@ -113,7 +113,7 @@ function artpacks (require, module, exports) {
                     return onerror(err, img);
                 }
 
-                // see https://en.wikipedia.org/wiki/HSL_color_space<hashtag>HSV_.28Hue_Saturation_Value.29
+                // see https://en.wikipedia.org/wiki/HSL_color_space#HSV_.28Hue_Saturation_Value.29
                 if (this.colorMap === undefined) {
                     this.colorMap = graycolorize.generateMap(120 / 360, 0.7);
                 }
@@ -170,7 +170,6 @@ function artpacks (require, module, exports) {
                     } else {
                         // possible multi-frame texture strip; read .mcmeta file
                         const json = this.getMeta(name, 'textures');
-                        console.log('.mcmeta=', json);
 
                         getPixels(img.src, (err, pixels) => {
                             if (err) {
@@ -245,9 +244,10 @@ function artpacks (require, module, exports) {
             const arrayBuffer = this.getArrayBuffer(name, type, false);
             if (arrayBuffer === undefined) return undefined;
 
-            return new Blob([arrayBuffer], {
+            const blob = new Blob([arrayBuffer], {
                 type: this.mimeTypes[type]
             });
+            return blob
         }
 
         getArrayBuffer(name, type, isMeta) {
@@ -381,7 +381,7 @@ function artpacks (require, module, exports) {
                 const basename = parts[1];
 
                 const pathRP = `assets/${namespace}/textures/${category}/${basename}.png`;
-                console.log('artpacks texture:', fullname, [category, namespace, basename]);
+                // console.log('artpacks texture:', fullname, [category, namespace, basename]); // Temporary to aid debugging
 
                 return pathRP;
             } else if (type === 'sounds') {

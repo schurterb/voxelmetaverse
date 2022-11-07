@@ -57,7 +57,7 @@ function voxel_artpacks (require, module, exports) {
             super(game, {
                 contents: APDialog.generateContents(plugin, game),
                 escapeKeys: [192, 80]
-            }); // `, P <hashtag> TODO: match close key from binding
+            }); // `, P # TODO: match close key from binding
         }
 
         static generateContents(plugin, game) {

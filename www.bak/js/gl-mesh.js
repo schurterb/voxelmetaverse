@@ -305,7 +305,7 @@ function gl_mesh (require, module, exports) {
         if (numElements === 0) {
             return new EmptyMesh(gl)
         }
-        var vao = createVAO(gl, elements, attributes.values)
+        var vao = createVAO(gl, attributes, elements, attributes.values) // (BNS - 2022/09/08) the second arg (attributes) was not specified, probably because of different versions of gl-vao
         return new Mesh(gl, mode, numElements, vao, elements, attributes.values, attributes.names)
     }
 
@@ -403,7 +403,8 @@ function gl_mesh (require, module, exports) {
                     for (var i = 0; i < element_count; ++i) {
                         point_buf[i] = elements[i]
                     }
-                    element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, point_buf.subarray(0, element_count))
+                    // element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, point_buf.subarray(0, element_count))
+                    element_buffer = createBuffer(gl, point_buf.subarray(0, element_count), gl.ELEMENT_ARRAY_BUFFER)
                     pool.freeUint16(point_buf)
                 } else {
                     //Otherwise we pack data into a uint16 array
@@ -418,7 +419,8 @@ function gl_mesh (require, module, exports) {
                             packed_buf[ptr++] = prim[j]
                         }
                     }
-                    element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, packed_buf.subarray(0, element_count))
+                    // element_buffer = createBuffer(gl, gl.ELEMENT_ARRAY_BUFFER, packed_buf.subarray(0, element_count))
+                    element_buffer = createBuffer(gl, packed_buf.subarray(0, element_count), gl.ELEMENT_ARRAY_BUFFER)
                     pool.freeUint16(packed_buf)
                 }
             } else {

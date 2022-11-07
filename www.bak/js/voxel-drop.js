@@ -123,7 +123,7 @@ return module.exports;
                 const name = file.name;
                 const opts = {};
 
-                console.log(`loadScript <hashtag>file.name = ${createPlugin}`);
+                console.log(`loadScript #file.name = ${createPlugin}`);
 
                 if (!createPlugin || typeof createPlugin !== 'function') {
                     // didn't return factory constructor, assume not a plugin
@@ -132,7 +132,7 @@ return module.exports;
                 }
 
                 //if not createPlugin.pluginInfo
-                //  console.log "Warning: plugin <hashtag>{name} missing pluginInfo"
+                //  console.log "Warning: plugin #{name} missing pluginInfo"
 
                 const plugin = this.game.plugins.instantiate(createPlugin, name, opts);
                 if (!plugin) {

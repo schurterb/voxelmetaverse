@@ -49,6 +49,9 @@ function webworkify (require, module, exports) {
     var stringify = JSON.stringify;
 
     module.exports = function(fn) {
+
+        console.log("[webworkify] fn :: ",fn);
+
         var sources = initFunctions;
         var cache = loaded_modules;
         var keys = [];
@@ -109,8 +112,9 @@ function webworkify (require, module, exports) {
         // console.log(" ##################################################### ");
         // console.log("src :: ",src);
         // console.log(" ##################################################### ");
-        return new Worker(window.URL.createObjectURL(
-            new Blob([src], { type: 'text/javascript' })
-        ));
+        // return new Worker(window.URL.createObjectURL(
+        //     new Blob([src], { type: 'text/javascript' })
+        // ));
+        return new Worker('./js/chunk-generator-worker.js')
     };
 }

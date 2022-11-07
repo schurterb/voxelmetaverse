@@ -22,7 +22,7 @@ function mcmeta (require, module, exports) {
     };
 
     var parseFramesInfo = function(imageWidth, imageHeight, json) {
-        console.log(json);
+        // console.log(json);(json);
 
         var countTilesX = getTileCountX(imageWidth, imageHeight, json);
         var countTilesY = getTileCountY(imageWidth, imageHeight, json);
@@ -72,7 +72,7 @@ function mcmeta (require, module, exports) {
         var tileHeight = totalHeight / countTilesY;
         var tiles = [];
 
-        console.log(countTilesY, tileWidth, tileHeight);
+        // console.log(json);(countTilesY, tileWidth, tileHeight);
         for (var j = 0; j < countTilesX; j += 1) {
             for (var i = 0; i < countTilesY; i += 1) {
                 var sx = j * tileWidth;
@@ -80,9 +80,9 @@ function mcmeta (require, module, exports) {
                 var ex = (j + 1) * tileWidth;
                 var ey = (i + 1) * tileHeight;
 
-                console.log(sx, sy, ex, sy);
+                // console.log(json);(sx, sy, ex, sy);
                 var tilePixels = pixels.lo(sy, sx).hi(ey - sy, ex - sx);
-                console.log(tilePixels);
+                // console.log(json);(tilePixels);
 
                 var canvas = savePixels(tilePixels, 'canvas');
                 /* debug
@@ -90,7 +90,7 @@ function mcmeta (require, module, exports) {
                 document.body.appendChild(document.createElement('br'));
                 document.body.appendChild(canvas);
                 document.body.appendChild(document.createElement('br'));
-                console.log(canvas.width,canvas.height);
+                // console.log(json);(canvas.width,canvas.height);
                 */
 
                 tiles.push(canvas.toDataURL());
@@ -116,10 +116,10 @@ function mcmeta (require, module, exports) {
         var imageHeight = pixels.shape[0];
         var imageWidth = pixels.shape[1];
 
-        console.log('wh', imageWidth, imageHeight);
+        // console.log(json);('wh', imageWidth, imageHeight);
 
         var framesInfo = parseFramesInfo(imageWidth, imageHeight, json);
-        console.log('framesInfo', framesInfo);
+        // console.log(json);('framesInfo', framesInfo);
 
         var countTilesX = getTileCountX(imageWidth, imageHeight, json);
         var countTilesY = getTileCountY(imageWidth, imageHeight, json);
@@ -139,7 +139,7 @@ function mcmeta (require, module, exports) {
             };
 
             flipbook.push(page);
-            console.log(i, page.index, page.image, page.time);
+            // console.log(json);(i, page.index, page.image, page.time);
         }
 
         return flipbook;

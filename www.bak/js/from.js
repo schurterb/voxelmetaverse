@@ -1,4 +1,4 @@
-function from (require, module, exports) {
+function from(require, module, exports) {
     module.exports = from
 
     var base64 = require('base64-js')
@@ -11,7 +11,8 @@ function from (require, module, exports) {
 
     function from(source, encoding) {
         if (Array.isArray(source)) {
-            return new Uint8Array(source)
+            var output = new Uint8Array(source)
+            return output;
         }
 
         return decoders[encoding || 'utf8'](source)
@@ -129,4 +130,5 @@ function from (require, module, exports) {
     function from_base64(str) {
         return new Uint8Array(base64.toByteArray(str))
     }
+
 }

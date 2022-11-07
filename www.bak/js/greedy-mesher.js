@@ -1,4 +1,4 @@
-function greedy_mesher (require, module, exports) {
+function greedy_mesher(require, module, exports) {
     "use strict"
 
     var pool = require("typedarray-pool")
@@ -148,7 +148,7 @@ function greedy_mesher (require, module, exports) {
 
         if (options.debug) {
             console.log("GENERATING MESHER:")
-            console.log(code.join("n"))
+            console.log(code.join("\n"))
         }
 
         //Compile procedure
@@ -163,7 +163,7 @@ function greedy_mesher (require, module, exports) {
         //Build wrapper
         var local_args = ["array"].concat(opt_args)
         var funcName = ["greedyMesher", d, "d_ord", order.join("s"), (skip ? "skip" : ""), (merge ? "merge" : "")].join("")
-        var gen_body = ["'use strict';function ", funcName, "(", local_args.join(","), "){", code.join("n"), "};return ", funcName].join("")
+        var gen_body = ["'use strict';function ", funcName, "(", local_args.join(","), "){", code.join("\n"), "};return ", funcName].join("")
         args.push(gen_body)
         var proc = Function.apply(undefined, args)
 
@@ -198,4 +198,5 @@ function greedy_mesher (require, module, exports) {
         )
     }
     module.exports = compileMesher
+
 }

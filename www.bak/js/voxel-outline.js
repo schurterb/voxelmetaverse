@@ -90,6 +90,7 @@ function voxel_outline (require, module, exports) {
 
     OutlinePlugin.prototype.render = function() {
         if (this.showOutline && this.currentTarget) {
+            if(enable_per_tick_logging) console.log("[voxel-outline][render] start render")
             var gl = this.shell.gl;
 
             if (this.showThrough) gl.disable(gl.DEPTH_TEST);
@@ -104,45 +105,53 @@ function voxel_outline (require, module, exports) {
             outlineVAO.bind();
             outlineVAO.draw(gl.LINES, outlineVAO.length);
             outlineVAO.unbind();
+            if(enable_per_tick_logging) console.log("[voxel-outline][render] end render")
         }
     };
 
     OutlinePlugin.prototype.shaderInit = function() {
-            this.outlineShader = createSimpleShader(this.shell.gl);
+        this.outlineShader = createSimpleShader(this.shell.gl);
 
-            // create outline mesh
+        // create outline mesh
 
-            // TODO: refactor with voxel-chunkborder, very similar
+        // TODO: refactor with voxel-chunkborder, very similar
 
-            var w = 1;
-            var outlineVertexArray = new Uint8Array([
-                0, 0, 0,
-                0, 0, w,
-                0, w, 0,
-                0, w, w,
-                w, 0, 0,
-                w, 0, w,
-                w, w, 0,
-                w, w, w
-            ]);
+        var w = 1;
+        var outlineVertexArray = new Uint8Array([
+            0, 0, 0,
+            0, 0, w,
+            0, w, 0,
+            0, w, w,
+            w, 0, 0,
+            w, 0, w,
+            w, w, 0,
+            w, w, w
+        ]);
 
-            var indexArray = new Uint16Array([
-                0, 1, 0, 2, 2, 3, 3, 1,
-                0, 4, 4, 5, 5, 1,
-                5, 7, 7, 3,
-                7, 6, 6, 2,
-                6, 4
-            ]);
+        var indexArray = new Uint16Array([
+            0, 1, 0, 2, 2, 3, 3, 1,
+            0, 4, 4, 5, 5, 1,
+            5, 7, 7, 3,
+            7, 6, 6, 2,
+            6, 4
+        ]);
 
-            var outlineVertexCount = indexArray.length;
+        var outlineVertexCount = indexArray.length;
 
-            var gl = this.shell.gl;
+        var gl = this.shell.gl;
 
-            var outlineBuf = createBuffer(gl, outlineVertexArray);
-            var indexBuf = createBuffer(gl, indexArray, gl.ELEMENT_ARRAY_BUFFER);
+        var outlineBuf = createBuffer(gl, outlineVertexArray);
+        var indexBuf = createBuffer(gl, indexArray, gl.ELEMENT_ARRAY_BUFFER);
 
-            var outlineVAO = createVAO(gl, [{
-                            buffer: outlineBuf,
-                            type: gl.UNSIGNED_BYTE,
-                            size: 3
-                        }
+        var outlineVAO = createVAO(gl, [{
+                buffer: outlineBuf,
+                type: gl.UNSIGNED_BYTE,
+                size: 3
+            }],
+            indexBuf);
+        outlineVAO.length = outlineVertexCount;
+
+        this.mesh = outlineVAO;
+    };
+
+}

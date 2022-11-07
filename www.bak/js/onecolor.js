@@ -30,7 +30,7 @@ function onecolor (require, module, exports) {
         } else if (typeof obj === 'string') {
             var lowerCased = obj.toLowerCase();
             if (namedColors[lowerCased]) {
-                obj = '<hashtag>' + namedColors[lowerCased];
+                obj = '#' + namedColors[lowerCased];
             }
             if (lowerCased === 'transparent') {
                 obj = 'rgba(0,0,0,0)';
@@ -57,10 +57,10 @@ function onecolor (require, module, exports) {
             // Assume hex syntax
             if (obj.length < 6) {
                 // Allow CSS shorthand
-                obj = obj.replace(/^<hashtag>?([0-9a-f])([0-9a-f])([0-9a-f])$/i, '$1$1$2$2$3$3');
+                obj = obj.replace(/^#?([0-9a-f])([0-9a-f])([0-9a-f])$/i, '$1$1$2$2$3$3');
             }
             // Split obj into red, green, and blue components
-            var hexMatch = obj.match(/^<hashtag>?([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])$/i);
+            var hexMatch = obj.match(/^#?([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])$/i);
             if (hexMatch) {
                 return new ONECOLOR.RGB(
                     parseInt(hexMatch[1], 16) / 255,
@@ -106,8 +106,7 @@ function onecolor (require, module, exports) {
                 return propertyName !== 'alpha';
             }).map(function(propertyName) {
                 return "isNaN(" + propertyName + ")";
-            }).join("||") + "){" + "throw new Error(" [" + colorSpaceName + "]: Invalid color: ("+" + propertyNames.join("+", "+") + "+")
-            ");}" +
+            }).join("||") + "){" + "throw new Error(\"[" + colorSpaceName + "]: Invalid color: (\"+" + propertyNames.join("+\",\"+") + "+\")\");}" +
             propertyNames.map(function(propertyName) {
                 if (propertyName === 'hue') {
                     return "this._hue=hue<0?hue-Math.floor(hue):hue%1"; // Wrap
@@ -167,13 +166,9 @@ function onecolor (require, module, exports) {
         prototype[colorSpaceName.toLowerCase()] = function() {
             return this;
         };
-        prototype.toString = new Function("return " [one.color.
-                " + colorSpaceName + ": "+" + propertyNames.map(function(propertyName, i) {
-                    return ""
-                    " + propertyNames[i] + " = "+this._" + propertyName;
-                }).join("+") + "+"
-            ]
-            ";");
+        prototype.toString = new Function("return \"[one.color." + colorSpaceName + ":\"+" + propertyNames.map(function (propertyName, i) {
+            return "\" " + propertyNames[i] + "=\"+this._" + propertyName;
+        }).join("+") + "+\"]\";");
 
         // Generate getters and setters
         propertyNames.forEach(function(propertyName, i) {
@@ -224,12 +219,12 @@ function onecolor (require, module, exports) {
     installColorSpace('RGB', ['red', 'green', 'blue', 'alpha'], {
         hex: function() {
             var hexString = (Math.round(255 * this._red) * 0x10000 + Math.round(255 * this._green) * 0x100 + Math.round(255 * this._blue)).toString(16);
-            return '<hashtag>' + ('00000'.substr(0, 6 - hexString.length)) + hexString;
+            return '#' + ('00000'.substr(0, 6 - hexString.length)) + hexString;
         },
 
         hexa: function() {
             var alphaString = Math.round(this._alpha * 255).toString(16);
-            return '<hashtag>' + '00'.substr(0, 2 - alphaString.length) + alphaString + this.hex().substr(1, 6);
+            return '#' + '00'.substr(0, 2 - alphaString.length) + alphaString + this.hex().substr(1, 6);
         },
 
         css: function() {
@@ -412,7 +407,7 @@ function onecolor (require, module, exports) {
 
     installColorSpace('XYZ', ['x', 'y', 'z', 'alpha'], {
         fromRgb: function() {
-            // http://www.easyrgb.com/index.php?X=MATH&H=02<hashtag>text2
+            // http://www.easyrgb.com/index.php?X=MATH&H=02#text2
             var convert = function(channel) {
                     return channel > 0.04045 ?
                         Math.pow((channel + 0.055) / 1.055, 2.4) :
@@ -433,7 +428,7 @@ function onecolor (require, module, exports) {
         },
 
         rgb: function() {
-            // http://www.easyrgb.com/index.php?X=MATH&H=01<hashtag>text1
+            // http://www.easyrgb.com/index.php?X=MATH&H=01#text1
             var x = this._x,
                 y = this._y,
                 z = this._z,
@@ -454,7 +449,7 @@ function onecolor (require, module, exports) {
         },
 
         lab: function() {
-            // http://www.easyrgb.com/index.php?X=MATH&H=07<hashtag>text7
+            // http://www.easyrgb.com/index.php?X=MATH&H=07#text7
             var convert = function(channel) {
                     return channel > 0.008856 ?
                         Math.pow(channel, 1 / 3) :
@@ -485,7 +480,7 @@ function onecolor (require, module, exports) {
         },
 
         xyz: function() {
-            // http://www.easyrgb.com/index.php?X=MATH&H=08<hashtag>text8
+            // http://www.easyrgb.com/index.php?X=MATH&H=08#text8
             var convert = function(channel) {
                     var pow = Math.pow(channel, 3);
                     return pow > 0.008856 ?

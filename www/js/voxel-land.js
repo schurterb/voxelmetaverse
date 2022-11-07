@@ -2,7 +2,7 @@ function voxel_land (require, module, exports) {
     (function(process) {
         (function() {
 
-            var webworkify = require('webworkify');
+            // var webworkify = require('webworkify');
             var unworkify = require('unworkify');
             var ndarray = require('ndarray');
 
@@ -56,16 +56,18 @@ function voxel_land (require, module, exports) {
 
             Land.prototype.enable = function() {
                 this.registerBlocks();
-                // (BNS - 2022/09/09) Skipping the web worker thingy, as I don't know how to get it to work.  Seems quite terrible...
-                if (process.browser) {
-                    this.worker = webworkify(require('./worker.js'));
-                } else {
-                    // fallback to unthreaded
-                    // TODO: switch to https://github.com/audreyt/node-webworker-threads
-                    this.worker = unworkify(require('./worker.js'));
-                }
-                // this.worker = unworkify(require('./worker.js'));
+                this.worker = new Worker('./js/chunk-generator-worker.js')
                 this.bindEvents();
+
+                // // (BNS - 2022/09/09) Skipping the web worker thingy, as I don't know how to get it to work.  Seems quite terrible...
+                // if (process.browser) {
+                //     this.worker = webworkify(require('./worker.js'));
+                // } else {
+                //     // fallback to unthreaded
+                //     // TODO: switch to https://github.com/audreyt/node-webworker-threads
+                //     this.worker = unworkify(require('./worker.js'));
+                // }
+                // // this.worker = unworkify(require('./worker.js'));
             };
 
             Land.prototype.disable = function() {

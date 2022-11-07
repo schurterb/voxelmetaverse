@@ -194,7 +194,7 @@ function ndarray (require, module, exports) {
             }).join(",") + ",offset)}")
 
         //Compile procedure
-        var procedure = new Function("CTOR_LIST", "ORDER", code.join("n"))
+        var procedure = new Function("CTOR_LIST", "ORDER", code.join("\n"))
         return procedure(CACHED_CONSTRUCTORS[dtype], order)
     }
 

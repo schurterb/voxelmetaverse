@@ -533,7 +533,12 @@ function util(require, module, exports) {
             }
             exports.isPrimitive = isPrimitive;
 
-            exports.isBuffer = require('./support/isBuffer');
+            exports.isBuffer = function isBuffer(arg) {
+              return arg && typeof arg === 'object'
+                && typeof arg.copy === 'function'
+                && typeof arg.fill === 'function'
+                && typeof arg.readUInt8 === 'function';
+            };
 
             function objectToString(o) {
                 return Object.prototype.toString.call(o);

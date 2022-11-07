@@ -6,7 +6,7 @@ function gl_shader(require, module, exports) {
     var makeReflect = require('./lib/reflect')
     var shaderCache = require('./lib/shader-cache')
     var runtime = require('./lib/runtime-reflect')
-    var GLError = require("./lib/GLError")
+    var GLError = require("./GLError")
 
     //Shader object
     function Shader(gl) {

@@ -28,7 +28,7 @@ function ftooltip (require, module, exports) {
                     'z-index: 20;',
                     'visibility: hidden;',
                     opts.extraStyle || '',
-                ].join('n');
+                ].join('\n');
 
                 this.cachedDivHeights = [];
 

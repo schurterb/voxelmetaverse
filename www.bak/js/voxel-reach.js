@@ -7,7 +7,8 @@ function voxel_reach (require, module, exports) {
     var fract = require('fract');
 
     module.exports = function(game, opts) {
-        return new Reach(game, opts);
+        var output = new Reach(game, opts);
+        return output;
     };
 
     module.exports.pluginInfo = {};
@@ -25,6 +26,9 @@ function voxel_reach (require, module, exports) {
         this.enable();
     }
 
+    // (BNS - 2022/09/06) Oddly, it seems that this overwrites any previously defined prototypes on the first argument (i.e. Reach)
+    //                    Therefore, it must be placed before any other prototypes are defined.
+    inherits(Reach, EventEmitter);
 
     Reach.prototype.enable = function() {
         var self = this;
@@ -55,12 +59,10 @@ function voxel_reach (require, module, exports) {
         function fire(fireTarget, state) {
             /*jshint unused:false*/
             var action, target;
-
             action = self.action(state);
             if (!action) {
                 return;
             }
-
             target = self.specifyTarget();
 
             if (action === 'mining' && (self.currentTarget || target)) {
@@ -70,17 +72,18 @@ function voxel_reach (require, module, exports) {
                     self.emit('start mining', target);
                 }
             }
-            self.currentTarget = target;
-
             self.emit(action, target);
         }
 
         // Edge triggered
         // TODO: refactor
+        // (BNS - 2022/10/25) We need to have a variable that stores the up-down
+        //    state and a loop that fires a hold event if down= true for 2 or more seconds
         function mousedown(ev) {
             if (!self.havePointer) return;
             if (ev.button !== self.opts.mouseButton) return;
             self.emit('start mining', self.specifyTarget());
+            self.mouseState = 'down';
         }
 
         function mouseup(ev) {
@@ -88,18 +91,40 @@ function voxel_reach (require, module, exports) {
             if (ev.button !== self.opts.mouseButton) return;
             self.currentTarget = null;
             self.emit('stop mining', self.specifyTarget());
+            self.mouseState = 'up';
         }
 
         this.game.on('fire', fire);
-        if (this.game.isClient) {
-            ever(document.body).on('mousedown', mousedown);
-            ever(document.body).on('mouseup', mouseup);
-        }
+        ever(document.body).on('mousedown', mousedown);
+        ever(document.body).on('mouseup', mouseup);
 
         // Save callbacks for removing in disable()
         this.fire = fire;
         this.mousedown = mousedown;
         this.mouseup = mouseup;
+
+        // (BNS - 2022/10/30) this does work as anlternative to the voxel-controls proc.
+        // (BNS - 2022/10/25) emit a fire event when the mouse is held for more than 500 ms
+        //  for response time, the loop runs every 10 ms.
+        // this.mouseState = null;
+        // this.prevMouseState = null;
+        // this.fireIntervalCheck = 10; //ms
+        // this.stateDuration = 0;
+        // this.fireThreshold = 500; //ms
+        // setInterval(function() {
+        //   if(this.mouseState == 'down') {
+        //     if(this.mouseState == this.prevMouseState) {
+        //       this.stateDuration += this.fireIntervalCheck;
+        //       if(this.stateDuration >= this.fireThreshold) {
+        //         this.game.onFire('mining');
+        //         this.stateDuration = 0;
+        //       }
+        //     }
+        //   } else {
+        //     this.stateDuration = 0;
+        //   }
+        //   this.prevMouseState = this.mouseState;
+        // }.bind(this), this.fireIntervalCheck);
     };
 
     Reach.prototype.disable = function() {
@@ -183,10 +208,10 @@ function voxel_reach (require, module, exports) {
             // right-click = use
             return 'use';
             // TODO: middle-click = pick
+        } else if (typeof(kb_state) === "string"){
+            return kb_state;
         } else {
             return undefined;
         }
     };
-
-    inherits(Reach, EventEmitter);
 }

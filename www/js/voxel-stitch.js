@@ -188,7 +188,6 @@ function voxel_stitch (require, module, exports) {
 
         var self = this;
         if (this.verbose) console.log('updateTextureSideIDs complete, about to call createGLTexture');
-        console.log("[voxel-stitch][updateTextureSideIDs] emitting updatedSides")
         this.emit('updatedSides'); // now ready: this.voxelSideTextureIDs, this.voxelSideTextureSizes
 
         this.createGLTexture(this.shell.gl, function(err, texture) {
@@ -273,7 +272,6 @@ function voxel_stitch (require, module, exports) {
 
                 self.countLoaded += 1;
                 if (self.countLoaded % self.countLoading === 0) {
-                    console.log("[voxel-stitch][getTextureImage] emitting addedAll")
                     self.emit('addedAll');
                 }
             };

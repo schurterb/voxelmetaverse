@@ -44,6 +44,7 @@ function voxel_engine (require, module, exports) {
                 // is this a client or a headless server
                 this.isClient = Boolean((typeof opts.isClient !== 'undefined') ? opts.isClient : process.browser)
 
+                // console.log("opts :: ",opts);
                 if (!('generateChunks' in opts)) opts.generateChunks = true
                 this.generateChunks = opts.generateChunks
                 this.setConfigurablePositions(opts)
@@ -115,7 +116,7 @@ function voxel_engine (require, module, exports) {
                 // setup plugins
                 var pluginLoaders = opts.pluginLoaders || {};
                 extend(pluginLoaders, {
-                    'voxel-engine': require('./'),
+                    'voxel-engine': module.exports,
                     'voxel-registry': require('voxel-registry'),
                     'voxel-stitch': require('voxel-stitch'),
                     'voxel-shader': require('voxel-shader'),
@@ -184,6 +185,7 @@ function voxel_engine (require, module, exports) {
                 // textures loaded, now can render chunks
                 this.stitcher = plugins.get('voxel-stitch')
                 this.stitcher.on('updatedSides', function() {
+                    self.generateChunks = true;
                     if (self.generateChunks) self.handleChunkGeneration()
                     self.showAllChunks()
 
@@ -205,7 +207,7 @@ function voxel_engine (require, module, exports) {
                 return 'voxel-engine'
             }
 
-            // <hashtag> External API
+            // # External API
 
             Game.prototype.voxelPosition = function(gamePosition) {
                 var _ = Math.floor
@@ -386,7 +388,7 @@ function voxel_engine (require, module, exports) {
                 // no-op; game-shell to append itself
             }
 
-            // <hashtag> Defaults/options parsing
+            // # Defaults/options parsing
 
             Game.prototype.gravity = [0, -0.0000036, 0]
             Game.prototype.friction = 0.3
@@ -478,7 +480,7 @@ function voxel_engine (require, module, exports) {
                 return wrapper
             }
 
-            // <hashtag> Physics/collision related methods
+            // # Physics/collision related methods
 
             Game.prototype.control = function(target) {
                 this.controlling = target
@@ -529,7 +531,7 @@ function voxel_engine (require, module, exports) {
                 })
             }
 
-            // <hashtag> Chunk related methods
+            // # Chunk related methods
 
             Game.prototype.configureChunkLoading = function(opts) {
                 var self = this
@@ -613,12 +615,12 @@ function voxel_engine (require, module, exports) {
                     count = Math.max(1, Math.min(count, pendingChunks.length))
                 }
 
-                for (var i = 0; i < count; i += 1) {
-                    var chunkPos = pendingChunks[i].split('|')
-                    var chunk = this.voxels.generateChunk(chunkPos[0] | 0, chunkPos[1] | 0, chunkPos[2] | 0)
-
-                    if (this.isClient) this.showChunk(chunk)
-                }
+                // for (var i = 0; i < count; i += 1) {
+                //     var chunkPos = pendingChunks[i].split('|')
+                //     var chunk = this.voxels.generateChunk(chunkPos[0] | 0, chunkPos[1] | 0, chunkPos[2] | 0)
+                //
+                //     if (this.isClient) this.showChunk(chunk)
+                // }
 
                 if (count) pendingChunks.splice(0, count)
             }
@@ -665,6 +667,7 @@ function voxel_engine (require, module, exports) {
 
                 if (!mesh) {
                     // no voxels
+                    if(enable_per_tick_logging) console.log("[voxel-engine][showChunk] :: No MESH!")
                     return null
                 }
 
@@ -679,7 +682,7 @@ function voxel_engine (require, module, exports) {
                 return mesh
             }
 
-            // <hashtag> Debugging methods
+            // # Debugging methods
 
             Game.prototype.addMarker = function(position) {
                 throw new Error('voxel-engine addMarker not yet implemented TODO: figure out how to fit this into the rendering pipeline')
@@ -694,9 +697,11 @@ function voxel_engine (require, module, exports) {
                 return this.addAABBMarker(bbox, color)
             }
 
-            // <hashtag> Misc internal methods
+            // # Misc internal methods
 
             Game.prototype.onFire = function(state) {
+                console.log(" [voxel-engine][onFire] -------------- ")
+                console.trace();
                 this.emit('fire', this.controlling, state)
             }
 
@@ -704,13 +709,15 @@ function voxel_engine (require, module, exports) {
             Game.prototype.setTimeout = tic.timeout.bind(tic)
 
             Game.prototype.tick = function(delta) {
+                if(enable_per_tick_logging) console.log("start game.tick");
                 for (var i = 0, len = this.items.length; i < len; ++i) {
                     this.items[i].tick(delta)
                 }
 
                 //if (this.materials) this.materials.tick(delta)
 
-                if (this.pendingChunks.length) this.loadPendingChunks()
+                // console.log("this.pendingChunks.length",this.pendingChunks.length);
+                // if (this.pendingChunks.length) this.loadPendingChunks()
                 if (Object.keys(this.chunksNeedsUpdate).length > 0) this.updateDirtyChunks()
 
                 tic.tick(delta)
@@ -720,6 +727,7 @@ function voxel_engine (require, module, exports) {
                 //if (!this.controls) return // this.controls removed; still load chunks
                 var playerPos = this.playerPosition()
                 this.spatial.emit('position', playerPos, playerPos)
+                if(enable_per_tick_logging) console.log("end game.tick");
             }
 
             Game.prototype.render = function(delta) {
@@ -757,6 +765,9 @@ function voxel_engine (require, module, exports) {
                     self.tick(wholeTick)
                     accum -= wholeTick
 
+                    // console.log("Pausing after first tick")
+                    // self.paused = true
+
                     self.frameUpdated = true
                 }
             }
@@ -773,7 +784,7 @@ function voxel_engine (require, module, exports) {
                             return self.shell.pointerLock && self.shell.wasDown(name)
                         }
                     })
-                })
+                });
             }
 
             // cleanup key name - based on https://github.com/mikolalysenko/game-shell/blob/master/shell.js
@@ -799,6 +810,7 @@ function voxel_engine (require, module, exports) {
 
                     this.shell.bind(name, key)
                 }
+                // console.log("keybindings :: ",keybindings);
 
                 obsolete(this, 'interact')
 

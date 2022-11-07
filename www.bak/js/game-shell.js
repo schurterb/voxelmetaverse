@@ -39,6 +39,10 @@ function game_shell (require, module, exports) {
 
     //Translates a virtual keycode to a normalized keycode
     function virtualKeyCode(key) {
+        // return parseInt(key.split("-")[1]) -1
+
+        // (BNS - 2022/10/30) Addmittedly, I don't understand the purpose of this bsearch in this case.
+        //   It doesn't seem to work, as far as I can tell.  For now, mouse-1 = 0, etc.
         return bsearch.eq(keyNames, key)
     }
 
@@ -277,7 +281,11 @@ function game_shell (require, module, exports) {
             var ns = !!state
             if (!ns) {
                 this._wantFullscreen = false
-                cancelFullscreen.call(document)
+                if( window.innerHeight == screen.height ) {
+                  cancelFullscreen.call(document);
+                } else {
+                  console.log("Not in fullscreen mode.");
+                }
             } else {
                 this._wantFullscreen = true
                 tryFullscreen(this)
@@ -373,6 +381,7 @@ function game_shell (require, module, exports) {
 
             //Tick the game
             s = hrtime()
+            if(enable_per_tick_logging) console.log("[game-shell][tick] emitting tick")
             shell.emit("tick")
             t = hrtime()
             shell.tickTime = t - s
@@ -399,6 +408,8 @@ function game_shell (require, module, exports) {
     //Render stuff
     function render(shell) {
 
+        if(enable_per_tick_logging) console.log("[game-shell][render] start render")
+
         //Request next frame
         shell._rafHandle = requestAnimationFrame(shell._render)
 
@@ -420,6 +431,7 @@ function game_shell (require, module, exports) {
         var t = hrtime()
         shell.frameTime = t - s
 
+        if(enable_per_tick_logging) console.log("[game-shell][render] end render")
     }
 
     function isFocused(shell) {
@@ -465,7 +477,7 @@ function game_shell (require, module, exports) {
     //Mouse events are really annoying
     var mouseCodes = iota(32).map(function(n) {
         return virtualKeyCode("mouse-" + (n + 1))
-    })
+    });
 
     function setMouseButtons(shell, buttons) {
         for (var i = 0; i < 32; ++i) {
@@ -494,14 +506,22 @@ function game_shell (require, module, exports) {
     }
 
     function handleMouseDown(shell, ev) {
+        // console.log("[game-shell][handleMouseDown] shell : ",shell);
+        // console.log("[game-shell][handleMouseDown] ev : ",ev);
         handleEvent(shell, ev)
-        setKeyState(shell, mouseCodes[ev.button], true)
+        // console.log("[game-shell][handleMouseDown] ev.button : ",ev.button);
+        // console.log("[game-shell][handleMouseDown] ev.buttons : ",ev.buttons);
+        // console.log("[game-shell][handleMouseDown] mouseCodes : ",mouseCodes);
+        // console.log("[game-shell][handleMouseDown] mouseCodes[ev.buttons] : ",mouseCodes[ev.buttons]);
+        // setKeyState(shell, mouseCodes[ev.button], true)
+        setKeyState(shell, mouseCodes[ev.buttons], true)
         return false
     }
 
     function handleMouseUp(shell, ev) {
         handleEvent(shell, ev)
-        setKeyState(shell, mouseCodes[ev.button], false)
+        // setKeyState(shell, mouseCodes[ev.button], false)
+        setKeyState(shell, mouseCodes[ev.buttons], false)
         return false
     }
 
@@ -615,7 +635,6 @@ function game_shell (require, module, exports) {
         //Wait for dom to intiailize
         setTimeout(function() {
             domready(function initGameShell() {
-
                 //Retrieve element
                 var element = options.element
                 if (typeof element === "string") {

@@ -26,7 +26,7 @@ function touchup (require, module, exports) {
     }
 
     // make the image bigger or smaller
-    // note from spec http://www.w3.org/html/wg/drafts/2dcontext/html5_canvas_CR/<hashtag>drawing-images-to-the-canvas
+    // note from spec http://www.w3.org/html/wg/drafts/2dcontext/html5_canvas_CR/#drawing-images-to-the-canvas
     // "This specification does not define the algorithm to use when scaling the image, if necessary."
     // which makes it mostly useless
     function scale(sourceImage, scaleX, scaleY, algorithm) {
@@ -79,7 +79,7 @@ function touchup (require, module, exports) {
         const [destW, destH] = overallSize(sourceImages);
         const [canvas, context] = createCanvas(destW, destH);
 
-        //  see http://www.w3.org/html/wg/drafts/2dcontext/html5_canvas_CR/<hashtag>compositing
+        //  see http://www.w3.org/html/wg/drafts/2dcontext/html5_canvas_CR/#compositing
         context.globalAlpha = alpha !== undefined ? alpha : 1.0;
         context.globalCompositeOperation = operation !== undefined ? operation : 'source-over';
 
@@ -112,7 +112,7 @@ function touchup (require, module, exports) {
         const imagedata = context.getImageData(0, 0, sourceImage.width, sourceImage.height);
         const data = imagedata.data;
         for (let i = 0; i < data.length; i += 4) { // TODO: optimize, use ndarray/cwise?
-            //[r, g, b, a] = data.data[i..i + 3] <hashtag> Uint8ClampedArray has no method 'slice'
+            //[r, g, b, a] = data.data[i..i + 3] # Uint8ClampedArray has no method 'slice'
             let r = data[i];
             let g = data[i + 1];
             let b = data[i + 2];

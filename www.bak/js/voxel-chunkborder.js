@@ -85,34 +85,39 @@ function voxel_chunkborder (require, module, exports) {
     // https://github.com/hughsk/indexed-geometry-demo
     // https://github.com/deathcap/avatar
     BorderPlugin.prototype.createBorderMesh = function(mesh, gl, _vert_data, voxels) {
-            var w = this.game.chunkSize;
+        var w = this.game.chunkSize;
 
-            var borderVertexArray = new Uint8Array([
-                0, 0, 0,
-                0, 0, w,
-                0, w, 0,
-                0, w, w,
-                w, 0, 0,
-                w, 0, w,
-                w, w, 0,
-                w, w, w
-            ]);
+        var borderVertexArray = new Uint8Array([
+            0, 0, 0,
+            0, 0, w,
+            0, w, 0,
+            0, w, w,
+            w, 0, 0,
+            w, 0, w,
+            w, w, 0,
+            w, w, w
+        ]);
 
-            var indexArray = new Uint16Array([
-                0, 1, 0, 2, 2, 3, 3, 1,
-                0, 4, 4, 5, 5, 1,
-                5, 7, 7, 3,
-                7, 6, 6, 2,
-                6, 4
-            ]);
+        var indexArray = new Uint16Array([
+            0, 1, 0, 2, 2, 3, 3, 1,
+            0, 4, 4, 5, 5, 1,
+            5, 7, 7, 3,
+            7, 6, 6, 2,
+            6, 4
+        ]);
 
-            var borderVertexCount = indexArray.length;
+        var borderVertexCount = indexArray.length;
 
-            var borderBuf = createBuffer(gl, borderVertexArray);
-            var indexBuf = createBuffer(gl, indexArray, gl.ELEMENT_ARRAY_BUFFER);
+        var borderBuf = createBuffer(gl, borderVertexArray);
+        var indexBuf = createBuffer(gl, indexArray, gl.ELEMENT_ARRAY_BUFFER);
 
-            var borderVAO = createVAO(gl, [{
-                            buffer: borderBuf,
-                            type: gl.UNSIGNED_BYTE,
-                            size: 3
-                        }
+        var borderVAO = createVAO(gl, [{
+            buffer: borderBuf,
+            type: gl.UNSIGNED_BYTE,
+            size: 3
+        }], indexBuf);
+        borderVAO.length = borderVertexCount
+
+        mesh.vertexArrayObjects.chunkborder = borderVAO
+    };
+}

@@ -14,6 +14,6 @@ function add_line_numbers (require, module, exports) {
             var digits = String(c).length
             var prefix = padLeft(c, totalDigits - digits)
             return prefix + delim + line
-        }).join('n')
+        }).join('\n')
     }
 }

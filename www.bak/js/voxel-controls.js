@@ -30,6 +30,7 @@ function voxel_controls (require, module, exports) {
         this.acceleration = opts.accelerationCurve || this.acceleration
 
         this.fire_rate = opts.fireRate || 0
+        this.fire_rate = 200
         this.needs_discrete_fire = opts.discreteFire || false
         this.onfire = opts.onfire || this.onfire
         this.firing = 0
@@ -102,9 +103,7 @@ function voxel_controls (require, module, exports) {
                 target.velocity[2] = min(max(-max_speed, -move_speed * dt * this.acceleration(this.z_accel_timer, this.accel_max_timer)), target.velocity[2])
         } else {
             this.z_accel_timer = this.accel_max_timer
-
         }
-
 
         if (state.left || state.right) {
             this.x_accel_timer = max(0, this.x_accel_timer - dt)
@@ -121,6 +120,7 @@ function voxel_controls (require, module, exports) {
         }
 
         if (state.jump) {
+                console.log("[voxel-controls] state = ",state);
             if (!this.jumping && !at_rest) {
                 // we're falling, we can't jump
             } else if (at_rest > 0) {
@@ -142,9 +142,12 @@ function voxel_controls (require, module, exports) {
 
         if (state.fire || state.firealt) {
             if (this.firing && this.needs_discrete_fire) {
+                console.log("[?]  this.firing = "+this.firing);
                 this.firing += dt
             } else {
+                console.log("this.firing = "+this.firing);
                 if (!this.fire_rate || floor(this.firing / this.fire_rate) !== floor((this.firing + dt) / this.fire_rate)) {
+                    console.log("Fire emitted from controls!")
                     this.onfire(state)
                 }
                 this.firing += dt

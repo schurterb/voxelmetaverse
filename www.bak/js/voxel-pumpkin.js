@@ -146,10 +146,10 @@ function voxel_pumpkin (require, module, exports) {
             'Pumpkin Carved South',
             'Pumpkin Carved East',
             'Pumpkin Carved West',
-            'Jack-o' - Lantern North ',
-            'Jack-o' - Lantern South ',
-            'Jack-o' - Lantern West ',
-            'Jack-o' - Lantern East ',
+            'Jack-o\'-Lantern North ',
+            'Jack-o\'-Lantern South ',
+            'Jack-o\'-Lantern West ',
+            'Jack-o\'-Lantern East ',
         ];
 
 
@@ -194,7 +194,7 @@ function voxel_pumpkin (require, module, exports) {
         });
         this.registry.registerItem('jackolantern', {
             itemTexture: this.textures[6],
-            displayName: 'Jack-o' - Lantern ',
+            displayName: 'Jack-o\'-Lantern ',
             onUse: function(held, target) {
                 return self.use.useBlock(target, new ItemPile('pumpkinCarved' + ucfirst(self.facingPlayer()) + 'Lit')) === undefined;
             },

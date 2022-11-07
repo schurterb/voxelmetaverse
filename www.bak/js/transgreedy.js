@@ -144,7 +144,7 @@ function transgreedy (require, module, exports) {
                                     dv[v] = 0;
                                 }
 
-                                // <hashtag><hashtag> enable code to ensure that transparent faces are last in the list
+                                // ## enable code to ensure that transparent faces are last in the list
                                 // if (!isTransparent(c)) {
                                 var vertex_count = vertices.length;
                                 vertices.push([x[0], x[1], x[2]]);
@@ -180,7 +180,7 @@ function transgreedy (require, module, exports) {
                 }
             }
 
-            // <hashtag><hashtag> enable code to ensure that transparent faces are last in the list
+            // ## enable code to ensure that transparent faces are last in the list
             // var vertex_count = vertices.length;
             // var newFaces = tFaces.map(function(v) {
             //   return [vertex_count+v[0], vertex_count+v[1], vertex_count+v[2], vertex_count+v[3], v[4]]

@@ -1,4 +1,3 @@
 function templates (require, module, exports) {
-    exports["audio.html"] = "<audio preload="
-    auto " /></audio>"
+  exports["audio.html"] = "<audio preload=\"auto\" /></audio>"
 }

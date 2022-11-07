@@ -27,7 +27,7 @@
   <script type="text/javascript" src="./js/rect-mip-map.js"></script>
   <script type="text/javascript" src="./js/trees.js"></script>
   <script type="text/javascript" src="./js/uniq.js"></script>
-  <script type="text/javascript" src="./js/54.js"></script>
+  <script type="text/javascript" src="./js/wrapper.js"></script>
   <script type="text/javascript" src="./js/voxel-drop.js"></script>
   <script type="text/javascript" src="./js/voxel-sprint.js"></script>
   <script type="text/javascript" src="./js/voxel-outline.js"></script>
@@ -128,14 +128,14 @@
   <script type="text/javascript" src="./js/rotateY.js"></script>
   <script type="text/javascript" src="./js/cube-side-array.js"></script>
   <script type="text/javascript" src="./js/gyro-position-sensor-vr-device.js"></script>
-  <script type="text/javascript" src="./js/0.js"></script>
   <script type="text/javascript" src="./js/fromYRotation.js"></script>
   <script type="text/javascript" src="./js/zstream.js"></script>
   <script type="text/javascript" src="./js/zlib.js"></script>
   <script type="text/javascript" src="./js/fs.js"></script>
   <script type="text/javascript" src="./js/transformQuat.js"></script>
   <script type="text/javascript" src="./js/voxel-modal.js"></script>
-  <script type="text/javascript" src="./js/BufferList.js"></script>
+  <script type="text/javascript" src="./js/voxel-hammer.js"></script>
+  <script type="text/javascript" src="./js/buffer-list.js"></script>
   <script type="text/javascript" src="./js/clone.js"></script>
   <script type="text/javascript" src="./js/atob-lite.js"></script>
   <script type="text/javascript" src="./js/voxel-flatland.js"></script>
@@ -168,7 +168,7 @@
   <script type="text/javascript" src="./js/shellwords.js"></script>
   <script type="text/javascript" src="./js/templates.js"></script>
   <script type="text/javascript" src="./js/voxel-wireframe.js"></script>
-  <script type="text/javascript" src="./js/450.js"></script>
+  <script type="text/javascript" src="./js/inflate_alt.js"></script>
   <script type="text/javascript" src="./js/playerdat.js"></script>
   <script type="text/javascript" src="./js/omggif.js"></script>
   <script type="text/javascript" src="./js/voxel-harvest.js"></script>
@@ -188,11 +188,11 @@
   <script type="text/javascript" src="./js/constants.js"></script>
   <script type="text/javascript" src="./js/craftingrecipes.js"></script>
   <script type="text/javascript" src="./js/is-regex.js"></script>
-  <script type="text/javascript" src="./js/236.js"></script>
+  <script type="text/javascript" src="./js/ndarray-fft.js"></script>
   <script type="text/javascript" src="./js/has-property-descriptors.js"></script>
   <script type="text/javascript" src="./js/voxel-bedrock.js"></script>
   <script type="text/javascript" src="./js/invert.js"></script>
-  <script type="text/javascript" src="./js/.tmp"></script>
+  <script type="text/javascript" src="./js/lodash.throttle.js"></script>
   <script type="text/javascript" src="./js/lodash.debounce.js"></script>
   <script type="text/javascript" src="./js/game-shell-fps-camera.js"></script>
   <script type="text/javascript" src="./js/src.js"></script>
@@ -218,6 +218,7 @@
   <script type="text/javascript" src="./js/bit-twiddle.js"></script>
   <script type="text/javascript" src="./js/voxel-blockdata.js"></script>
   <script type="text/javascript" src="./js/GLError.js"></script>
+  <script type="text/javascript" src="./js/ndarray-resample.js"></script>
   <script type="text/javascript" src="./js/reflect.js"></script>
   <script type="text/javascript" src="./js/audio-play.js"></script>
   <script type="text/javascript" src="./js/voxel-chest.js"></script>
@@ -243,7 +244,6 @@
   <script type="text/javascript" src="./js/dat.gui.js"></script>
   <script type="text/javascript" src="./js/pngjs.js"></script>
   <script type="text/javascript" src="./js/raf-polyfill.js"></script>
-  <script type="text/javascript" src="./js/232.js"></script>
   <script type="text/javascript" src="./js/voxel-zen.js"></script>
   <script type="text/javascript" src="./js/mapped.js"></script>
   <script type="text/javascript" src="./js/path.js"></script>
@@ -295,7 +295,6 @@
   <script type="text/javascript" src="./js/voxel-modal-dialog.js"></script>
   <script type="text/javascript" src="./js/equals.js"></script>
   <script type="text/javascript" src="./js/greedy-mesher.js"></script>
-  <script type="text/javascript" src="./js/243.js"></script>
   <script type="text/javascript" src="./js/voxel-region-change.js"></script>
   <script type="text/javascript" src="./js/mesh-buffer.js"></script>
   <script type="text/javascript" src="./js/adler32.js"></script>
@@ -313,6 +312,7 @@
   <script type="text/javascript" src="./js/transformMat3.js"></script>
   <script type="text/javascript" src="./js/voxel-carry.js"></script>
   <script type="text/javascript" src="./js/inventory.js"></script>
+  <script type="text/javascript" src="./js/voxel-commands.js"></script>
   <script type="text/javascript" src="./js/scope.js"></script>
   <script type="text/javascript" src="./js/voxel-health.js"></script>
   <script type="text/javascript" src="./js/voxel-bucket.js"></script>
@@ -379,13 +379,21 @@
   <script type="text/javascript" src="./js/buffer.js"></script>
   <script type="text/javascript" src="./js/binding.js"></script>
   <script type="text/javascript" src="./js/toarray.js"></script>
+  <script type="text/javascript" src="./js/aomesh.js"></script>
 
+  <script type="text/javascript" src="./js/browser.js"></script>
+  <script type="text/javascript" src="./js/ndarray-pack.js"></script>
+  <script type="text/javascript" src="./js/ndarray-scratch.js"></script>
+  <script type="text/javascript" src="./js/zip.js"></script>
+
+  <script type="text/javascript" src="./js/init-functions.js"></script>
   <!-- Style Sheets -->
   <link rel="stylesheet" href="./css/voxelverse.css">
 </head>
 <body>
   <div id="container"></div>
   <script src="main.js"></script>
+  <!-- <script src="builtgame.bak.js"></script> -->
 
   <div id="crosshair"><img src="./img/crosshair4.png"></div>
 </body>

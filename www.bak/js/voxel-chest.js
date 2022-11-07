@@ -68,7 +68,7 @@ function voxel_chest (require, module, exports) {
 
             // allow shift-click to transfer items between these two inventories
             chestIW.linkedInventory = playerInventory;
-            //this.playerIW.linkedInventory = this.chestInventory <hashtag> TODO: need to reach into voxel-inventory-dialog?
+            //this.playerIW.linkedInventory = this.chestInventory # TODO: need to reach into voxel-inventory-dialog?
 
             const chestCont = chestIW.createContainer();
 

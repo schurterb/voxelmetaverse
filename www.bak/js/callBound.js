@@ -3,7 +3,7 @@ function callBound (require, module, exports) {
 
     var GetIntrinsic = require('get-intrinsic');
 
-    var callBind = require('./');
+    var callBind = require('call-bind');
 
     var $indexOf = callBind(GetIntrinsic('String.prototype.indexOf'));
 
