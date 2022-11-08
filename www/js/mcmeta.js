@@ -85,13 +85,6 @@ function mcmeta (require, module, exports) {
                 // console.log(json);(tilePixels);
 
                 var canvas = savePixels(tilePixels, 'canvas');
-                /* debug
-                document.body.appendChild(document.createTextNode([sx,sy,ex,ey].join(',')));
-                document.body.appendChild(document.createElement('br'));
-                document.body.appendChild(canvas);
-                document.body.appendChild(document.createElement('br'));
-                // console.log(json);(canvas.width,canvas.height);
-                */
 
                 tiles.push(canvas.toDataURL());
             }

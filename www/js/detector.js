@@ -9,7 +9,11 @@ function detector (require, module, exports) {
             canvas: !!window.CanvasRenderingContext2D,
             webgl: (function() {
                 try {
-                    return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
+                    // return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl');
+                    if(!!window.WebGLRenderingContext) {
+                      const canvas = document.createElement('canvas');
+                      return !!canvas.getContext('experimental-webgl');
+                    }
                 } catch (e) {
                     return false;
                 }

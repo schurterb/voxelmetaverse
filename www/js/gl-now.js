@@ -18,6 +18,8 @@ function gl_now (require, module, exports) {
 
             //Create canvas
             var canvas = document.createElement("canvas")
+            canvas.id = 'gl_now-canvas'
+            console.log(canvas.id);
 
             //Try initializing WebGL
             var gl = canvas.getContext("webgl", contextOptions) ||
@@ -35,6 +37,8 @@ function gl_now (require, module, exports) {
                     return
                 }
             }
+
+            //TODO: Set
 
             //Set canvas style
             canvas.style.position = "absolute"

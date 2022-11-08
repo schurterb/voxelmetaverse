@@ -7,6 +7,7 @@
 #  - voxel-engine.showChunk does meshing and chunk rendering
 #  - - TODO: This needs to create a THREE.Geometry (use the latest?) and add it to a THREE.Scene
 #  - -       Create a separate canvas so we can test the StackGL against the THREE during this phase
+#  - -       Canvas sizing might be doable in gl-now
 #
 # TODO: modify chunk-generator-worker.js to load scripts instead of having them ALL embedded
 #
