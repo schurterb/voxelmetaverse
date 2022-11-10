@@ -1340,5 +1340,6 @@ const initFunctions = {
   "./lib/create-attributes": create_attributes,
   "./lib/create-uniforms": create_uniforms,
   "./reflect": reflect,
-  "./doConvert.js": doConvert
+  "./doConvert.js": doConvert,
+  "voxel-view": voxel_view
 }

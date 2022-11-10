@@ -38,7 +38,6 @@ function gl_now (require, module, exports) {
                 }
             }
 
-            //TODO: Set
 
             //Set canvas style
             canvas.style.position = "absolute"

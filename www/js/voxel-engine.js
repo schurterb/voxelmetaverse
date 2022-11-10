@@ -1,4 +1,49 @@
 function voxel_engine (require, module, exports) {
+
+    function aetherViewTest(voxel_engine, threeShellOpts) {
+        console.log("Running AetherView Test")
+
+        var canvasElement = document.createElement('canvas');
+        threeShellOpts.element.appendChild(canvasElement);
+        voxel_engine.view = new View(canvasElement);
+        voxel_engine.scene = voxel_engine.view.getScene();
+
+
+        const ccFactory = new ChainConnectorFactory();
+        const etherium = {
+          'infura': {
+            'id': '645218b7af35464bac32292d3758e754',
+            'network': 'mainnet.infura.io/v3'
+          }
+        }
+
+        // Objects
+        const chain = new Blockchain(ccFactory.getChainConnector(etherium));
+        // chain.blocks.map(function (block) {
+        //   // console.log(block.getMesh());
+        //   voxel_engine.scene.add(block.getMesh());
+        // });
+        voxel_engine.view.add(chain);
+
+
+        // Lights
+        defaultLighting(voxel_engine.scene);
+
+        // Base camera
+        const camera = new DefaultCamera();
+        voxel_engine.view.add(camera);
+
+        // Controls
+        // defaultNavigation(camera);
+        // const controls = new OrbitControls( camera.getMesh(), view.renderer.domElement );
+        const controls = new FlyControls( camera.getMesh(), voxel_engine.view.renderer.domElement );
+
+        const engine = new AetherEngine({});
+        engine.setView(voxel_engine.view);
+        engine.setCamera(camera);
+        engine.start();
+    }
+
     (function(process) {
         (function() {
             'use strict'
@@ -50,7 +95,6 @@ function voxel_engine (require, module, exports) {
                 this.setConfigurablePositions(opts)
                 this.configureChunkLoading(opts)
                 this.setDimensions(opts)
-                obsolete(this, 'THREE')
                 this.vector = vector
                 obsolete(this, 'glMatrix', 'use your own gl-matrix, gl-vec3, or gl-vec4')
                 this.arrayType = opts.arrayType || {
@@ -78,32 +122,20 @@ function voxel_engine (require, module, exports) {
                 this.items = []
                 this.voxels = voxel(this)
 
-                // was a three.js Scene instance, mainly used for scene.add(), objects, lights TODO: scene graph replacement? or can do without?
-                obsolete(this, 'scene')
-
-                // hooked up three.js Scene, created three.js PerspectiveCamera, added to element
-                // TODO: add this.view.cameraPosition(), this.view.cameraVector()? -> [x,y,z]  to game-shell-fps-camera, very useful
-                obsolete(this, 'view')
-
-                // used to be a three.js PerspectiveCamera set by voxel-view; see also basic-camera but API not likely compatible (TODO: make it compatible?)
-                obsolete(this, 'camera')
-
-
-
-                // the game-shell
+                // the game-shell (stackgl)
                 if (this.isClient) /*GZ: Do not load on server, as document element is missing*/ {
                     var createShell = require('gl-now')
-                    var shellOpts = shellOpts || {}
-                    shellOpts.clearColor = [
+                    var stackglShellOpts = stackglShellOpts || {}
+                    stackglShellOpts.clearColor = [
                         (this.skyColor >> 16) / 255.0,
                         ((this.skyColor >> 8) & 0xff) / 255.0,
                         (this.skyColor & 0xff) / 255.0,
                         1.0
                     ]
-                    shellOpts.pointerLock = opts.pointerLock !== undefined ? opts.pointerLock : true
-                    shellOpts.stickyPointerLock = opts.stickyPointerLock !== undefined ? opts.stickyPointerLock : shellOpts.pointerLock
-                    shellOpts.element = this.createContainer(opts)
-                    var shell = createShell(shellOpts)
+                    stackglShellOpts.pointerLock = opts.pointerLock !== undefined ? opts.pointerLock : true
+                    stackglShellOpts.stickyPointerLock = opts.stickyPointerLock !== undefined ? opts.stickyPointerLock : stackglShellOpts.pointerLock
+                    stackglShellOpts.element = this.createContainer(stackglShellOpts, "stackgl-container")
+                    var shell = createShell(stackglShellOpts)
 
                     shell.on('gl-error', function(err) {
                         // normally not reached; notCapable() checks for WebGL compatibility first
@@ -112,6 +144,33 @@ function voxel_engine (require, module, exports) {
 
                     this.shell = shell
                 }
+
+                // the game-shell (threejs)
+
+                var voxelView = require('voxel-view');
+                var threeShellOpts = threeShellOpts || {}
+                // threeShellOpts.height = "auto";
+                threeShellOpts.clearColor = [
+                  (this.skyColor >> 16) / 255.0,
+                  ((this.skyColor >> 8) & 0xff) / 255.0,
+                  (this.skyColor & 0xff) / 255.0,
+                  1.0
+                ]
+                threeShellOpts.pointerLock = opts.pointerLock !== undefined ? opts.pointerLock : true
+                threeShellOpts.stickyPointerLock = opts.stickyPointerLock !== undefined ? opts.stickyPointerLock : threeShellOpts.pointerLock
+                threeShellOpts.element = this.createContainer(threeShellOpts, "threejs-container")
+
+                // this.view = opts.view || new voxelView(THREE, {
+                //     width: threeShellOpts.element.offsetWidth,
+                //     height: threeShellOpts.element.offsetHeight
+                // })
+                // this.view.appendTo(threeShellOpts.element);
+                // this.scene = new THREE.Scene()
+                // this.view.bindToScene(this.scene)
+                // this.camera = this.view.getCamera()
+
+                //(BNS - 2022/11/09) testing THREE.js panel with aetherview
+                aetherViewTest(this, threeShellOpts);
 
                 // setup plugins
                 var pluginLoaders = opts.pluginLoaders || {};
@@ -426,23 +485,17 @@ function voxel_engine (require, module, exports) {
                 this.worldOrigin = wo || [0, 0, 0]
             }
 
-            Game.prototype.createContainer = function(opts) {
-                if (opts.container) return opts.container
+            Game.prototype.createContainer = function(opts, id) {
+              if (opts.container) return opts.container
 
-                // based on game-shell makeDefaultContainer()
-                var container = document.createElement("div")
-                container.tabindex = 1
-                container.style.position = "absolute"
-                container.style.left = "0px"
-                container.style.right = "0px"
-                container.style.top = "0px"
-                container.style.bottom = "0px"
-                container.style.height = "100%"
-                container.style.overflow = "hidden"
-                document.body.appendChild(container)
-                document.body.style.overflow = "hidden" //Prevent bounce
-                document.body.style.height = "100%"
-                return container
+              var container = document.createElement("div")
+              container.id = id
+              container.style.height = opts.height || "50%"
+              container.style.width = opts.width || "100%"
+              container.style.overflow = "hidden"
+              document.getElementById('canvas-container').appendChild(container)
+
+              return container
             }
 
             Game.prototype.setDimensions = function(opts) {

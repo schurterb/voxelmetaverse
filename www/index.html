@@ -5,7 +5,13 @@
   <title>voxelmetaverse</title>
 
   <!-- External Libs -->
-  <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r56/three.min.js"></script>
+  <!-- <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r56/three.min.js"></script> -->
+  <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js"></script> -->
+
+  <script crossorigin type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.7/ethers.umd.min.js"></script>
+  <script crossorigin type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.7/ethers.esm.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
   <!-- Code -->
   <script type="text/javascript" src="./js/unworkify.js"></script>
@@ -385,19 +391,33 @@
   <script type="text/javascript" src="./js/ndarray-scratch.js"></script>
   <script type="text/javascript" src="./js/zip.js"></script>
 
+  <!-- new -->
+  <script type="text/javascript" src="./js/voxel-view.js"></script>
   <script type="text/javascript" src="./js/init-functions.js"></script>
 
+  <!-- aetherview -->
+  <script type="text/javascript" src="./av/globals.js"></script>
+  <script type="text/javascript" src="./av/utilities.js"></script>
+  <script type="text/javascript" src="./av/aetherengine.js"></script>
+  <script type="text/javascript" src="./av/resourceloader.js"></script>
+  <script type="text/javascript" src="./av/view.js"></script>
+  <script type="text/javascript" src="./av/camera.js"></script>
+  <script type="text/javascript" src="./av/lighting.js"></script>
+  <script type="text/javascript" src="./av/navigation.js"></script>
+  <script type="text/javascript" src="./av/chainbuilder.js"></script>
+  <script type="text/javascript" src="./av/chainconnector.js"></script>
+  <script type="text/javascript" src="./av/controls/controls-fly.js"></script>
 
   <!-- No longer necessary
   <script type="text/javascript" src="./js/webworkify.js"></script>
   -->
 
-
   <!-- Style Sheets -->
   <link rel="stylesheet" href="./css/voxelverse.css">
 </head>
-<body>
-  <div id="container"></div>
+<body style="overflow: hidden; height: 100%; width: 100%">
+  <div id="canvas-container" style="position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; height: 100%; width: 100%;"></div>
+
   <script src="main.js"></script>
   <!-- <script src="builtgame.bak.js"></script> -->
 

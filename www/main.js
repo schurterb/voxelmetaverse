@@ -22,8 +22,12 @@ require = function (name) {
 const enable_per_tick_logging = false;
 const createEngine = require('voxel-engine');
 
+// (part of the aetherview test)
+const resourceLoader = new ResourceLoader();
+
 function main() {
   console.log('voxelmetaverse starting'); // TODO: show git version (browserify-commit-sha)
+
 
   createEngine({exposeGlobal: true, pluginLoaders: {
       'voxel-artpacks': require('voxel-artpacks'),
@@ -162,19 +166,19 @@ function main() {
     'voxel-skyhook': {},
     'voxel-bedrock': {},
     'voxel-blockdata': {},
-    'voxel-chest': {},
-    'voxel-workbench': {},
-    'voxel-furnace': {},
-    'voxel-pickaxe': {},
-    'voxel-hammer': {},
-    'voxel-wool': {},
-    'voxel-pumpkin': {},
+    // 'voxel-chest': {},
+    // 'voxel-workbench': {},
+    // 'voxel-furnace': {},
+    // 'voxel-pickaxe': {},
+    // 'voxel-hammer': {},
+    // 'voxel-wool': {},
+    // 'voxel-pumpkin': {},
 
-    'voxel-glass': {},
+    // 'voxel-glass': {},
     'voxel-land': {populateTrees: true},
     'voxel-flatland': {block: 'bedrock', onDemand:true},
     'voxel-decorative': {},
-    'voxel-inventory-creative': {},
+    // 'voxel-inventory-creative': {},
     //'voxel-clientmc': {url: 'ws://localhost:1234', onDemand: true}, // TODO
 
     'voxel-console': {},
@@ -184,17 +188,17 @@ function main() {
 
 
     //'voxel-player': {image: 'player.png', homePosition: [2,14,4], homeRotation: [0,0,0]}, // three.js TODO: stackgl avatar
-    'voxel-health': {},
-    'voxel-health-bar': {},
+    // 'voxel-health': {},
+    // 'voxel-health-bar': {},
     //'voxel-health-fall': {}, // requires voxel-player TODO: enable and test
-    'voxel-food': {},
+    // 'voxel-food': {},
     'voxel-scriptblock': {},
     'voxel-sfx': {},
     'voxel-flight': {flySpeed: 0.8, onDemand: true},
     'voxel-gamemode': {},
     'voxel-sprint': {},
-    'voxel-inventory-hotbar': {inventorySize:10, wheelEnable:true},
-    'voxel-inventory-crafting': {},
+    // 'voxel-inventory-hotbar': {inventorySize:10, wheelEnable:true},
+    // 'voxel-inventory-crafting': {},
     'voxel-reach': { reachDistance: 8 },
     'voxel-decals': {},
     // left-click hold to mine
@@ -204,18 +208,18 @@ function main() {
       progressTexturesCount: 9
     },
     // right-click to place block (etc.)
-    'voxel-use': {},
+    // 'voxel-use': {},
     // handles 'break' event from voxel-mine (left-click hold breaks blocks), collects block and adds to inventory
     'voxel-harvest': {},
-    'voxel-voila': {},
+    // 'voxel-voila': {},
     'voxel-fullscreen': {},
     'voxel-keys': {},
 
     // the GUI window (built-in toggle with 'H')
     //'voxel-debug': {}, // heavily three.js dependent TODO: more debugging options for stackgl-based engine besides camera?
-    'camera-debug': {}, // TODO: port from game-shell-fps-camera
-    'voxel-plugins-ui': {},
-    'kb-bindings-ui': {}
+    // 'camera-debug': {}, // TODO: port from game-shell-fps-camera
+    // 'voxel-plugins-ui': {},
+    // 'kb-bindings-ui': {}
     }
   });
 }

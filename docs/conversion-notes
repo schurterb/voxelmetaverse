@@ -11,3 +11,13 @@
 #
 # TODO: modify chunk-generator-worker.js to load scripts instead of having them ALL embedded
 #
+
+## 2022-11-09
+# got THREE.js rendering in one canvas and Stackgl in the other.
+# got old AetherView partially working in THREE.js canvas
+
+# TODO: set up require function to load scripts (check time)
+# TODO: develop AetherEngine in parallel with converting voxelmetaverse
+#       - revise control system in voxelmetaverse and then implement for AE
+
+### Trans-dimensional Phase-shift Alternator - TPA?
