@@ -17,7 +17,7 @@
 # got old AetherView partially working in THREE.js canvas
 
 # TODO: set up require function to load scripts (check time)
-# TODO: develop AetherEngine in parallel with converting voxelmetaverse
-#       - revise control system in voxelmetaverse and then implement for AE
+# TODO: develop AetherViewEngine in parallel with converting voxelmetaverse
+#       - revise control system in voxelmetaverse and then implement for AVE
 
 ### Trans-dimensional Phase-shift Alternator - TPA?
