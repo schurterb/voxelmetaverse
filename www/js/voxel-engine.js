@@ -234,16 +234,11 @@ function voxel_engine (require, module, exports) {
                 }
                 plugins.loadAll()
 
-                // load modules
-                var module_proc_id = setInterval(function (modules) {
-                  if(window.moduleLoader) {
-                      if(modules) {
-                        console.log("[voxel-engine] Attempting to load "+modules.length+" modules.");
-                        window.moduleLoader.loadModules(modules);
-                      }
-                      clearInterval(module_proc_id);
-                  }
-                }, 100, opts.modules);
+                // load plugins
+                if(opts.plugins) {
+                  console.log("[voxel-engine] Attempting to load "+Object.keys(plugins).length+" plugins.");
+                  pluginLoader.loadPlugins(opts.plugins);
+                }
 
                 // textures loaded, now can render chunks
                 this.stitcher = plugins.get('voxel-stitch')

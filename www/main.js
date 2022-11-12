@@ -222,8 +222,11 @@ function main() {
     // 'voxel-plugins-ui': {},
     // 'kb-bindings-ui': {}
     },
-    'modules': {
-
+    'plugins': {
+      'test': {
+        'url': "./test/test-module.js",
+        'worker': 'test'
+      }
     }
   });
 }
