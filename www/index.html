@@ -394,6 +394,7 @@
   <!-- new -->
   <script type="text/javascript" src="./js/voxel-view.js"></script>
   <script type="text/javascript" src="./js/init-functions.js"></script>
+  <!-- <script type="module" src="./new-js/module-loader.js"></script> -->
 
   <!-- aetherview -->
   <script type="text/javascript" src="./av/globals.js"></script>
@@ -416,11 +417,25 @@
   <link rel="stylesheet" href="./css/voxelverse.css">
 </head>
 <body style="overflow: hidden; height: 100%; width: 100%">
+
+  <!-- Pre-existing elements -->
   <div id="canvas-container" style="position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; height: 100%; width: 100%;"></div>
-
-  <script src="main.js"></script>
-  <!-- <script src="builtgame.bak.js"></script> -->
-
   <div id="crosshair"><img src="./img/crosshair4.png"></div>
+
+  <!-- Body scripts -->
+  <script id="module-loader" type="text/javascript">
+    url = "./new-js/module-loader.js";
+    var script = document.createElement('script');
+    script.type = 'module';
+    script.src = url;
+    script.onload = async function() {
+      console.log("Initializing Module Loader");
+      const {moduleLoader} = await import(url);
+      window.moduleLoader = moduleLoader;
+    }
+    document.body.insertBefore(script, document.getElementById("main"));
+  </script>
+  <script id="main" type="text/javascript" src="main.js"></script>
+
 </body>
 </html>

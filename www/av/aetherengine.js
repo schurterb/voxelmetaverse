@@ -201,7 +201,7 @@ class AetherEngine {
         window.dispatchEvent(new CustomEvent(this.hoverEventName,{detail:intersects}));
       } else {
         var hover = $('#hover-data');
-        if( !("hidden" in hover[0].classList) ) {
+        if( hover && hover.length > 0 && !("hidden" in hover[0].classList) ) {
           hover.removeClass("show");
           hover.addClass("hidden");
         }

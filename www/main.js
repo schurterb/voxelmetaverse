@@ -24,6 +24,7 @@ const createEngine = require('voxel-engine');
 
 // (part of the aetherview test)
 const resourceLoader = new ResourceLoader();
+const engine = new AetherEngine({});
 
 function main() {
   console.log('voxelmetaverse starting'); // TODO: show git version (browserify-commit-sha)
@@ -220,6 +221,9 @@ function main() {
     // 'camera-debug': {}, // TODO: port from game-shell-fps-camera
     // 'voxel-plugins-ui': {},
     // 'kb-bindings-ui': {}
+    },
+    'modules': {
+
     }
   });
 }

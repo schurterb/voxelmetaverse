@@ -8,7 +8,6 @@ function voxel_engine (require, module, exports) {
         voxel_engine.view = new View(canvasElement);
         voxel_engine.scene = voxel_engine.view.getScene();
 
-
         const ccFactory = new ChainConnectorFactory();
         const etherium = {
           'infura': {
@@ -19,10 +18,6 @@ function voxel_engine (require, module, exports) {
 
         // Objects
         const chain = new Blockchain(ccFactory.getChainConnector(etherium));
-        // chain.blocks.map(function (block) {
-        //   // console.log(block.getMesh());
-        //   voxel_engine.scene.add(block.getMesh());
-        // });
         voxel_engine.view.add(chain);
 
 
@@ -35,10 +30,9 @@ function voxel_engine (require, module, exports) {
 
         // Controls
         // defaultNavigation(camera);
-        // const controls = new OrbitControls( camera.getMesh(), view.renderer.domElement );
+        // const controls = new OrbitControls(  camera.getMesh(), view.renderer.domElement );
         const controls = new FlyControls( camera.getMesh(), voxel_engine.view.renderer.domElement );
 
-        const engine = new AetherEngine({});
         engine.setView(voxel_engine.view);
         engine.setCamera(camera);
         engine.start();
@@ -240,6 +234,16 @@ function voxel_engine (require, module, exports) {
                 }
                 plugins.loadAll()
 
+                // load modules
+                var module_proc_id = setInterval(function (modules) {
+                  if(window.moduleLoader) {
+                      if(modules) {
+                        console.log("[voxel-engine] Attempting to load "+modules.length+" modules.");
+                        window.moduleLoader.loadModules(modules);
+                      }
+                      clearInterval(module_proc_id);
+                  }
+                }, 100, opts.modules);
 
                 // textures loaded, now can render chunks
                 this.stitcher = plugins.get('voxel-stitch')
