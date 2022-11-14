@@ -424,18 +424,6 @@
   <div id="crosshair"><img src="./img/crosshair4.png"></div>
 
   <!-- Body scripts -->
-  <script id="module-loader" type="text/javascript">
-    url = "./new-js/module-loader.js";
-    var script = document.createElement('script');
-    script.type = 'module';
-    script.src = url;
-    script.onload = async function() {
-      console.log("Initializing Module Loader");
-      const {moduleLoader} = await import(url);
-      window.moduleLoader = moduleLoader;
-    }
-    document.body.insertBefore(script, document.getElementById("main"));
-  </script>
   <script id="main" type="text/javascript" src="main.js"></script>
 
 </body>
