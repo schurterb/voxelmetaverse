@@ -222,10 +222,36 @@ function main() {
     // 'voxel-plugins-ui': {},
     // 'kb-bindings-ui': {}
     },
+    'channels': {
+      'action': {
+        'local': true,
+        'workers': true,
+        'distributed': false,
+        'events': [ //Not sure we need these...
+          'look',
+          'move',
+          'fire',
+          'altfire',
+          'inventory',
+          'menu',
+          'exit'
+        ]
+      },
+      'test-channel': {
+        'local': true,
+        'workers': true,
+        'distributed': true,
+        'events': [
+          'testing'
+        ]
+      }
+    },
     'plugins': {
       'test': {
         'url': "./test/test-module.js",
-        'worker': 'test'
+        'worker': 'test-worker',
+        'inputChannels': ['test-channel'],
+        'outputChannels': []
       }
     }
   });

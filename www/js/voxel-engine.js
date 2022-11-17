@@ -234,11 +234,21 @@ function voxel_engine (require, module, exports) {
                 }
                 plugins.loadAll()
 
+                // #############################################################
+                // initialize channels
+                if(opts.channels) {
+                  console.log("[voxel-engine] Attempting to set up "+Object.keys(opts.channels).length+" channels.");
+                  for(let id in opts.channels) {
+                    eventChannelManager.addChannel(id, opts.channels[id]);
+                  }
+                }
                 // load plugins
                 if(opts.plugins) {
-                  console.log("[voxel-engine] Attempting to load "+Object.keys(plugins).length+" plugins.");
+                  console.log("[voxel-engine] Attempting to load "+Object.keys(opts.plugins).length+" plugins.");
                   pluginLoader.loadPlugins(opts.plugins);
                 }
+                // #############################################################
+
 
                 // textures loaded, now can render chunks
                 this.stitcher = plugins.get('voxel-stitch')

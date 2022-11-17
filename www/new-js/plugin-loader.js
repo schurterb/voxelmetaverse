@@ -4,8 +4,8 @@
     'plugins': {
       '<plugin-name>': {
         'url': `<url to load plugin file from>`,
-        'worker': `<name of webworker to run on>`,
-        'workerOpts': {} //Options to pass to the worker
+        'thread': `<name of webthread to run on>`,
+        'threadOpts': {} //Options to pass to the thread
         'inputChannels': [`list of input channels`],
         'outputChannels': [`list of output channels`]
       }
@@ -13,19 +13,19 @@
   }
 
   * Only 'url' param is required
-  * 'worker' will default to '' if unspecified   # TODO: Figure out default worker
+  * 'thread' will default to '' if unspecified   # TODO: Figure out default thread
   * 'inputChannels' is optional and has no Defaults
   * 'outputChannels' is optional and will default to ... # TODO: figure out default channels
 
   plugin file requirements ::
-    The plugin will be run entirely in a webworker and must have event handlers
+    The plugin will be run entirely in a webthread and must have event handlers
     to receive events from the input channels.  Anything sent to the main thread
     must be emitted as an event.
 */
 
 /* exports pluginLoader */
 
-/* imports workerManager */
+/* imports threadManager */
 
 const pluginLoader = {
 
@@ -41,16 +41,32 @@ const pluginLoader = {
 
   disablePlugin: function(name) {
     if(this.pluginList[name]) {
-      console.log(`TODO: Disconnect channels from worker`);
-      workerManager.stopWorker(this.pluginList[name].worker);
+      // console.log(`TODO: Disconnect channels from thread`);
+      plugin.inputChannels.forEach((item, i) => {
+        let channel = eventChannelManager.getChannel(item);
+        if(channel) channel.unsubscribe(thread);
+      });
+      plugin.outputChannels.forEach((item, i) => {
+        let channel = eventChannelManager.getChannel(item);
+        if(channel) channel.unsubscribe(thread);
+      });
+      threadManager.stopThread(this.pluginList[name].thread || this.pluginList[name].worker);
       console.log(`[plugin-loader] '${name}' disabled`);
     }
   },
   enablePlugin: function(name) {
     if(this.pluginList[name]) {
       var plugin = this.pluginList[name];
-      workerManager.startWorker(plugin.worker, plugin.url, plugin.workerOpts);
-      console.log(`TODO: Connect channels to worker`);
+      var thread = threadManager.startThread(plugin.thread || plugin.worker, plugin.url, plugin.threadOpts || plugin.workerOpts);
+      // console.log(`TODO: Connect channels to thread`);
+      plugin.inputChannels.forEach((item, i) => {
+        let channel = eventChannelManager.getChannel(item);
+        if(channel) channel.subscribe(thread);
+      });
+      plugin.outputChannels.forEach((item, i) => {
+        let channel = eventChannelManager.getChannel(item);
+        if(channel) channel.subscribe(thread);
+      });
       console.log(`[plugin-loader] '${name}' enabled`);
     }
   },

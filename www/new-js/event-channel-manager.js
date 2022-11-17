@@ -16,6 +16,8 @@
 
 */
 
+/* exports eventChannelManager, EventChannel */
+
 const eventChannelManager = {
 
   eventChannels: {},
@@ -43,7 +45,7 @@ const eventChannelManager = {
   }
 };
 
-class EventChannel() {
+class EventChannel {
   constructor(id, opts) {
     this.id = id;
     this.events = opts.events; //required
@@ -65,13 +67,13 @@ class EventChannel() {
   }
 
   subscribe(entity) {
-    if(typeof(entity) === 'Worker') {
+    if(entity instanceof Thread) {
       this.workerList.push(entity);
     }
     //TODO: implement distributed events via WebRTC Data Channels
   }
   unsubscribe(entity) {
-    if(typeof(entity) === 'Worker') {
+    if(typeof(entity) === 'Thread') {
       var idx = this.workerList.indexOf(entity);
       if(idx > 0) { this.workerList = this.workerList.split(idx, 1); }
     }
@@ -84,8 +86,11 @@ class EventChannel() {
       document.dispatchEvent(event);
     }
     if(this.workers) {
-      for(var i in this.workers) {
-        this.workers[i].postMessage(event);
+      console.log("check 2 :: "+this.workerList);
+      for(var i in this.workerList) {
+        console.log("check 3");
+        this.workerList[i].dispatchEvent(event);
+          console.log("check 4");
       }
     }
     if(this.distributed) {
