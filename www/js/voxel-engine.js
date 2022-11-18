@@ -232,6 +232,7 @@ function voxel_engine (require, module, exports) {
                 for (var name in pluginOpts) {
                     plugins.add(name, pluginOpts[name])
                 }
+
                 plugins.loadAll()
 
                 // #############################################################

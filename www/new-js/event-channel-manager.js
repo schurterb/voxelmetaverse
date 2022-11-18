@@ -59,7 +59,7 @@ class EventChannel {
     if(this.workers) {
       this.workerList = [];
     }
-
+    
     // Enable distributed events
     this.distrubted = opts.distrubted || false;
     if(this.distrubted) {

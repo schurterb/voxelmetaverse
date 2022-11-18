@@ -223,7 +223,13 @@ function main() {
     // 'kb-bindings-ui': {}
     },
     'channels': {
-      'action': {
+      'input': {
+        'local': false, //Inputs are already local, so we don't need to forward them to the DOM again
+        'workers': true,
+        'distributed': false,
+        'events': []
+      },
+      'control': {
         'local': true,
         'workers': true,
         'distributed': false,
