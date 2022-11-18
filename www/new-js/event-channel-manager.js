@@ -49,6 +49,7 @@ class EventChannel {
   constructor(id, opts) {
     this.id = id;
     this.events = opts.events; //required
+    this.logging = opts.logging || false;
 
     // Enable local events
     this.local = opts.local || false;
@@ -69,6 +70,7 @@ class EventChannel {
   subscribe(entity) {
     if(entity instanceof Thread) {
       this.workerList.push(entity);
+      if(this.logging) console.log(`Worker '${entity.id}' subscribed to '${this.id}'`);
     }
     //TODO: implement distributed events via WebRTC Data Channels
   }
@@ -76,21 +78,27 @@ class EventChannel {
     if(typeof(entity) === 'Thread') {
       var idx = this.workerList.indexOf(entity);
       if(idx > 0) { this.workerList = this.workerList.split(idx, 1); }
+      if(this.logging) console.log(`Worker '${entity.id}' unsubscribed from '${this.id}'`);
     }
     //TODO: implement distributed events via WebRTC Data Channels
   }
 
   //TODO: how to create proper event from CustomEvent
-  send(event) {
+  send(eventName, data={}) {
+    var e = new CustomEvent(eventName, {
+      'bubbles': true,
+      'details': data
+    });
+    this.sendEvent(e);
+  }
+  sendEvent(e) {
+    if(this.logging) console.log(`[${this.id}] Sending event : `,e);
     if(this.local) {
-      document.dispatchEvent(event);
+      document.body.dispatchEvent(e);
     }
     if(this.workers) {
-      console.log("check 2 :: "+this.workerList);
       for(var i in this.workerList) {
-        console.log("check 3");
-        this.workerList[i].dispatchEvent(event);
-          console.log("check 4");
+        this.workerList[i].dispatchEvent(e);
       }
     }
     if(this.distributed) {

@@ -7,7 +7,7 @@
 //TODO: test sending messages
 
 addEventListener("message", (event) => {
-  console.log("[test-module] Message Received :: ",JSON.stringify(event));
+  console.log("[test-module] Message Received :: ",event);
 
   //TODO: Ensure that large data/objects can be efficiently sent back to the event source
   // event.source.postMessage("Test Response");
@@ -23,5 +23,9 @@ console.log(`[test-module] LOADED`);
  eventChannelManager.getChannel("test-channel").send("test");
 
  eventChannelManager.getChannel("test-channel").workerList[0].worker.postMessage("help")
+
+
+  eventChannelManager.getChannel("test-channel").send("test");
+
 
 */

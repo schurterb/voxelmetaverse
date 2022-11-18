@@ -51,11 +51,23 @@ class Thread {
     this.url = url;
     this.options = opts.workerOptions || {};
     this.worker = null;
+    this.listeners = [];
   }
 
   start() {
     if( !this.isRunning() ) {
       this.worker = new Worker(this.url, this.options);
+      this.worker.onmessage = function(e) {
+        for(var i in this.listeners) {
+          this.listeners[i](e);
+        }
+      }.bind(this);
+      this.worker.onmessageerror = function(e) {
+        console.log(`[${this.id}] Messsage Error: ${e}`)
+      }.bind(this);
+      this.worker.onerror = function(e) {
+        console.log(`[${this.id}] ERROR: ${e}`)
+      }.bind(this);
     }
     return this.isRunning();
   }
@@ -75,7 +87,22 @@ class Thread {
   dispatchEvent(event) {
     if(this.isRunning()) {
       console.log("TODO: Ensure that this can efficiently copy/send large data and objects to worker threads");
-      this.worker.postMessage(event);
+      if(typeof(event) != "string") {
+        this.worker.postMessage(JSON.stringify(event));
+      } else {
+        this.worker.postMessage(event);
+      }
+    }
+  }
+
+  addListener(l) {
+    if( !this.listeners[l] ) {
+      this.listeners.push(l);
+    }
+  }
+  removeListener(l) {
+    if(this.listeners[l]) {
+      delete this.listeners[l];
     }
   }
 }

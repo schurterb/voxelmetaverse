@@ -244,6 +244,12 @@ function main() {
         'events': [
           'testing'
         ]
+      },
+      'null':{
+        'local': true,
+        'workers': false,
+        'distributed': false,
+        'events': []
       }
     },
     'plugins': {
@@ -251,7 +257,7 @@ function main() {
         'url': "./test/test-module.js",
         'worker': 'test-worker',
         'inputChannels': ['test-channel'],
-        'outputChannels': []
+        'outputChannels': ['null']
       }
     }
   });

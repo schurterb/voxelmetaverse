@@ -47,8 +47,7 @@ const pluginLoader = {
         if(channel) channel.unsubscribe(thread);
       });
       plugin.outputChannels.forEach((item, i) => {
-        let channel = eventChannelManager.getChannel(item);
-        if(channel) channel.unsubscribe(thread);
+        thread.removeListener(item);
       });
       threadManager.stopThread(this.pluginList[name].thread || this.pluginList[name].worker);
       console.log(`[plugin-loader] '${name}' disabled`);
@@ -64,8 +63,8 @@ const pluginLoader = {
         if(channel) channel.subscribe(thread);
       });
       plugin.outputChannels.forEach((item, i) => {
-        let channel = eventChannelManager.getChannel(item);
-        if(channel) channel.subscribe(thread);
+        const channel = eventChannelManager.getChannel(item);
+        if(channel) thread.addListener(function(e) { channel.send(e); });
       });
       console.log(`[plugin-loader] '${name}' enabled`);
     }
