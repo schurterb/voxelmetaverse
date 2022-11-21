@@ -16,7 +16,8 @@ export class UserInputMapper {
       console.log("[input-mapper] ERROR :: mapping is null!");
       return;
     }
-    this.mapping = mapping;
+    this.state = {};
+    this.mapping = this.getMappingFunctions ? this.getMappingFunctions() : {};
     this.opts = opts || {};
     this.element = this.opts.element || document.body;
     this.tickSource = this.opts.tickSource || eventChannelManager.getChannel('engine');
@@ -27,15 +28,28 @@ export class UserInputMapper {
 
   __init() {
     //TODO: Initialize the mapping table
-    for(var key in this.mapping) {
+    for(var k in this.mapping) {
       try {
+        const key = k;
         this.element.addEventListener(key, function (e) {
-          //TODO: Update the mapping table
+          console.log(" ----- ----- ----- ");
+          console.log("Event Type :: ",key);
+          console.log("Event Data :: ",e);
+          //TODO: how to lock state inbetween calls?
+          //     -- push to interval
+          this.state = this.mapping[key](this.state, e);
         }.bind(this));
       } catch(e) {
         console.log(`[input-mapper] ERROR :: Failed to create mapping for '${key}'`);
       }
     }
-    //TODO: Add event listener to tick source
+    if(this.tickSource instanceof EventChannel) {
+      this.tickSource.subscribe((e) => { this.tick(e); }.bind(this)));
+    }
+  }
+
+  //TODO: Implement event listener to tick source
+  tick(tickEvent) {
+    
   }
 }

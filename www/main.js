@@ -244,10 +244,12 @@ function main() {
         ]
       },
       'test-channel': {
+        'logging': true,
         'local': true,
         'workers': true,
         'distributed': true,
         'events': [
+          'test',
           'testing'
         ]
       },

@@ -53,13 +53,16 @@ class EventChannel {
 
     // Enable local events
     this.local = opts.local || false;
+    if(this.local) {
+      this.localHandlers = [];
+    }
 
     // Enable worker events
     this.workers = opts.workers || false;
     if(this.workers) {
       this.workerList = [];
     }
-    
+
     // Enable distributed events
     this.distrubted = opts.distrubted || false;
     if(this.distrubted) {
@@ -85,24 +88,34 @@ class EventChannel {
 
   //TODO: how to create proper event from CustomEvent
   send(eventName, data={}) {
-    var e = new CustomEvent(eventName, {
-      'bubbles': true,
-      'details': data
-    });
-    this.sendEvent(e);
+    if(this.events.indexOf(eventName) >= 0) {
+      var e = new CustomEvent(eventName, {
+        'bubbles': true,
+        'details': data
+      });
+      this.sendEvent(e);
+    } else {
+      console.log(`[${this.id}][ERROR]: Unsupported event type '${eventName}'.`)
+    }
   }
   sendEvent(e) {
-    if(this.logging) console.log(`[${this.id}] Sending event : `,e);
-    if(this.local) {
-      document.body.dispatchEvent(e);
-    }
-    if(this.workers) {
-      for(var i in this.workerList) {
-        this.workerList[i].dispatchEvent(e);
+    if(this.events.indexOf(e.type) >= 0) {
+      if(this.logging) console.log(`[${this.id}] Sending event : `,e);
+      if(this.local) {
+        for(var i in this.localHandlers) {
+          this.localHandlers[i](e);
+        }
       }
-    }
-    if(this.distributed) {
-      console.log("[EventChannel] TODO: Implement distributed events via WebRTC Data Channels");
+      if(this.workers) {
+        for(var i in this.workerList) {
+          this.workerList[i].dispatchEvent(e);
+        }
+      }
+      if(this.distributed) {
+        console.log("[EventChannel] TODO: Implement distributed events via WebRTC Data Channels");
+      }
+    } else {
+      console.log(`[${this.id}][ERROR]: Unsupported event type '${e.type}'.`)
     }
   }
 }
