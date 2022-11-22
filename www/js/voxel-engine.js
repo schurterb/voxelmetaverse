@@ -236,18 +236,34 @@ function voxel_engine (require, module, exports) {
                 plugins.loadAll()
 
                 // #############################################################
-                // initialize channels
-                if(opts.channels) {
-                  console.log("[voxel-engine] Setting up "+Object.keys(opts.channels).length+" channels.");
-                  for(let id in opts.channels) {
-                    eventChannelManager.addChannel(id, opts.channels[id]);
+                console.log(" ####################################### ");
+                try {
+                  // initialize channels
+                  if(opts.channels) {
+                    console.log("[voxel-engine] Setting up "+Object.keys(opts.channels).length+" channels.");
+                    for(let id in opts.channels) {
+                      eventChannelManager.addChannel(id, opts.channels[id]);
+                    }
                   }
+
+                  //Initialize input capture
+                  initializeCaptureComponents({
+                    'tickSource': eventChannelManager.getChannel('engine'),
+                    'channel': eventChannelManager.getChannel('input')
+                  });
+                  // eventChannelManager.getChannel('input').subscribe(function(e) {
+                  //   console.log(e);
+                  // });
+
+                  // load plugins
+                  if(opts.plugins) {
+                    console.log("[voxel-engine] Loading "+Object.keys(opts.plugins).length+" plugins.");
+                    pluginLoader.loadPlugins(opts.plugins);
+                  }
+                } catch(e) {
+                  console.log(e);
                 }
-                // load plugins
-                if(opts.plugins) {
-                  console.log("[voxel-engine] Loading "+Object.keys(opts.plugins).length+" plugins.");
-                  pluginLoader.loadPlugins(opts.plugins);
-                }
+                console.log(" ####################################### ");
                 // #############################################################
 
 
@@ -778,6 +794,9 @@ function voxel_engine (require, module, exports) {
             Game.prototype.setTimeout = tic.timeout.bind(tic)
 
             Game.prototype.tick = function(delta) {
+
+                eventChannelManager.getChannel('engine').send('tick',delta);
+
                 if(enable_per_tick_logging) console.log("start game.tick");
                 for (var i = 0, len = this.items.length; i < len; ++i) {
                     this.items[i].tick(delta)

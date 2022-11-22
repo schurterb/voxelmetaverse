@@ -3,9 +3,7 @@ var require;
 require = function (name) {
   if(initFunctions[name]) {
     if( !loaded_modules[name] ) {
-      // console.log("Loading "+name);
       var module={}; var exports={}; initFunctions[name](require, module, exports);
-      // console.log(" - COMPLETE");
       if(module.exports) {
         loaded_modules[name] = module.exports
       } else {
@@ -25,6 +23,8 @@ const createEngine = require('voxel-engine');
 // (part of the aetherview test)
 const resourceLoader = new ResourceLoader();
 const engine = new AetherEngine({});
+
+
 
 function main() {
   console.log('voxelmetaverse starting'); // TODO: show git version (browserify-commit-sha)
@@ -223,17 +223,24 @@ function main() {
     // 'kb-bindings-ui': {}
     },
     'channels': {
-      'input': {
-        'local': false, //Inputs are already local, so we don't need to forward them to the DOM again
+      'engine': {
+        'local': true,
         'workers': true,
         'distributed': false,
-        'events': []
+        'events': ['tick'],
+        'logging': false
+      },
+      'input': {
+        'local': true,
+        'workers': true,
+        'distributed': false,
+        'events': ['w','a','s','d']
       },
       'control': {
         'local': true,
         'workers': true,
         'distributed': false,
-        'events': [ //Not sure we need these...
+        'events': [
           'look',
           'move',
           'fire',

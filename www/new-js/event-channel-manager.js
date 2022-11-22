@@ -72,8 +72,12 @@ class EventChannel {
 
   subscribe(entity) {
     if(entity instanceof Thread) {
-      this.workerList.push(entity);
+      var idx = this.workerList.indexOf(entity);
+      if(idx < 0) this.workerList.push(entity);
       if(this.logging) console.log(`Worker '${entity.id}' subscribed to '${this.id}'`);
+    } else if(typeof(entity) === "function") {
+      var idx = this.localHandlers.indexOf(entity);
+      if(idx < 0) this.localHandlers.push(entity);
     }
     //TODO: implement distributed events via WebRTC Data Channels
   }
@@ -82,6 +86,9 @@ class EventChannel {
       var idx = this.workerList.indexOf(entity);
       if(idx > 0) { this.workerList = this.workerList.split(idx, 1); }
       if(this.logging) console.log(`Worker '${entity.id}' unsubscribed from '${this.id}'`);
+    } else if(typeof(entity) === "function") {
+      var idx = this.localHandlers.indexOf(entity);
+      if(idx > 0) { this.localHandlers = this.localHandlers.split(idx, 1); }
     }
     //TODO: implement distributed events via WebRTC Data Channels
   }
@@ -95,7 +102,7 @@ class EventChannel {
       });
       this.sendEvent(e);
     } else {
-      console.log(`[${this.id}][ERROR]: Unsupported event type '${eventName}'.`)
+      if(this.logging) console.log(`[${this.id}][ERROR]: Unsupported event type '${eventName}'.`)
     }
   }
   sendEvent(e) {
@@ -115,7 +122,7 @@ class EventChannel {
         console.log("[EventChannel] TODO: Implement distributed events via WebRTC Data Channels");
       }
     } else {
-      console.log(`[${this.id}][ERROR]: Unsupported event type '${e.type}'.`)
+      if(this.logging) console.log(`[${this.id}][ERROR]: Unsupported event type '${e.type}'.`)
     }
   }
 }
