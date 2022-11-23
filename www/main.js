@@ -234,7 +234,8 @@ function main() {
         'local': true,
         'workers': true,
         'distributed': false,
-        'events': ['w','a','s','d']
+        'events': ['w','a','s','d','mouse-0','mouse-1','mouse-2'],
+        'logging': false
       },
       'control': {
         'local': true,
@@ -273,6 +274,12 @@ function main() {
         'worker': 'test-worker',
         'inputChannels': ['test-channel'],
         'outputChannels': ['null']
+      },
+      'control-module': {
+        'url': "./plugins/control-module.js",
+        'worker': 'control-module-worker',
+        'inputChannels': ['input'],
+        'outputChannels': ['control']
       }
     }
   });

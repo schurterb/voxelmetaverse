@@ -36,7 +36,7 @@ class InputCapture {
           //TODO: how to lock state inbetween calls?
           //     -- push to interval
           //     -- actually, should be async alright
-          this.state = this.mapping[key](this.state, e) || this.state;
+          this.state = this.mapping[key](this.state, e, this.opts) || this.state;
         }.bind(this));
       } catch(e) {
         console.log(`[input-mapper] ERROR :: Failed to create mapping for '${key}'`);
@@ -68,13 +68,13 @@ class InputCapture {
 class KeyboardCapture extends InputCapture {
   constructor(opts = {}) {
     super({
-      'keydown': function(s, e) {
+      'keydown': function(s, e, o={}) {
         if(e.isTrusted) {
           s[e.key] = true;
         }
         return s;
       },
-      'keyup': function(s, e) {
+      'keyup': function(s, e, o={}) {
         if(e.isTrusted) {
           s[e.key] = false;
         }
@@ -87,15 +87,17 @@ class KeyboardCapture extends InputCapture {
 class MouseCapture extends InputCapture {
   constructor(opts = {}) {
     super({
-      'mousedown': function(s, e) {
+      'mousedown': function(s, e, o={}) {
         if(e.isTrusted) {
-          s[e.key] = e;
+          var buttonNames = o.buttonNames || ['mouse-0','mouse-1','mouse-2'];
+          s[buttonNames[e.button]] = true;
         }
         return s;
       },
-      'mouseup': function(s, e) {
+      'mouseup': function(s, e, o={}) {
         if(e.isTrusted) {
-          s[e.key] = false;
+          var buttonNames = o.buttonNames || ['mouse-0','mouse-1','mouse-2'];
+          s[buttonNames[e.button]] = false;
         }
         return s;
       }

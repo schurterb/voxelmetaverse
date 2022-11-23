@@ -21,3 +21,8 @@
 #       - revise control system in voxelmetaverse and then implement for AVE
 
 ### Trans-dimensional Phase-shift Alternator - TPA?
+
+## 2022-11-23
+# TODO: How to send strings and objects between worker thread and main?
+#       Serializing the event only provides the 'isTrusted' field.
+#       There doesn't appear to be clear documentation on how to pass data from main to worker.
