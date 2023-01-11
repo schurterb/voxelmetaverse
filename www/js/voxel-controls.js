@@ -4,7 +4,8 @@ function voxel_controls (require, module, exports) {
     var Stream = require('stream').Stream
 
     function control(control_state, opts) {
-        return new Control(control_state, opts)
+        const control = new Control(control_state, opts)
+        return control
     }
 
     function Control(state, opts) {
@@ -88,7 +89,6 @@ function voxel_controls (require, module, exports) {
             okay_x = abs(target.velocity[0]) < max_speed,
             at_rest = target.atRestY()
 
-        if (!this._target) return
         var move_speed = speed
         if (target.velocity[1] !== 0) move_speed = move_speed * jump_speed_move
 

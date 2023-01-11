@@ -84,13 +84,13 @@ class Thread {
     return this.worker != null;
   }
 
-  dispatchEvent(event) {
+  dispatchEvent(e) {
     if(this.isRunning()) {
       // console.log("TODO: Ensure that this can efficiently copy/send large data and objects to worker threads");
       if(typeof(event) != "string") {
-        this.worker.postMessage(JSON.stringify(event));
+        this.worker.postMessage({type:e.type, value:e.detail});
       } else {
-        this.worker.postMessage(event);
+        this.worker.postMessage({type:e.type});
       }
     }
   }

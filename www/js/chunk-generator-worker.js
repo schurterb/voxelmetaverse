@@ -18566,7 +18566,6 @@ function worker(require, module, exports) {
   module.exports = function() {
       var gen;
       ever(this).on('message', function(ev) {
-
           if (ev.data.cmd === 'configure') {
               gen = new ChunkGenerator(this, ev.data.opts);
           } else if (ev.data.cmd === 'generateChunk') {
@@ -18575,8 +18574,6 @@ function worker(require, module, exports) {
           }
       });
   };
-
-
 }
 
 function tsort(require, module, exports) {

@@ -64,7 +64,7 @@ const pluginLoader = {
       });
       plugin.outputChannels.forEach((item, i) => {
         const channel = eventChannelManager.getChannel(item);
-        if(channel) thread.addListener(function(e) { channel.send(e); });
+        if(channel) thread.addListener(function(e) { channel.send(e.data.type, e.data.value); });
       });
       console.log(`[plugin-loader] '${name}' enabled`);
     }

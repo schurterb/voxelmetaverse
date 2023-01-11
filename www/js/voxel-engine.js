@@ -207,7 +207,6 @@ function voxel_engine (require, module, exports) {
                     if (opts.exposeGlobal) window.game = window.g = this
                 }
 
-
                 self.chunkRegion.on('change', function(newChunk) {
                     self.removeFarChunks()
                 })
@@ -251,15 +250,23 @@ function voxel_engine (require, module, exports) {
                     'tickSource': eventChannelManager.getChannel('engine'),
                     'channel': eventChannelManager.getChannel('input')
                   });
-                  // eventChannelManager.getChannel('input').subscribe(function(e) {
-                  //   console.log(e);
-                  // });
 
                   // load plugins
                   if(opts.plugins) {
                     console.log("[voxel-engine] Loading "+Object.keys(opts.plugins).length+" plugins.");
                     pluginLoader.loadPlugins(opts.plugins);
                   }
+
+                  // Listen to the control channel
+                  eventChannelManager.getChannel('control').subscribe(function(e) {
+                    // console.log('[voxel-controls] input channel handler :: ',e);
+                    if(this.controls && e.type == 'state') {
+                      for(const [key, value] of Object.entries(e.detail)) {
+                        this.controls[key] = value;
+                      }
+                    }
+                  }.bind(this));
+
                 } catch(e) {
                   console.log(e);
                 }
@@ -911,6 +918,7 @@ function voxel_engine (require, module, exports) {
                 opts.controls = opts.controls || {}
                 opts.controls.onfire = this.onFire.bind(this)
                 this.controls = control(buttons, opts.controls)
+
                 this.items.push(this.controls)
                 this.controlling = null
             }

@@ -26,3 +26,11 @@
 # TODO: How to send strings and objects between worker thread and main?
 #       Serializing the event only provides the 'isTrusted' field.
 #       There doesn't appear to be clear documentation on how to pass data from main to worker.
+
+## 2022-11-28
+# To send data to worker thread, use the following in main:
+#  worker.postMessage({type:e.type, value:e.detail})
+# Then, in the worker, retrieve the posted message with 'e.data'
+
+## 2022-12-02
+# Keep voxel-controls, but update it to receive from control channel

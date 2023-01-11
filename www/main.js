@@ -243,13 +243,9 @@ function main() {
         'distributed': false,
         'events': [
           'look',
-          'move',
-          'fire',
-          'altfire',
-          'inventory',
-          'menu',
-          'exit'
-        ]
+          'state'
+        ],
+        'logging': false
       },
       'test-channel': {
         'logging': true,

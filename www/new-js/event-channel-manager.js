@@ -97,8 +97,8 @@ class EventChannel {
   send(eventName, data={}) {
     if(this.events.indexOf(eventName) >= 0) {
       var e = new CustomEvent(eventName, {
-        'bubbles': true,
-        'details': data
+        bubbles: true,
+        detail: data
       });
       this.sendEvent(e);
     } else {
